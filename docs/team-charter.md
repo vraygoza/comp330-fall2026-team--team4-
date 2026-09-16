@@ -4,12 +4,12 @@
 Team 4
 
 ## Team Members
-1. vraygoza (Team Lead)
-2. 
-3. 
-4. 
-5. 
-6. 
+1. Victoria
+2. Bazid
+3. Mazen
+4. Adiya
+5. Sophail
+6. Khumonyun
 
 ## Team Mission
 [Add team mission statement]
@@ -21,35 +21,39 @@ Team 4
 - Deliver quality code with proper testing and reviews
 
 ## Communication Plan
-- **Primary Channel**: [Discord/Slack/Teams - specify]
+- **Primary Channel**: WhatsApp or Outlook email
 - **Response Expectation**: Within 24 hours during weekdays
 - **Urgent/Blocking Signal**: [Define how urgent issues will be flagged]
-- **Meeting Schedule**: Weekly 15-30 minute sync (Day/Time TBD)
+   ***especially if it interferes with completing a checkpoint !!***
+- **Meeting Schedule**: The Wednesday before a checkpoint is due!
+     We will communicate via text or email during the week if anyone needs assistance in their
+  of the checkpoint for the project assignment
+     15-30 minute sync (wednesday 7pm)
 
 ## Five Core Roles + Backups
 
 ### 1. Team Lead
-- **Primary**: vraygoza
+- **Primary**: Victoria
 - **Backup**: [Assign backup]
 - **Responsibilities**: Coordination, cadence, milestones, overall project vision
 
 ### 2. Planning & Process Lead
-- **Primary**: [Assign]
+- **Primary**: Bazid
 - **Backup**: [Assign backup]
 - **Responsibilities**: Scope definition, issue tracking, time estimates, risk management
 
 ### 3. Architecture & Development Lead
-- **Primary**: [Assign]
+- **Primary**: Adiya
 - **Backup**: [Assign backup]
 - **Responsibilities**: Design coherence, repo structure, implementation standards, technical decisions
 
 ### 4. Quality & Review Lead
-- **Primary**: [Assign]
+- **Primary**: Sophail
 - **Backup**: [Assign backup]
 - **Responsibilities**: Test planning, PR reviews, defect tracking, quality validation
 
-### 5. Operations & Evidence Lead
-- **Primary**: [Assign]
+### 5. Operations & Evidence Lead   ( will have two people working due to potential work load of overseeing)
+- **Primary**: Mazen and 
 - **Backup**: [Assign backup]
 - **Responsibilities**: Release documentation, AI usage logging, operational decisions, security/compliance
 
@@ -60,7 +64,7 @@ Team 4
 
 ---
 
-## Operational Decisions - Before Leaving Class
+## Operational Decisions - Before Leaving meeting or submitting checkpoints
 
 ### 1️⃣ Meet Your Team
 - [ ] Names and strengths documented
