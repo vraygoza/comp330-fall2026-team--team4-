@@ -30,11 +30,11 @@ Tasks are tracked as GitHub Issues so everyone can see who owns what.
 ## Assignment 1 Plan
 | Task | Owner | Due |
 |------|-------|-----|
-| Team charter, info table, final Word doc | Victoria | 2026-09-18, 11:59 PM |
-| Working agreements, planning, risk register, milestones | Bazid | 2026-09-18, 11:59 PM |
-| README, repo structure, requirements, Cycle 1 scope | Adiya | 2026-09-18, 11:59 PM |
-| PR review guidelines, quality checklist | Sophail | 2026-09-18, 11:59 PM |
-| AI policy, decision records, documentation standards | Mazen | 2026-09-18, 11:59 PM |
-| AI use log, meeting notes, evidence tracking | Khumonyun | 2026-09-18, 11:59 PM |
-| Review and fix everything | Everyone | 2026-09-19 |
-| Submit to Sakai and tag `a1-project-launch` | Victoria | 2026-09-20, 1:00 PM |
+| Team charter, info table, final Word doc | Victoria | 09/18/2026, 11 PM |
+| Working agreements, planning, risk register, milestones | Bazid | 09/18/2026, 11 PM |
+| README, repo structure, requirements, Cycle 1 scope | Adiya | 09/18/2026, 11 PM |
+| PR review guidelines, quality checklist | Sophail | 09/18/2026, 11 PM |
+| AI policy, decision records, documentation standards | Mazen | 09/18/2026, 11 PM |
+| AI use log, meeting notes, evidence tracking | Khumonyun | 09/18/2026, 11 PM |
+| Review and fix everything | Everyone | 09/19/2026 |
+| Submit to Sakai and tag `a1-project-launch` | Victoria | 09/20/2026, 1 PM |
