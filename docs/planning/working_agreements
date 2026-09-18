@@ -1,40 +1,42 @@
-# Planning
+# Working Agreements
 
 | Field | Value |
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-09-18 |
+| Last updated | 09-18-2026 |
 
-## Our Project
-We're building a calorie-counter bot on Telegram. Users text the bot what they ate, and it keeps track of their calories. The first version is small: log a meal and see your daily total. It will be tested by about 10 to 15 friends and classmates. Tracking macros (protein, carbs, fats, fiber) comes later.
+These are the day-to-day rules for how Team 4 works together. Our mission, goals, and roles are in the [Team Charter](../team-charter.md). If this document and the charter ever disagree, the charter wins.
 
-TODO: The project choice is still marked "Proposed" in the [Decision Log](../decisions/decision-log.md) (D1). Update this once the team confirms it.
+## Meetings
+- Formal meetings are Wednesdays at 7:00 PM before each assignment or checkpoint, and run 15 to 30 minutes.
+- If you can't make it, say so in WhatsApp before the meeting starts.
+- Every action item leaves the meeting with an owner and a due date. Khumonyun records them in the [Meeting Notes](../meeting-notes.md).
 
-Roles and backups are in the [Team Charter](../team-charter.md).
+## Communication
+- WhatsApp is for quick questions. Loyola Outlook email is for official announcements.
+- Reply within 24 hours on weekdays.
+- If something could stop you from finishing on time, post it as 🚨 BLOCKER so the team can respond right away.
 
-## How We Plan Each Assignment
-1. **Plan:** Break the assignment into tasks. Every task gets one owner and a due date.
-2. **Build:** Owners do their work on a branch and open a pull request.
-3. **Review:** In the 48 hours before the due date, teammates review each other's work and fix problems.
-4. **Submit:** Victoria does the final check and submits to Sakai.
-5. **Look back:** At the next meeting we go over what worked and what to change.
+## Deadlines
+- All work is in the repo at least 48 hours before the official due date.
+- Those last 48 hours are only for review and fixes, not new work.
+- If you think you'll miss a deadline, tell the team as soon as you know.
 
-Tasks are tracked as GitHub Issues so everyone can see who owns what.
+## GitHub
+- Follow the [Documentation Standards](../team/documentation-standards.md) for file names, headers, and formatting.
+- Work on a branch and open a pull request. Someone other than the author reviews it before it's merged, using Sophail's review guidelines.
+- Commit messages start with a type, like `docs: add risk register`.
+- A task is only done when it meets the Definition of Done in the charter.
 
-## Keeping Scope Under Control
-- The scope for each cycle is locked at the start of that cycle.
-- New feature ideas go into a GitHub Issue as backlog, not into the current cycle.
-- Any change to scope is agreed on by the team and recorded in the Decision Log.
+## AI Use
+- Follow the [AI Policy](../ai/ai-policy.md).
+- Log any AI help in the [AI Use Log](../ai/ai-use-log.md) and mention it in your pull request.
 
-## Assignment 1 Plan
-| Task | Owner | Due |
-|------|-------|-----|
-| Team charter, info table, final Word doc | Victoria | 2026-09-18, 11:59 PM |
-| Working agreements, planning, risk register, milestones | Bazid | 2026-09-18, 11:59 PM |
-| README, repo structure, requirements, Cycle 1 scope | Adiya | 2026-09-18, 11:59 PM |
-| PR review guidelines, quality checklist | Sophail | 2026-09-18, 11:59 PM |
-| AI policy, decision records, documentation standards | Mazen | 2026-09-18, 11:59 PM |
-| AI use log, meeting notes, evidence tracking | Khumonyun | 2026-09-18, 11:59 PM |
-| Review and fix everything | Everyone | 2026-09-19 |
-| Submit to Sakai and tag `a1-project-launch` | Victoria | 2026-09-20, 1 PM |
+## Disagreements
+1. Talk to the person directly first.
+2. If that doesn't fix it, bring it to Victoria.
+3. If it's still stuck, the team votes at the next meeting.
+4. If someone keeps not contributing, we go to the instructor.
+
+Important decisions that come out of this get recorded in the [Decision Log](../decisions/decision-log.md).
