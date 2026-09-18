@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-09-18 |
+| Last updated | 09-18-2026 |
 
 ## Our Project
 We're building a calorie-counter bot on Telegram. Users text the bot what they ate, and it keeps track of their calories. The first version is small: log a meal and see your daily total. It will be tested by about 10 to 15 friends and classmates. Tracking macros (protein, carbs, fats, fiber) comes later.
