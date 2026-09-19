@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
-| Backup | Khumonyun (Operations & Evidence Lead) |
+| Backup | Khumoyun (Operations & Evidence Lead) |
 | Last updated | 2026-09-18 |
 
 

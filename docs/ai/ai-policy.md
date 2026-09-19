@@ -2,7 +2,7 @@
 | Field | Value |
 |---|---|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
-| Backup | Khumonyun (Operations & Evidence Lead) |
+| Backup | Khumoyun (Operations & Evidence Lead) |
 | Last updated | 2026-09-18 |
  
 ## 1. Purpose
@@ -102,6 +102,6 @@ Each member accepts this policy by filling in their row through a commit or PR a
 | Victoria | Team Lead | | |
 | Bazid | Planning & Process Lead | | |
 | Adiya | Architecture & Development Lead | | |
-| Sophail | Quality & Review Lead | | |
+| Sohail | Quality & Review Lead | | |
 | Mazen Malas | Operations & Evidence Lead | Yes | 9/18/2026 |
-| Khumonyun | Operations & Evidence Lead | | |
+| Khumoyun | Operations & Evidence Lead | | |

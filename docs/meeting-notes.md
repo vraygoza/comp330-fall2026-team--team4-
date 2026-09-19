@@ -35,3 +35,27 @@
 ### Notes
 - No project direction chosen yet — first working session is next Tuesday.
 
+---
+
+## 2026-09-16 — Team Meeting
+**Present:** Everyone
+**Format:** Call
+
+### Decisions
+- **Backup role assignments confirmed:**
+  - Khumoyun - Operations & Evidence Lead
+  - Sohail - Quality & Review Lead 
+- **Project chosen:** Build a calorie-counter Telegram bot for a small group of friends and classmates (~10–15 users). See [D1 in decision-log.md]
+
+### Action Items
+| Item | Owner | Due |
+|------|-------|-----|
+| Expand the project scope. It may need a few more features to be advanced enough. | Everyone | 09-22-2026 |
+
+### Open / Next Meeting
+- Discuss the additional project features and come to a consensus on what to add
+
+### Notes
+- Project decision resolves the open item from the 09-08 kickoff.
+- Backup roles are now fully assigned.
+

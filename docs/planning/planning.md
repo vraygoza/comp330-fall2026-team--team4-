@@ -33,8 +33,8 @@ Tasks are tracked as GitHub Issues so everyone can see who owns what.
 | Team charter, info table, final Word doc | Victoria | 09/18/2026, 11 PM |
 | Working agreements, planning, risk register, milestones | Bazid | 09/18/2026, 11 PM |
 | README, repo structure, requirements, Cycle 1 scope | Adiya | 09/18/2026, 11 PM |
-| PR review guidelines, quality checklist | Sophail | 09/18/2026, 11 PM |
+| PR review guidelines, quality checklist | Sohail | 09/18/2026, 11 PM |
 | AI policy, decision records, documentation standards | Mazen | 09/18/2026, 11 PM |
-| AI use log, meeting notes, evidence tracking | Khumonyun | 09/18/2026, 11 PM |
+| AI use log, meeting notes, evidence tracking | Khumoyun | 09/18/2026, 11 PM |
 | Review and fix everything | Everyone | 09/19/2026 |
 | Submit to Sakai and tag `a1-project-launch` | Victoria | 09/20/2026, 1 PM |

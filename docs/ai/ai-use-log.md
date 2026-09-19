@@ -19,7 +19,7 @@ Track all AI tool usage for transparency and academic integrity purposes.
 | Date | Tool | Feature/File | Type of Use | Team Member | Notes |
 |------|------|-------------|------------|-------------|-------|
 | 2026-09-08 | GitHub Copilot | meeting-notes.md | Documentation | vraygoza | Initial template creation |
-
+| 2026-09-19 | Google Antigravity (Claude) | Multiple docs files | Documentation | Khumoyun | Replaced all instances of misspelled names (Sophail to Sohail, Khumonyun to Khumoyun) across the repo |
 ---
 
 ## Summary Statistics
