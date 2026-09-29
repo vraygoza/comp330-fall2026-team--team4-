@@ -101,7 +101,7 @@ Each member accepts this policy by filling in their row through a commit or PR a
 |---|---|---|---|
 | Victoria | Team Lead | | |
 | Bazid | Planning & Process Lead | | |
-| Adiya | Architecture & Development Lead | | |
+| Adiya | Architecture & Development Lead | Yes | 9/29/2026 |
 | Sophail | Quality & Review Lead | | |
 | Mazen Malas | Operations & Evidence Lead | Yes | 9/18/2026 |
 | Khumonyun | Operations & Evidence Lead | | |
