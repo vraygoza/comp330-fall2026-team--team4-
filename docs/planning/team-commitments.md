@@ -13,7 +13,7 @@ TODO: Each member confirms their own hours by editing their row or replying in W
 
 | Member | Role | Hours/week | Confirmed |
 |--------|------|------------|-----------|
-| Victoria | Team Lead | TODO | No |
+| Victoria | Team Lead | T5 | No |
 | Bazid | Planning & Process Lead | 6 | Yes |
 | Adiya | Architecture & Development Lead | TODO | No |
 | Sophail | Quality & Review Lead | TODO | No |
