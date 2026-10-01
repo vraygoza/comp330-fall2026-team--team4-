@@ -1,0 +1,34 @@
+# Team 4 .gitignore
+# Owner: Adiya (Architecture & Development Lead) | Backup: Khumoyun
+# Language-specific rules get added once OQ-3 (language and bot library) is decided.
+
+# Secrets: Telegram bot token, USDA API key, any credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Local data: tester food logs must never be committed
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# Logs
+*.log
+logs/
+
+# Python (likely language, see OQ-3)
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
