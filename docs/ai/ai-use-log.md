@@ -22,6 +22,7 @@ Track all AI tool usage for transparency and academic integrity purposes.
 | 2026-09-19 | Google Antigravity (Claude) | Multiple docs files | Documentation | Khumoyun | Replaced all instances of misspelled names (Sophail to Sohail, Khumonyun to Khumoyun) across the repo |
 | 2026-09-29 | Claude | README.md, docs/planning/README.md, docs/planning/scope.md, docs/requirements/requirements.md, docs/requirements/open-questions.md | Documentation | Adiya | Drafted from existing repo contents; reviewed and edited by Adiya before commit |
 | 2026-10-01 | Google Antigravity (Claude) | docs/decisions/deferred-scope.md | Documentation | Khumoyun | Drafted deferred scope and tradeoff decisions from existing scope.md and planning evidence; reviewed and edited by Khumoyun before commit|
+| 2026-10-01 | Claude | docs/planning/traceability.md, docs/planning/risk-register.md, docs/decisions/tradeoff-records.md | Documentation | Mazen | Drafted with help from Claude from existing planning docs; reviewed and edited by Mazen before commit |
 
 
 ## Summary Statistics
