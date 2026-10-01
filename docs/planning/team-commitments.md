@@ -16,7 +16,7 @@ TODO: Each member confirms their own hours by editing their row or replying in W
 | Victoria | Team Lead | 5 | Yes |
 | Bazid | Planning & Process Lead | 6 | Yes |
 | Adiya | Architecture & Development Lead | TODO | No |
-| Sophail | Quality & Review Lead | TODO | No |
+| Sohail | Quality & Review Lead | TODO | No |
 | Mazen | Operations & Evidence Lead | TODO | No |
 | Khumoyun | Operations & Evidence Co-Lead | TODO | No |
 

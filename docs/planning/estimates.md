@@ -85,7 +85,7 @@ That is close to the limit of what this team can sustain, and [Team Commitments]
 - The real Cycle 1 end date differing from 10/18/2026.
 - A member's confirmed capacity coming in below what is assumed here.
 
-Re-estimation is tracked by Sophail in [reestimation.md](reestimation.md).
+Re-estimation is tracked by Sohail in [reestimation.md](reestimation.md).
 
 ## Change Log
 | Date | Change | By |

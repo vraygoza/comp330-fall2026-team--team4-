@@ -31,7 +31,7 @@ These come before any requirement work and are blocked by open questions.
 | T-10 | Default to one standard serving when no amount is given, and say so | FR-2 (AC-2.2) | T-9 | TODO: assign | Not started |
 | T-11 | Query the data source and scale calories to the amount | FR-3 (AC-3.1) | T-1, T-9 | TODO: assign | Not started |
 | T-12 | Save the entry with food, amount, calories, and timestamp | FR-2 (AC-2.1) | T-3, T-11 | TODO: assign | Not started |
-| T-13 | Hand-check 20 common foods against the data source | FR-3 (AC-3.2) | T-11 | Sophail | Not started |
+| T-13 | Hand-check 20 common foods against the data source | FR-3 (AC-3.2) | T-11 | Sohail | Not started |
 | T-14 | Calculate and reply with the daily running total | FR-4 (AC-4.1) | T-12 | TODO: assign | Not started |
 | T-15 | Build `/today`: list entries plus total | FR-5 (AC-5.1) | T-12 | TODO: assign | Not started |
 | T-16 | Handle empty `/today` with a clear message | FR-5 (AC-5.2) | T-15 | TODO: assign | Not started |
@@ -50,11 +50,11 @@ Only started if every Must task is done.
 ## Testing and Release
 | ID | Task | Traces to | Depends on | Owner | Status |
 |----|------|-----------|------------|-------|--------|
-| T-22 | Write acceptance tests for every Must acceptance criterion | All Must FRs | T-7 through T-19 | Sophail | Not started |
-| T-23 | Time responses to confirm the 5-second target | NFR-1 | T-14 | Sophail | Not started |
+| T-22 | Write acceptance tests for every Must acceptance criterion | All Must FRs | T-7 through T-19 | Sohail | Not started |
+| T-23 | Time responses to confirm the 5-second target | NFR-1 | T-14 | Sohail | Not started |
 | T-24 | Test with 15 testers active in one week | NFR-2 | T-19, OQ-9 | TODO: assign | Not started |
 | T-25 | Write tester onboarding and data-handling notice | Tester onboarding | OQ-8 | Mazen | Not started |
-| T-26 | Confirm no secrets in the repo before release | NFR-3 | T-4 | Sophail | Not started |
+| T-26 | Confirm no secrets in the repo before release | NFR-3 | T-4 | Sohail | Not started |
 
 ## Dependency Notes
 - T-1 through T-3 gate almost everything. Until OQ-2, OQ-3, and OQ-4 close, no implementation task can start and no estimate is firm.

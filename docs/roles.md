@@ -4,7 +4,7 @@
 |--------|--------|--------|
 | Team Lead | Victoria | Adiya |
 | Planning & Process Lead | Bazid | Victoria |
-| Architecture & Development Lead | Adiya | Khumonyun |
-| Quality & Review Lead | Sophail | Bazid |
+| Architecture & Development Lead | Adiya | Khumoyun |
+| Quality & Review Lead | Sohail | Bazid |
 | Operations & Evidence Lead | Mazen | Adiya |
-| Operations & Evidence Co-Lead | Khumonyun | Mazen |
+| Operations & Evidence Co-Lead | Khumoyun | Mazen |

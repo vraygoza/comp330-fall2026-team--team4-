@@ -18,6 +18,6 @@ This is a list of things that could go wrong with the project and how we plan to
 | 6 | Test users' food logs or bot tokens get exposed | Low | High | Keep secrets out of the repo and AI tools; store as little user data as possible | Mazen | Open |
 | 7 | Busy schedules (work, other classes) | High | Medium | Clear task owners and weekly WhatsApp updates | Bazid | Open |
 | 8 | Docs contradict each other or don't follow the format | Medium | Medium | Follow the documentation standards; read each other's sections | Mazen | Open |
-| 9 | Some people do more work than others | Medium | High | Track who did what through repo evidence | Khumonyun | Open |
+| 9 | Some people do more work than others | Medium | High | Track who did what through repo evidence | Khumoyun | Open |
 | 10 | AI-written work submitted without being checked | Medium | High | Follow the AI policy and log all AI use | Mazen | Open |
-| 11 | Bugs or mistakes get through review | Medium | Medium | Use the quality checklist before merging | Sophail | Open |
+| 11 | Bugs or mistakes get through review | Medium | Medium | Use the quality checklist before merging | Sohail | Open |

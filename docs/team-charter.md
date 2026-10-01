@@ -6,8 +6,8 @@
 2. Bazid
 3. Mazen
 4. Adiya
-5. Sophail
-6. Khumonyun
+5. Sohail
+6. Khumoyun
 
 ---
 
@@ -118,7 +118,7 @@ Team members who anticipate delays must notify the team immediately so adjustmen
 
 **Primary:** Adiya
 
-**Backup:** Khumonyun
+**Backup:** Khumoyun
 
 ### Responsibilities
 
@@ -132,7 +132,7 @@ Team members who anticipate delays must notify the team immediately so adjustmen
 
 ## 4. Quality & Review Lead
 
-**Primary:** Sophail
+**Primary:** Sohail
 
 **Backup:** Bazid
 
@@ -150,7 +150,7 @@ Team members who anticipate delays must notify the team immediately so adjustmen
 
 **Primary:** Mazen
 
-**Co-Lead:** Khumonyun
+**Co-Lead:** Khumoyun
 
 **Backup:** Adiya
 
@@ -191,7 +191,7 @@ Team members who anticipate delays must notify the team immediately so adjustmen
 - Create Initial Requirements documentation
 - Define Cycle 1 scope and project direction
 
-## Sophail (Quality & Review Lead)
+## Sohail (Quality & Review Lead)
 
 - Create Pull Request Review Guidelines
 - Create Quality Checklist
@@ -205,7 +205,7 @@ Team members who anticipate delays must notify the team immediately so adjustmen
 - Create and maintain Decision Records
 - Support repository evidence organization
 
-## Khumonyun (Operations & Evidence Lead)
+## Khumoyun (Operations & Evidence Lead)
 
 - Maintain Meeting Notes
 - Organize Engineering Evidence
