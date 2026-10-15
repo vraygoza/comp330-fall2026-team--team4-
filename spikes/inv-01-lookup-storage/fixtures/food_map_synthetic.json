@@ -1,0 +1,5 @@
+{
+  "_notice": "SYNTHETIC curated food map for the spike. In the real bot this file is filled from the T-13 hand check: each entry names the FDC record a team member confirmed on the FDC website and the default portion used when the tester gives no amount. fdcId values here point at the synthetic fixture.",
+  "egg":    {"fdc_id": 900001, "portion_label": "1 large egg", "portion_grams": 50},
+  "banana": {"fdc_id": 900010, "portion_label": "1 medium banana", "portion_grams": 118}
+}
