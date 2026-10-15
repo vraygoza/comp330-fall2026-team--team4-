@@ -6,7 +6,7 @@
 | Backup | Victoria (Team Lead) |
 | Last updated | 2026-09-29 |
 
-Estimates for the tasks in [Task Plan](task-plan.md). Numbers are hours of focused work by one person.
+Estimates for the tasks in [Task Plan](taskplan.md). Numbers are hours of focused work by one person.
 
 ## How These Were Made
 - This is the team's first implementation cycle, so there is no past velocity to base estimates on. Everything here is judgment, not measurement.

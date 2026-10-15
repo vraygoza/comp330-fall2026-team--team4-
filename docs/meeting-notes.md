@@ -59,4 +59,26 @@
 - Backup roles are now fully assigned.
 
 
+## 2026-10-14 — A2 Feedback Review
+**Present:** Everyone
+**Format:** Call (6:00 PM)
+
+### Decisions
+- **A2 feedback reviewed:** General pattern was that everyone completed their part, but the project still feels disconnected. Docs don't all reference each other consistently.
+- **PR review assignment rule:** Pull requests are now assigned to a different team member based on the area changed, so everyone stays aware of changes happening across the whole repo. Reviewer is chosen by the PR author at open time.
+
+### Action Items
+| Item | Owner | Due |
+|------|-------|-----|
+| Update AI use log with all A3 AI-assisted work | Khumoyun | Before A3 submission |
+| Confirm and fill in weekly hours in team-commitments.md | Each member | Before A3 submission |
+
+### Open / Next Meeting
+- Close blocking technical decisions (OQ-2, OQ-3, OQ-4, OQ-5) so implementation tasks can start
+- Assign remaining TODO owners in the task plan
+
+### Notes
+- The disconnected feeling from A2 feedback is tracked as Risk 8 in the risk register (docs contradict each other).
+- PR reviewer assignment is a working-agreement change.
+
 
