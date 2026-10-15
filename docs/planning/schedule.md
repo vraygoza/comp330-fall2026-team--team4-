@@ -28,7 +28,7 @@ Schedule for Cycle 1 of the Telegram calorie-counter bot. The Cycle 1 vertical s
 | 8 | Final project submitted | TODO: confirm with syllabus | Not started | |
 
 ## Cycle 1 Working Schedule
-TODO: Fill in once GitHub Issues exist and estimates are set. Each row should map to issue numbers from [Task Plan](task-plan.md).
+TODO: Fill in once GitHub Issues exist and estimates are set. Each row should map to issue numbers from [Task Plan](taskplan.md).
 
 | Week | Focus | Owner |
 |------|-------|-------|

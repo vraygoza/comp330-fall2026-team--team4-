@@ -21,7 +21,7 @@ Owners marked TODO are proposed based on team roles and must be confirmed by Vic
 | Cycle 1 Scope Statement | [scope.md](scope.md) | Adiya | Khumoyun | Draft |
 | Updated Requirements Package | [requirements.md](../requirements/requirements.md), [open-questions.md](../requirements/open-questions.md) | Adiya | Khumoyun | Draft |
 | Requirement-to-Task Traceability | [traceability.md](traceability.md) | TODO: assign | TODO | Not started |
-| Task Plan | [task-plan.md](task-plan.md) | TODO: assign | TODO | Not started |
+| Task Plan | [taskplan.md](taskplan.md) | TODO: assign | TODO | Not started |
 | GitHub Issues | [Issues](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues) | TODO: assign | TODO | Not started |
 | GitHub Projects board | TODO: add link | TODO: assign | TODO | Not started |
 | Effort Estimates | [estimates.md](estimates.md) | TODO: assign | TODO | Not started |
