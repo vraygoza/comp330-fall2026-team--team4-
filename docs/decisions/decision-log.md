@@ -4,17 +4,18 @@
 |---|---|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Khumoyun (Operations & Evidence Lead) |
-| Last updated | 2026-09-18 |
+| Last updated | 2026-10-14 | Khumoyun
 
 
 This log records important team decisions and why we made them. If a decision changes, add a new entry instead of deleting the old one.
  
  ## D1: Project Choice
  
-- **Status:** Proposed (TODO: confirm with team)
+- **Status:** Accepted — confirmed at the 2026-09-16 team meeting (all members present). See [Meeting Notes](../meeting-notes.md).
 - **Decision:** Build a calorie-counter Telegram bot for a small group of friends and classmates to test and use (about 10 to 15 users).
 - **Why:** We have real users available for feedback, the first version has a clear small scope (log a meal, see a daily total), and the Telegram bot API is well documented.
 - **Tradeoffs:** We need to choose a nutrition data source, and users' food logs are personal data we must protect.
+- **Note:** This decision records the project choice only. Which features go into Cycle 1 is a separate question tracked in OQ-1 ([Open Questions](../requirements/open-questions.md)) and the [Scope Statement](../planning/scope.md). The current S1–S8 committed items are a working assumption until OQ-1 is formally closed.
 
 ## D2: Markdown in `/docs/` as the Official Record
  

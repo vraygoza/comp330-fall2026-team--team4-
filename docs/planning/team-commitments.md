@@ -18,7 +18,7 @@ TODO: Each member confirms their own hours by editing their row or replying in W
 | Adiya | Architecture & Development Lead | TODO | No |
 | Sohail | Quality & Review Lead | TODO | No |
 | Mazen | Operations & Evidence Lead | TODO | No |
-| Khumoyun | Operations & Evidence Co-Lead | TODO | No |
+| Khumoyun | Operations & Evidence Co-Lead | 4 | No |
 
 ## What Everyone Commits To
 - Attend the Wednesday 7:00 PM meeting, or tell the team in WhatsApp beforehand.

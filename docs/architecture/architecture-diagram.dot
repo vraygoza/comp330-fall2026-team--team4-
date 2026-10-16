@@ -1,0 +1,113 @@
+// Source for architecture-diagram.png. Render with:
+//   dot -Tpng -Gdpi=150 architecture-diagram.dot -o architecture-diagram.png
+// Owner: Adiya. Backup: Khumoyun. Last updated: 2026-10-14.
+// AI-assisted (Claude), reviewed by Adiya.
+digraph calorie_bot {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=12, nodesep=0.35, ranksep=0.55, pad=0.3,
+         label="Team 4 Calorie Counter Bot: Cycle 1 architecture (draft for review, 2026-10-14)\nProposed decisions P-1 to P-10 in docs/architecture/investigations/inv-01-lookup-storage.md",
+         labelloc=t, labeljust=l, newrank=true];
+  node  [fontname="Helvetica", fontsize=10, style="rounded,filled", shape=box, color="#555555", fillcolor="#ffffff"];
+  edge  [fontname="Helvetica", fontsize=9, color="#444444"];
+
+  // ---------------- people
+  tester    [label="Tester\n(Telegram app, private chat)", shape=box, style="filled", fillcolor="#f3e8ff"];
+  developer [label="Team 4 developer", shape=box, style="filled", fillcolor="#f3e8ff"];
+
+  // ---------------- external services
+  subgraph cluster_ext_tg {
+    label="External: Telegram"; style="dashed"; color="#888888"; fontcolor="#555555";
+    tgapi    [label="Telegram Bot API\napi.telegram.org", fillcolor="#eeeeee"];
+    botfather[label="BotFather\n(token issue / revoke)", fillcolor="#eeeeee"];
+  }
+  subgraph cluster_ext_fdc {
+    label="External: USDA"; style="dashed"; color="#888888"; fontcolor="#555555";
+    fdc [label="FoodData Central API\nsearch + food details\nread-only, 1,000 req/h", fillcolor="#eeeeee"];
+  }
+  subgraph cluster_dev {
+    label="Development"; style="dashed"; color="#888888"; fontcolor="#555555";
+    github [label="GitHub repo (main)\ncode, docs, data/food_map.json\nno secrets (NFR-3)", fillcolor="#eeeeee"];
+  }
+
+  // ---------------- host
+  subgraph cluster_host {
+    label="Host: PythonAnywhere free web app (proposed P-7, pending V-2 to V-4)\nTrust boundary TB-4: only named developers log in";
+    style="rounded"; color="#b91c1c"; penwidth=1.6; fontcolor="#b91c1c";
+
+    webhook [label="1 Webhook Endpoint (Flask)\nchecks secret header, drops\nrepeat update_id, answers < 5 s", fillcolor="#dbeafe"];
+    router  [label="2 Command Router\n/start /today /privacy text", fillcolor="#dbeafe"];
+
+    subgraph cluster_core {
+      label="Core: no Telegram, HTTP or SQL"; style="rounded,filled"; fillcolor="#f8fafc"; color="#2563eb"; fontcolor="#2563eb";
+      usecases [label="3 Use Cases\nregister, log food, today", fillcolor="#bfdbfe"];
+      parser   [label="4 Message Parser\nforms + limits (P-5)", fillcolor="#bfdbfe"];
+      resolver [label="5 Food Resolver\nmap, strict match, grams\nrefuse when unsure (P-2 to P-4)", fillcolor="#bfdbfe"];
+      daycalc  [label="6 Day Calculator\nChicago day to UTC window (P-8)", fillcolor="#bfdbfe"];
+    }
+
+    tgadapter  [label="7 Telegram Adapter\nholds bot token", fillcolor="#ccfbf1"];
+    fdcadapter [label="8 FDC Adapter\nholds API key, 3 s timeout", fillcolor="#ccfbf1"];
+    store      [label="9 Entry Store\nonly SQL; every call\nneeds a user ID", fillcolor="#ccfbf1"];
+
+    foodmap [label="10 Curated Food Map\n(deployed copy)", shape=note, fillcolor="#fef9c3"];
+    db      [label="11 SQLite bot.db\nusers, entries, food_cache,\nprocessed_updates\n+ nightly backup copy", shape=cylinder, fillcolor="#fef9c3"];
+    oplog   [label="12 Operations Log\noutcome code, ms, FDC status\nno food text, no IDs", shape=cylinder, fillcolor="#fef9c3"];
+    env     [label="Environment secrets\nTELEGRAM_BOT_TOKEN, WEBHOOK_SECRET,\nFDC_API_KEY", shape=component, fillcolor="#fee2e2"];
+  }
+
+  // ---------------- approval points
+  node [shape=octagon, style="filled", fillcolor="#fed7aa", color="#c2410c", fontsize=9];
+  g1 [label="G-1 PR review\nby non-author"];
+  g2 [label="G-2 food map change\nneeds T-13 evidence"];
+  g3 [label="G-3 deploy tagged main\n+ smoke test"];
+  g4 [label="G-4 tester onboarding\nnotice + invite"];
+  g5 [label="G-5 deletion request\nrun + second check"];
+  g6 [label="G-6 secret leak:\nrevoke and rotate"];
+
+  // ---------------- runtime flow
+  tester -> tgapi      [dir=both, xlabel="1. sends \"2 eggs\"\n6. gets reply: item, grams,\nkcal, today's total  "];
+  tgapi -> webhook     [label="2. HTTPS POST Update\n+ secret header (TB-1, C-1)", color="#b91c1c", fontcolor="#b91c1c", penwidth=1.4];
+  webhook -> router;
+  router -> usecases;
+  usecases -> parser;
+  usecases -> resolver;
+  usecases -> daycalc;
+  resolver -> foodmap  [label="reads"];
+  resolver -> fdcadapter [label="FoodSource port (C-7)", style=dashed];
+  fdcadapter -> fdc    [label="3. food words only\n(TB-2, C-4/C-5)", color="#b91c1c", fontcolor="#b91c1c", penwidth=1.4];
+  usecases -> store    [label="EntryStore port (C-6)", style=dashed];
+  store -> db          [label="4. save entry + update_id\n(one transaction)"];
+  usecases -> tgadapter [label="Messenger port", style=dashed];
+  tgadapter -> tgapi   [label="5. sendMessage (TB-3, C-3)", color="#b91c1c", fontcolor="#b91c1c", penwidth=1.4];
+    webhook -> oplog     [label="log line", style=dotted];
+  fdcadapter -> oplog  [style=dotted];
+  env -> tgadapter     [style=dotted, arrowhead=none];
+  env -> fdcadapter    [style=dotted, arrowhead=none];
+
+  // ---------------- governance flow
+  developer -> g1 [label="opens PR"];
+  g1 -> github [label="merge"];
+  github -> g2 [style=dashed, arrowhead=none];
+  github -> g3;
+  g3 -> webhook [label="TB-4 deploy", color="#b91c1c", fontcolor="#b91c1c"];
+  developer -> g4;
+  g4 -> tester [label="invite link"];
+  developer -> g5;
+  g5 -> db [label="delete one\ntester's rows"];
+  botfather -> g6 [style=dashed, arrowhead=none];
+  g6 -> env [label="new token"];
+
+  // ---------------- legend
+  legend [shape=plaintext, style="", fontsize=9, label=<
+    <TABLE BORDER="1" COLOR="#999999" CELLBORDER="0" CELLSPACING="3" CELLPADDING="4">
+      <TR><TD COLSPAN="2" ALIGN="LEFT"><B>Legend</B></TD></TR>
+      <TR><TD BGCOLOR="#bfdbfe" WIDTH="30"> </TD><TD ALIGN="LEFT">Core component (no Telegram, HTTP or SQL)</TD></TR>
+      <TR><TD BGCOLOR="#ccfbf1"> </TD><TD ALIGN="LEFT">Adapter to an external system or storage</TD></TR>
+      <TR><TD BGCOLOR="#fef9c3"> </TD><TD ALIGN="LEFT">Data store, file or log</TD></TR>
+      <TR><TD BGCOLOR="#eeeeee"> </TD><TD ALIGN="LEFT">External service (not ours)</TD></TR>
+      <TR><TD BGCOLOR="#fed7aa"> </TD><TD ALIGN="LEFT">Human approval point (G-1 to G-6)</TD></TR>
+      <TR><TD BGCOLOR="#fee2e2"> </TD><TD ALIGN="LEFT">Secrets (host environment only)</TD></TR>
+      <TR><TD><FONT COLOR="#b91c1c"><B>red</B></FONT></TD><TD ALIGN="LEFT">Trust boundary crossing (TB-1 to TB-4)</TD></TR>
+      <TR><TD>- - -</TD><TD ALIGN="LEFT">Call through a port (interface)</TD></TR>
+      <TR><TD>. . .</TD><TD ALIGN="LEFT">Logging, secrets or reply delivery</TD></TR>
+    </TABLE>>];
+}

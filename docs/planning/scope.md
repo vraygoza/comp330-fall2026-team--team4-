@@ -14,6 +14,8 @@ This one path touches every layer of the system: the Telegram interface, message
 Requirement details and acceptance criteria are in [Requirements](../requirements/requirements.md).
 
 ## In Scope (Committed)
+> **Note (2026-10-14):** OQ-1 ([Open Questions](../requirements/open-questions.md)) is still open — the team has not formally confirmed which features belong in Cycle 1. S1–S8 below are a working assumption based on the vertical slice plan. This list becomes a commitment once OQ-1 is closed and the team agrees. Do not treat these as final until that decision is recorded in the Decision Log.
+
 | ID | Item | Requirement |
 |----|------|-------------|
 | S1 | `/start` command that registers the tester and explains how to log a meal | FR-1 |

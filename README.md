@@ -56,3 +56,4 @@ Task tracking lives in GitHub Issues and the GitHub Projects board, not in repos
 The Cycle 1 architecture evidence is indexed in [docs/architecture/README.md](docs/architecture/README.md).
 Planning records are in [docs/planning/](docs/planning/), requirements in [docs/requirements/](docs/requirements/), decisions in [docs/decisions/](docs/decisions/), and AI use in [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md).
 
+The Cycle 1 architecture evidence is indexed in [docs/architecture/README.md](docs/architecture/README.md). Planning records are in [docs/planning/](docs/planning/), requirements in [docs/requirements/](docs/requirements/), decisions in [docs/decisions/](docs/decisions/), and AI use in [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md).
