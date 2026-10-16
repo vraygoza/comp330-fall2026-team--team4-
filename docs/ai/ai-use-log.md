@@ -33,6 +33,6 @@ Add a new row for every AI-assisted file in Assignment 3, and name who checked i
 
 ## Summary Statistics
 
-- Total AI-assisted sessions: 9
-- Most used tool: Claude (8 of 9, including via Google Antigravity)
+- Total AI-assisted sessions: 10
+- Most used tool: Claude (9 of 10, including via Google Antigravity)
 - Primary use cases: Documentation, Code Generation
