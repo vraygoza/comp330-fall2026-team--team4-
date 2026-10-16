@@ -29,10 +29,14 @@ Date | Tool | Feature/File | Type of Use | Team Member | Notes
 | 2026-10-14 | Google Antigravity (Claude) | docs/meeting-notes.md | Documentation | Khumoyun | Organized Oct 14 meeting notes from a rough draft into the established format; reviewed and edited by Khumoyun before commit |
 | 2026-10-15 | Claude | docs/planning/re-estimation.md, docs/planning/task-plan.md | Documentation | Bazid | Drafted re-estimation from INV-01 findings and the A2 estimates; added architecture tasks T-27 to T-34, verification tasks V-1 to V-6, and proposed owners for unassigned work. Reviewed and edited by Bazid before commit; PRs #31 and the stacked follow-on, reviewers Victoria and Khumoyun |
 | 2026-10-14 | Claude | docs/architecture/README.md, README.md | Documentation | vraygoza | Drafted from the A3 instructions and A2 feedback; reviewed and edited by Victoria before commit |
+| 2026-10-15 | Claude | docs/decisions/adr-0001 to adr-0008, decision-log.md, tradeoff-records.md; docs/architecture/data-context.md; docs/planning/risk-register.md, traceability.md | Documentation | Mazen | Drafted from INV-01, the architecture docs and Victoria's A3 action plan. Reviewed and edited by Mazen before commit |
+
 Add a new row for every AI-assisted file in Assignment 3, and name who checked it.
 
 ## Summary Statistics
 
 - Total AI-assisted sessions: 8
 - Most used tool: Claude (7 of 8, including via Google Antigravity)
+- Total AI-assisted sessions: 10
+- Most used tool: Claude (9 of 10, including via Google Antigravity)
 - Primary use cases: Documentation, Code Generation
