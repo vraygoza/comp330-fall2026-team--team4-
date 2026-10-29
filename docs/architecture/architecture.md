@@ -195,7 +195,7 @@ Checked against the code on 2026-10-26 (A5, issue #51). Recommendations behind e
 | CC-2 | Calories computed from grams (P-4, ADR-0003) | `quantity x kcal_per_serving` | Sample data is per serving | CC-1 reverts |
 | CC-3 | Webhook only (P-6, C-1, C-3) | Webhook built and unit tested (`src/bot/web.py`). Added `src/bot/poll.py`, a development-only runner using Telegram `getUpdates`, outside contract C-3. Both share `src/bot/router.py` | V-2 to V-4 have not run, so no public webhook URL exists | Never deployed; removed or kept as a dev tool once the host passes V-2 to V-4 |
 | CC-4 | Curated Food Map at `data/food_map.json` | Sample file at `src/core/sample_foods.json` | `.gitignore` ignores every `data/` folder | The real food map arrives; the ignore rule is narrowed then |
-| CC-5 | Duplicate `update_id` check on every webhook request (C-1, T-27) | Marked TODO in `src/bot/web.py` | Owned by Khumoyun (T-27); not needed for the local slice | T-27 merges |
+| CC-5 | Duplicate `update_id` check on every webhook request (C-1, T-27) | Marked TODO in `src/bot/web.py` | Owned by Khumoyun (T-27); not needed for the local slice. **The bot is not deployed until T-27 merges**: without it, a Telegram resend could log a meal twice (Risk Register, #58) | T-27 merges |
 
 Modules in the A4 code, mapped to Section 3: Webhook Endpoint `src/bot/web.py`; Command Router `src/bot/router.py`; Telegram Adapter `src/adapters/telegram.py`; Food lookup (stand-in for the Food Resolver) `src/core/food_lookup.py`. Not yet built: Use Cases, Message Parser (K2, #61), Day Calculator (B2, #44), Entry Store, FDC Adapter.
 
@@ -211,3 +211,4 @@ Drafted with Claude from the team's A2 files, the A2 feedback and the INV-01 res
 |------|--------|----|
 | 2026-10-14 | Created draft for architecture review | Adiya |
 | 2026-10-26 | Added Section 11 (construction changes CC-1 to CC-5), live check status, removed link to the uncreated component-responsibilities file | Adiya |
+| 2026-10-29 | CC-5: no deploy until T-27 merges (from Mazen review on #71) | Adiya |
