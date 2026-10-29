@@ -7,7 +7,7 @@
 | Last updated | 2026-10-14 |
 | Status | Draft for architecture review. External facts checked 2026-10-14; FDC field names pending live check V-1 |
 
-Every boundary the bot crosses, with inputs, outputs, errors, permissions, limits and what each call is allowed to change. Components are defined in [Architecture](architecture.md). Proposed decisions (P-1 to P-10) are explained in [INV-01](investigations/inv-01-lookup-storage.md). Planned tests for each contract are listed at the end for the [Test Strategy](../testing/test-strategy.md).
+Every boundary the bot crosses, with inputs, outputs, errors, permissions, limits and what each call is allowed to change. Components are defined in [Architecture](architecture.md). Proposed decisions (P-1 to P-10) are explained in [INV-01](investigations/inv-01-lookup-storage.md). Planned tests for each contract are listed at the end for the Test Strategy (planned, Sohail).
 
 | ID | Contract | Direction | Kind |
 |----|----------|-----------|------|
@@ -184,7 +184,7 @@ Log-only codes: `AUTH_REJECTED`, `BAD_UPDATE`, `DUPLICATE`, `REPLY_FAILED`, `INT
 
 ## Contract Checks for the Test Strategy
 
-Proposed for Sohail's [Test Strategy](../testing/test-strategy.md). Items marked "spike" already ran in [INV-01](../../spikes/inv-01-lookup-storage/results-2026-10-14.md) against synthetic data.
+Proposed for Sohail's Test Strategy (planned). Items marked "spike" already ran in [INV-01](../../spikes/inv-01-lookup-storage/results-2026-10-14.md) against synthetic data.
 
 | Contract | Check | Kind |
 |----------|-------|------|
