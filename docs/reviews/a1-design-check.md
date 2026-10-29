@@ -43,11 +43,19 @@ Agreeing on these now lets K2, B2 and A3 be built in parallel and joined in A4 w
 
 ```python
 parse_message(text: str) -> ParseResult
-# ParseResult fields: outcome, food, quantity
-# outcome is one of: "PARSED", "UNSUPPORTED_FORMAT", "OUT_OF_RANGE"
-# parse_message("2 tacos") -> ParseResult("PARSED", "tacos", 2.0)
-# parse_message("banana")  -> ParseResult("PARSED", "banana", 1.0)   see Finding 1
+# ParseResult fields: outcome, food, quantity, unit, amount_given
+#   outcome:      "PARSED", "UNSUPPORTED_FORMAT" or "OUT_OF_RANGE"
+#   unit:         "count" or "g" (None unless PARSED)
+#   amount_given: True if the tester typed an amount, False if one serving was assumed
+# parse_message("2 tacos")          -> ParseResult("PARSED", "tacos", 2.0, "count", True)
+# parse_message("an egg")           -> ParseResult("PARSED", "egg", 1.0, "count", True)
+# parse_message("banana")           -> ParseResult("PARSED", "banana", 1.0, "count", False)  see Finding 1
+# parse_message("150g rice cooked") -> ParseResult("PARSED", "rice cooked", 150.0, "g", True)
+# parse_message("eggs 2")           -> ParseResult("UNSUPPORTED_FORMAT", None, None, None, None)
+# parse_message("25 eggs")          -> ParseResult("OUT_OF_RANGE", None, None, None, None)
 ```
+
+`amount_given=False` is how A4 knows to say the amount was assumed (AC-2.2). Gram input stays in scope (ADR-0004), so K2 parses it. The sample list has calories per serving only, so in the slice A4 saves nothing for a `g` entry and replies that gram amounts work once real FDC data arrives (V-1, architecture.md CC-2).
 
 **A3 lookup** (`src/core/food_lookup.py`, built)
 
@@ -59,10 +67,21 @@ lookup(food: str) -> LookupResult
 **B2 daily total** (`src/core/day.py`)
 
 ```python
+chicago_day_bounds(day: date) -> tuple[datetime, datetime]
+# The UTC start (inclusive) and end (exclusive) of one Chicago calendar day (ADR-0007).
+# Every "today" query uses this, including /today later; nothing else does its own date math.
+# chicago_day_bounds(date(2026, 10, 26)) -> (2026-10-26 05:00 UTC, 2026-10-27 05:00 UTC)   24 hours
+# chicago_day_bounds(date(2026, 11, 1))  -> (2026-11-01 05:00 UTC, 2026-11-02 06:00 UTC)   25 hours
+
 daily_total(entries, today: date) -> float
-# entries: objects or dicts with kcal (float) and logged_at (timezone-aware UTC datetime)
-# today: the Chicago calendar date. Sum only entries whose logged_at falls on that date
-# in America/Chicago. Example: 23:30 Chicago on Oct 26 counts for Oct 26; 00:10 counts for Oct 27.
+# entries: one tester's entries only (AC-7.1). Each has kcal (float) and
+#   logged_at (timezone-aware UTC datetime). The caller (A4) passes entries already
+#   filtered by Telegram user ID; daily_total never mixes testers.
+# today: the Chicago calendar date. Sums entries with start <= logged_at < end,
+#   using chicago_day_bounds(today).
+# Example: 23:30 Chicago on Oct 26 counts for Oct 26; 00:10 counts for Oct 27.
+# Example: on Sunday, Nov 1 (daylight saving ends), 23:30 Chicago is 05:30 UTC Nov 2
+#   and still counts for Nov 1; 00:10 Nov 2 Chicago is 06:10 UTC and counts for Nov 2.
 ```
 
 Core files import nothing from `src/bot/`, `src/adapters/`, Flask, `sqlite3` or `urllib` (architecture.md, Section 3). Reviewers check this on every PR.
@@ -93,3 +112,4 @@ Core files import nothing from `src/bot/`, `src/adapters/`, Flask, `sqlite3` or 
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-26 | Created for issue #47 | Adiya |
+| 2026-10-29 | Section 3: added `unit` and `amount_given` to the parser result, and `chicago_day_bounds` with one-tester and Nov 1 examples for the daily total (from Mazen review on #64) | Adiya |
