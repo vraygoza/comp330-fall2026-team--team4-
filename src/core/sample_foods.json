@@ -1,0 +1,13 @@
+{
+  "_note": "MADE-UP SAMPLE DATA for the Cycle 1 slice (issue #49). These calorie values are synthetic and are not from USDA FoodData Central. Do not show them to testers as real nutrition facts. Real values replace this file after live check V-1 (ADR-0002).",
+  "foods": {
+    "egg":        {"name": "Egg",         "serving": "1 large egg",      "kcal_per_serving": 70},
+    "banana":     {"name": "Banana",      "serving": "1 medium banana",  "kcal_per_serving": 105},
+    "apple":      {"name": "Apple",       "serving": "1 medium apple",   "kcal_per_serving": 95},
+    "taco":       {"name": "Taco",        "serving": "1 taco",           "kcal_per_serving": 170},
+    "rice":       {"name": "Rice, cooked","serving": "1 cup",            "kcal_per_serving": 205},
+    "toast":      {"name": "Toast",       "serving": "1 slice",          "kcal_per_serving": 80},
+    "yogurt":     {"name": "Yogurt",      "serving": "1 cup",            "kcal_per_serving": 150},
+    "pizza slice":{"name": "Pizza slice", "serving": "1 slice",          "kcal_per_serving": 285}
+  }
+}
