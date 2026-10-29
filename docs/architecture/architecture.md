@@ -4,11 +4,11 @@
 |-------|-------|
 | Owner | Adiya (Architecture & Development Lead) |
 | Backup | Mazen Malas (Operations & Evidence Lead) |
-| Last updated | 2026-10-14 |
-| Status | Draft for architecture review. Built on proposed decisions P-1 to P-10; none are accepted yet |
+| Last updated | 2026-10-26 |
+| Status | Draft. Built on proposed decisions P-1 to P-10, which the team votes on in #56. Construction changes are recorded in Section 11 |
 | Baseline under review | Branch `docs/a3-architecture-adiya` (commit recorded in the review file when the PR opens) |
 
-Related files: [Diagram](architecture-diagram.png) ([source](architecture-diagram.dot)), [API and Tool Contracts](api-contracts.md), [Component Responsibilities](component-responsibilities.md), [Data and Context](data-context.md), [INV-01 Investigation](investigations/inv-01-lookup-storage.md), [Requirements](../requirements/requirements.md).
+Related files: [Diagram](architecture-diagram.png) ([source](architecture-diagram.dot)), [API and Tool Contracts](api-contracts.md), [Data and Context](data-context.md), [INV-01 Investigation](investigations/inv-01-lookup-storage.md), [Requirements](../requirements/requirements.md).
 
 ## 1. Purpose
 
@@ -49,7 +49,7 @@ The design is layered with the core in the middle. The core (parser, resolver, d
 | 11 | SQLite Database | Data (host) | Tables `users`, `entries`, `food_cache`, `processed_updates` | `~/calorie-bot/bot.db` on the host |
 | 12 | Operations Log | Data (host) | Outcome codes and timings, no food text, no Telegram IDs | Host server and error logs |
 
-Ownership of each component, what it must not know, and its inputs and outputs are detailed in [Component Responsibilities](component-responsibilities.md) (owner Khumoyun, backup Adiya). This table is the summary.
+This table is the authoritative list of components and responsibilities (owner Khumoyun, backup Adiya). The separate component-responsibilities file planned in A3 was not created; Section 11 shows which modules exist in the A4 code.
 
 ### Dependency direction
 
@@ -183,6 +183,24 @@ Health signals reviewed weekly (Risk 5 and NFR-5): count of each outcome code, 9
 
 These feed the risk register (owner Mazen) and the re-estimation notes (owner Sohail and Bazid).
 
+**Live check status (2026-10-26):** V-1 to V-6 have not been run. The A4 slice is built so it does not depend on them (Section 11). Whether they are completed in A4 or deferred to A5 is the Team Lead's call; the outcome is recorded here and in the [Risk Register](../planning/risk-register.md).
+
+## 11. Construction Changes from Assignment 3
+
+Checked against the code on 2026-10-26 (A5, issue #51). Recommendations behind each change are in the [A1 design check](../reviews/a1-design-check.md). None of these changes the core design: the core still has no knowledge of Telegram, Flask, HTTP or SQL, and secrets are still read only in adapters.
+
+| # | A3 design | A4 code | Why | Reverts when |
+|---|-----------|---------|-----|--------------|
+| CC-1 | Food Resolver (`src/core/resolver.py`) uses FDC and the curated food map (P-2, P-3, C-4, C-5) | `src/core/food_lookup.py` returns calories from a made-up sample list (`src/core/sample_foods.json`). `lookup()` is the seam the resolver replaces | V-1 has not run; A3 feedback says to build only work that does not depend on unverified FDC behavior | V-1 passes and the FDC Adapter is built |
+| CC-2 | Calories computed from grams (P-4, ADR-0003) | `quantity x kcal_per_serving` | Sample data is per serving | CC-1 reverts |
+| CC-3 | Webhook only (P-6, C-1, C-3) | Webhook built and unit tested (`src/bot/web.py`). Added `src/bot/poll.py`, a development-only runner using Telegram `getUpdates`, outside contract C-3. Both share `src/bot/router.py` | V-2 to V-4 have not run, so no public webhook URL exists | Never deployed; removed or kept as a dev tool once the host passes V-2 to V-4 |
+| CC-4 | Curated Food Map at `data/food_map.json` | Sample file at `src/core/sample_foods.json` | `.gitignore` ignores every `data/` folder | The real food map arrives; the ignore rule is narrowed then |
+| CC-5 | Duplicate `update_id` check on every webhook request (C-1, T-27) | Marked TODO in `src/bot/web.py` | Owned by Khumoyun (T-27); not needed for the local slice. **The bot is not deployed until T-27 merges**: without it, a Telegram resend could log a meal twice (Risk Register, #58) | T-27 merges |
+
+Modules in the A4 code, mapped to Section 3: Webhook Endpoint `src/bot/web.py`; Command Router `src/bot/router.py`; Telegram Adapter `src/adapters/telegram.py`; Food lookup (stand-in for the Food Resolver) `src/core/food_lookup.py`. Not yet built: Use Cases, Message Parser (K2, #61), Day Calculator (B2, #44), Entry Store, FDC Adapter.
+
+**Final check after the integration PR (A4, #50):** TODO before this PR merges: compare the merged parser, daily total, storage and wiring with Sections 3 and 4, and add any further row above.
+
 ## AI Disclosure
 
 Drafted with Claude from the team's A2 files, the A2 feedback and the INV-01 results; reviewed and edited by Adiya. See the [AI Use Log](../ai/ai-use-log.md).
@@ -192,3 +210,5 @@ Drafted with Claude from the team's A2 files, the A2 feedback and the INV-01 res
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-14 | Created draft for architecture review | Adiya |
+| 2026-10-26 | Added Section 11 (construction changes CC-1 to CC-5), live check status, removed link to the uncreated component-responsibilities file | Adiya |
+| 2026-10-29 | CC-5: no deploy until T-27 merges (from Mazen review on #71) | Adiya |
