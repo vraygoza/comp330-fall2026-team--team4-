@@ -1,5 +1,6 @@
 # Team 4 CI: runs a secrets check and the automated tests on every pull request and on main.
 # Owner: Mazen Malas (Operations & Evidence Lead) | Backup: Adiya
+# AI-assisted (Claude), reviewed by Mazen Malas
 # Issue #57 (M2). The actions and packages used here are reviewed in ADR-0009 (issue #58).
 # Test command is the one in src/README.md and the A1 design check: Python's built-in unittest.
 
