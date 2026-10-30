@@ -1,0 +1,69 @@
+# Team 4 CI: runs a secrets check and the automated tests on every pull request and on main.
+# Owner: Mazen Malas (Operations & Evidence Lead) | Backup: Adiya
+# AI-assisted (Claude), reviewed by Mazen Malas
+# Issue #57 (M2). The actions and packages used here are reviewed in ADR-0009 (issue #58).
+# Test command is the one in src/README.md and the A1 design check: Python's built-in unittest.
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Read-only token: this workflow never writes to the repository.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Secrets check and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # Actions are pinned to a full commit SHA so a moved tag cannot change what runs (ADR-0009).
+      - name: Check out the code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # NFR-3 and Risk 6. Prints file names only, never the matched value, because CI logs are public.
+      - name: Check for committed secrets
+        run: |
+          status=0
+          bad_files=$(git ls-files | grep -E '(^|/)\.env($|\.)|\.(db|sqlite3?|pem|key)$' | grep -vE '(^|/)\.env\.example$' || true)
+          if [ -n "$bad_files" ]; then
+            echo "::error::Secret or tester-data files are committed:"
+            echo "$bad_files"
+            status=1
+          fi
+          token_files=$(git grep -l -I -E '[0-9]{8,}:[A-Za-z0-9_-]{35}' || true)
+          if [ -n "$token_files" ]; then
+            echo "::error::Possible Telegram bot token in these files (value not printed):"
+            echo "$token_files"
+            status=1
+          fi
+          if [ "$status" -eq 0 ]; then
+            echo "No secret files or Telegram tokens found."
+          fi
+          exit "$status"
+
+      # ADR-0005 says Python 3.10 or later; 3.10 reaches end of life in October 2026, so CI uses 3.12 (ADR-0009).
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          else
+            echo "No requirements.txt on this branch yet; it arrives with the bot skeleton (#48)."
+          fi
+
+      # Fails until a tests/ folder exists on the branch (expected before #48 merges; see issue #57).
+      - name: Run the tests
+        run: python -m unittest discover -s tests -t . -v
