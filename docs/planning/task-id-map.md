@@ -31,7 +31,7 @@ The A3 review named the consequence directly: someone could build a cache while 
 |----|------|-----------|-------|-------------------|
 | T-27 | Review the database tables against NFR-4 before the Entry Store merges: only the fields listed in Data and Context are stored | NFR-4 | Mazen | — |
 | T-28 | Weekly health check: outcome counts, reply times and FDC calls per hour against free-tier limits | NFR-5, Risk 5 | Adiya | — |
-| T-29 | Build the tester invite check and the `/privacy` reply | FR-10 (AC-10.1 to AC-10.3), OQ-8, G-4 | TODO: assign | absorbs old T-30 and T-34 |
+| T-29 | Build the tester invite check and the `/privacy` reply | FR-10 (AC-10.1 to AC-10.3), OQ-8, G-4 | Mazen | absorbs old T-30 and T-34 |
 | T-30 | Record processed `update_id` values in the same transaction as the entry | C-1, INV-01 Finding 7 | TODO: assign | task-plan T-27 |
 | T-31 | Build `food_cache` table, loader, and 30-day refresh rule | C-5, INV-01 Finding 8 | TODO: assign | task-plan T-28 |
 | T-32 | Check `X-Telegram-Bot-Api-Secret-Token`; return 403 and log AUTH_REJECTED | C-1, TB-1 | TODO: assign | task-plan T-29 |
@@ -39,6 +39,7 @@ The A3 review named the consequence directly: someone could build a cache while 
 | T-34 | Deploy smoke test: `/start`, `2 eggs`, `/today` on a dev account | G-3 | Adiya | task-plan T-32 |
 | T-35 | Nightly `sqlite3 .backup` of `bot.db` on the host | architecture.md §8 recovery | TODO: assign | task-plan T-33 |
 
+T-32 is partly complete: the 403 check and its unit tests merged in PR #69 (`src/bot/web.py`, `tests/test_web.py`). The live-host half remains, tracked as V-3.
 Verification tasks V-1 through V-6 are unchanged. They appear only in `task-plan.md` and never collided.
 
 ## Merged Entries
@@ -59,9 +60,10 @@ The A3 review asked for completion criteria on the privacy, security and verific
 | ID | Done when |
 |----|-----------|
 | T-27 | The `users`, `entries`, `food_cache` and `processed_updates` tables are compared field by field against the list in `data-context.md`; any field not on that list is removed or justified in writing; result recorded in the PR that merges the Entry Store |
+| T-28 | Outcome counts, 95th percentile reply time and FDC calls per hour are recorded once a week during the test week, and any value over 80% of a free-tier limit is raised in the group chat |
 | T-29 | An unregistered Telegram ID gets the closed-test reply and no row is created; `/privacy` returns the collection notice; both verified with two synthetic accounts |
-| T-30 | The same `update_id` sent twice produces one entry; verified by a unit test with a fake adapter |
-| T-32 | A request with a wrong or missing secret header returns 403, logs AUTH_REJECTED, and runs no handler code; verified by unit test and once on the live host (V-3) |
+| T-30 | The same `update_id` sent twice produces one entry; and if saving fails after the entry is written, neither the entry nor the `update_id` is kept (C-1 single-transaction rule); both verified by unit tests with a fake adapter |
+| T-32 | A request with a wrong or missing secret header returns 403, logs AUTH_REJECTED, and runs no handler code. Unit-test half done in PR #69; remaining check is one live-host run under V-3 |
 | T-33 | The script removes one tester's rows and leaves every other tester's rows intact; run by one developer and confirmed by a second, per checkpoint G-5 |
 
 ## What Has to Change
@@ -72,6 +74,7 @@ The A3 review asked for completion criteria on the privacy, security and verific
 | `traceability.md` | Mark the "Proposed New Tasks" section adopted; point the NFR-4 and NFR-5 rows at T-27 and T-28 as governing | Mazen |
 | `re-estimation.md` | Re-estimate under the new IDs; T-29 is unestimated and needs one | Bazid |
 | `risk-register.md` | Update any task references that moved | Mazen |
+| `src/bot/web.py` line 48, `docs/reviews/a1-design-check.md` line 36, `architecture.md` CC-5 row | These still say T-27 for duplicate protection; it is now T-30 (PR #75) | Adiya |
 
 ## How to Keep This From Happening Again
 
@@ -92,3 +95,4 @@ The A3 review asked that the relevant owners confirm the mapping.
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-29 | Created to resolve the T-27 to T-29 collision found in the A3 review | Bazid |
+| 2026-10-29 | Applied review feedback from PR #74: carried Mazen to T-29, noted T-32 partly done in #69, added the crash case to T-30, added T-28 done criteria, listed Adiya's files to update | Bazid |
