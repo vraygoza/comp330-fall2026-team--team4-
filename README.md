@@ -57,3 +57,31 @@ The Cycle 1 architecture evidence is indexed in [docs/architecture/README.md](do
 Planning records are in [docs/planning/](docs/planning/), requirements in [docs/requirements/](docs/requirements/), decisions in [docs/decisions/](docs/decisions/), and AI use in [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md).
 
 The Cycle 1 architecture evidence is indexed in [docs/architecture/README.md](docs/architecture/README.md). Planning records are in [docs/planning/](docs/planning/), requirements in [docs/requirements/](docs/requirements/), decisions in [docs/decisions/](docs/decisions/), and AI use in [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md).
+
+
+
+## Assignment 4: Construction and Review Evidence
+
+Status: construction is in progress. This section is updated as pull requests merge.
+
+### How to run
+The bot source goes in `/src` (A2, Adiya). Exact run steps will be added here once the skeleton is merged. Never put the bot token in a file; it is read from an environment variable (see `.env.example` once it exists).
+
+### How to test
+Automated tests go in `/tests` (Sohail) and run on every pull request through the CI workflow (Mazen). Test commands will be added here when the tests are merged. The planned test cases are in `docs/testing/test-strategy.md`.
+
+### Evidence map
+| Evidence | Location | Status |
+|---|---|---|
+| Pull request template | `.github/pull_request_template.md` | PR open |
+| CI workflow | `.github/workflows/ci.yml` | In progress |
+| Source code | `/src/` | In progress |
+| Tests | `/tests/` | In progress |
+| Traceability | [docs/planning/traceability.md](docs/planning/traceability.md) | Updating |
+| Decisions and ADRs | [docs/decisions/](docs/decisions/) | Exists |
+| Architecture | [docs/architecture/](docs/architecture/) | Exists |
+| AI-use log | [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md) | Updating |
+| Review package (index of all evidence) | `docs/reviews/assignment4-review-package.md` | PR open |
+
+
+
