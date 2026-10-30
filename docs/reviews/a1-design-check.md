@@ -33,7 +33,7 @@ A tester sends `/start`, then one food such as `2 tacos`. The bot parses it, loo
 | Today's total in Chicago time | B2 (#44) | Bazid | `src/core/day.py` |
 | Save, connect, reply | A4 (#50) | Adiya | `src/core/use_cases.py`, `src/adapters/store.py` |
 
-Out of the slice: live FDC lookups, hosting and deployment, `/undo`, `/privacy`, invite codes, duplicate update protection (T-27). These stay in the plan; none are needed to show the slice working.
+Out of the slice: live FDC lookups, hosting and deployment, `/undo`, `/privacy`, invite codes, duplicate update protection (T-30, formerly T-27; see the task ID map, #74). These stay in the plan; none are needed to show the slice working.
 
 ## 3. Interfaces So the Pieces Fit
 
@@ -112,4 +112,5 @@ Core files import nothing from `src/bot/`, `src/adapters/`, Flask, `sqlite3` or 
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-26 | Created for issue #47 | Adiya |
+| 2026-10-29 | Task ID: duplicate update protection is now T-30 (task ID map, #74) | Adiya |
 | 2026-10-29 | Section 3: added `unit` and `amount_given` to the parser result, and `chicago_day_bounds` with one-tester and Nov 1 examples for the daily total (from Mazen review on #64) | Adiya |
