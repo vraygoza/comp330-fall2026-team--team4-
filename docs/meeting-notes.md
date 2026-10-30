@@ -82,3 +82,33 @@
 - PR reviewer assignment is a working-agreement change.
 
 
+
+## 2026-10-26 — Team Meeting
+**Present:** Victoria, Bazid, Adiya, Mazen, Khumoyun **Absent:** Sohail **Format:** Zoom (6:30 PM)
+
+### Decisions
+- Victoria set up a GitHub Project board to track progress and each person's tasks.
+- The team reviewed instructor feedback about contradictory records and making teamwork visible.
+
+### Action Items
+| Item | Owner | Due |
+|---|---|---|
+| Follow up with Sohail on his assigned tasks | Victoria | 2026-10-28 |
+
+## 2026-10-28 — Assignment 4 Status Check
+**Format:** Group chat
+
+### Decisions
+- Work is due tonight, Wed 10/28 at 11 PM, so Thursday is for cross-review. Sakai deadline is Thu 10/29 at 11 PM.
+- Thursday plan: reviews 8 AM to noon, merge 3 PM, tag 4 PM, submit by 6 PM.
+- Nobody merges their own pull request.
+
+### Action Items
+| Item | Owner | Due |
+|---|---|---|
+| Open pull requests for all tasks | Everyone | 2026-10-28, 11 PM |
+| Review assigned pull requests | Reviewers | 2026-10-29, noon |
+| Merge, tag, submit | Victoria | 2026-10-29 |
+
+### Notes
+- Status replies are in the group chat on 10/28; individual status is tracked on the Assignment 4 board.
