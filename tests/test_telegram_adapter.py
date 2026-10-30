@@ -23,6 +23,7 @@ class TelegramAdapterTests(unittest.TestCase):
             "https://api.telegram.org/bot" + FAKE_TOKEN + "/sendMessage",
             400, "Bad Request", {}, io.BytesIO(b'{"ok":false,"description":"chat not found"}'),
         )
+        self.addCleanup(error.close)  # avoids a ResourceWarning on newer Python versions
         with mock.patch("urllib.request.urlopen", side_effect=error):
             with self.assertLogs("src.adapters.telegram", level="WARNING") as logs:
                 self.assertFalse(client.send_message(111, "hi"))
