@@ -45,7 +45,7 @@ def create_app(messenger=None) -> Flask:
             log.warning("outcome=BAD_UPDATE")
             return jsonify(ok=False), 400
 
-        # TODO(T-27, Khumoyun): skip an update_id that was already processed,
+        # TODO(T-30, Khumoyun; was T-27 before the task ID map, #74): skip an update_id that was already processed,
         # recorded in the same transaction as the entry (C-1).
 
         result = route_update(update)
