@@ -81,4 +81,38 @@
 - The disconnected feeling from A2 feedback is tracked as Risk 8 in the risk register (docs contradict each other).
 - PR reviewer assignment is a working-agreement change.
 
+## 2026-10-26 — Team Meeting
+**Present:** Victoria, Bazid, Adiya, Mazen, Khumoyun **Absent:** Sohail **Format:** Zoom (6:30 PM)
 
+### Decisions
+- **Project board:** Victoria set up a GitHub Project board to track overall progress and each person's tasks.
+- **Instructor feedback reviewed:** The team reviewed feedback about contradictory information across the records and about making teamwork visible in the repository.
+- **Task ownership reviewed:** Individual tasks were reviewed ahead of the next checkpoint.
+
+### Action Items
+| Item | Owner | Due |
+|---|---|---|
+| Follow up with Sohail on his assigned tasks | Victoria | 2026-10-28 |
+
+### Notes
+- Notes drafted by Victoria and expanded with Gemini; logged in docs/ai/ai-use-log.md.
+
+## 2026-10-30 — Assignment 4 Update
+**Present:** [names] **Format:** [Zoom / group chat]
+
+### Decisions
+- **Team change:** Sohail is no longer on the team. His Assignment 4 tasks are being reassigned: test strategy (TBD), remaining tests (TBD), review of the integration pull request (10/30/26), AI code review (TBD).
+- **Deadline:** The Assignment 4 deadline was extended to tonight, 2026-10-30, [time per Sakai].
+- **Status:** Every task that is not listed as merged on the board is in progress.
+- **Plan for tonight:** reviews by [12 AM]; merge by [9 AM]; tag by [9 AM]; Sakai submission by [time].
+
+### Action Items
+| Item | Owner | Due |
+|---|---|---|
+| Confirm new owners for the reassigned tasks | Victoria | [6PM] |
+| Open or finish pull requests for all in-progress tasks | Everyone | [12AM] |
+| Review assigned pull requests | Reviewers | [9AM] |
+| Merge approved pull requests, tag, submit on Sakai | Victoria | [11AM] |
+
+### Notes
+- Status is tracked on the Assignment 4 board.
