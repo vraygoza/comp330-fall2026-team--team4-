@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-10-30 |
+| Last updated | 2026-11-02 |
 
 Schedule for Cycle 1 of the Telegram calorie-counter bot. The Cycle 1 vertical slice is: a tester sends the bot one food item, the bot finds the calories, saves the entry, and replies with the daily total. See [Scope Statement](scope.md).
 
@@ -44,13 +44,13 @@ Work is tracked as GitHub Issues. Issue prefixes are by owner initial (A Adiya, 
 | #48 | Bot skeleton | Adiya | Merged (#69) |
 | #49 | Food lookup | Adiya | Merged (#70) |
 | #51 | A5 architecture index and construction changes | Adiya | PR #71 open, blocked on #50 |
-| #44 | B2 daily-total function | Bazid | Not started — blocks #50 |
+| #44 | B2 daily-total function | Bazid | PR open, approved by Adiya |
 | #61 | K2 input parsing | Khumoyun | Not started — blocks #50 |
 | #50 | A4 integration | Adiya | Blocked on #44 and #61 |
 | #56 | ADR acceptance vote | Team | Open |
 | #58 | Risk register update | Mazen | Open |
-| M2 | CI workflow and secrets check | Mazen | PR #73 open, check failing |
-| S2 | Contract tests for parser and daily total | Unowned | PR #77 open |
+| M2 | CI workflow and secrets check | Mazen | PR #73 open, check passing |
+| S2 | Contract tests for parser and daily total | Adiya | PR #77 open |
 
 ## Team Change, 2026-10-30
 
@@ -59,7 +59,7 @@ Sohail is no longer on the team; the instructor was notified the same day. The t
 Consequences for this schedule:
 - Quality & Review Lead is vacant. Bazid is the charter backup and is acting in the role for Cycle 1.
 - T-13, T-22, T-23 and T-26 need new owners. See [Task Plan](task-plan.md).
-- PR #72 (architecture review, PR template, A4 test matrix) and PR #77 (contract tests) were his. Both are open and need a decision to adopt, continue or close.
+- PR #72 (architecture review, PR template, A4 test matrix) is still open and unowned. Adiya took over S2 after the team change and owns PR #77 (contract tests).
 - Capacity assumptions in [Team Commitments](team-commitments.md) and [Re-estimation Notes](re-estimation.md) are now out of date and must be recalculated for five people.
 
 ## Schedule Risks
@@ -77,3 +77,4 @@ Consequences for this schedule:
 |------|--------|----|
 | 09/29/2026 | Created Cycle 1 schedule | Bazid |
 | 10/30/2026 | Updated through A3 and A4; fixed broken links to task-plan.md and meeting-notes.md; replaced the placeholder working schedule with current issues; recorded the team change; reworded the A2 internal-deadline row | Bazid |
+| 11/02/2026 | Applied review feedback on #79: S2 owner is Adiya, M2 check passing, B2 status updated | Bazid |
