@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-10-30 |
+| Last updated | 2026-11-02 |
 
 Cycle 1 work broken into tasks. Each task traces to a requirement in [Requirements](../requirements/requirements.md). Estimates are in [Effort Estimates](estimates.md) and [Re-estimation Notes](re-estimation.md).
 
@@ -17,29 +17,31 @@ These come before any requirement work and are blocked by open questions.
 
 | ID | Task | Traces to | Depends on | Owner | Status |
 |----|------|-----------|------------|-------|--------|
-| T-1 | Choose nutrition data source and confirm free tier | FR-3, NFR-5 | OQ-2 | Adiya | Not started |
-| T-2 | Choose language and Telegram bot library | All FRs | OQ-3 | Adiya | Not started |
-| T-3 | Choose data storage and design the data model | FR-2, FR-5, FR-7, NFR-4 | OQ-4 | Adiya | Not started |
-| T-4 | Set up repo scaffolding, `.gitignore`, and secrets handling | NFR-3 | T-2 | TODO: assign | Not started |
+| T-1 | Choose nutrition data source and confirm free tier | FR-3, NFR-5 | OQ-2 | Adiya | Decided in ADR-0002 (Proposed until M1) |
+| T-2 | Choose language and Telegram bot library | All FRs | OQ-3 | Adiya | Decided in ADR-0005; language set in the A1 design check (#64) |
+| T-3 | Choose data storage and design the data model | FR-2, FR-5, FR-7, NFR-4 | OQ-4 | Adiya | Decided in ADR-0006 (Proposed until M1) |
+| T-4 | Set up repo scaffolding, `.gitignore`, and secrets handling | NFR-3 | T-2 | Adiya | Done in #69 |
 | T-5 | Register the bot and get a working token in a dev environment | FR-1 | T-2 | TODO: assign | Not started |
-| T-6 | Decide where the bot runs so testers can reach it anytime | Tester onboarding | OQ-5 | TODO: assign | Not started |
+| T-6 | Decide where the bot runs so testers can reach it anytime | Tester onboarding | OQ-5 | TODO: assign | Blocked on V-2 to V-4 |
 
 ## Must Requirements
 | ID | Task | Traces to | Depends on | Owner | Status |
 |----|------|-----------|------------|-------|--------|
 | T-7 | Handle `/start`: create account, send usage example | FR-1 (AC-1.1) | T-3, T-5 | TODO: assign | Not started |
 | T-8 | Make repeat `/start` safe: no duplicate account, keep entries | FR-1 (AC-1.2) | T-7 | TODO: assign | Not started |
-| T-9 | Parse a message into food and amount | FR-2 (AC-2.1) | T-2, OQ-6 | TODO: assign | Not started |
-| T-10 | Default to one standard serving when no amount is given, and say so | FR-2 (AC-2.2) | T-9 | TODO: assign | Not started |
-| T-11 | Query the data source and scale calories to the amount | FR-3 (AC-3.1) | T-1, T-9 | TODO: assign | Not started |
+| T-9 | Parse a message into food and amount | FR-2 (AC-2.1) | T-2, OQ-6 | Khumoyun (K2, #61) | Not started |
+| T-10 | Default to one standard serving when no amount is given, and say so | FR-2 (AC-2.2) | T-9 | Khumoyun (K2, #61) | Not started |
+| T-11 | Query the data source and scale calories to the amount | FR-3 (AC-3.1) | T-1, T-9 | Adiya | Partly done; sample data in #70 |
 | T-12 | Save the entry with food, amount, calories, and timestamp | FR-2 (AC-2.1) | T-3, T-11 | TODO: assign | Not started |
 | T-13 | Build and verify the curated food map (reviewed word to FDC record and portion) | FR-3 (AC-3.2), P-2 | T-11, V-1 | TODO: reassign | Not started |
-| T-14 | Calculate and reply with the daily running total | FR-4 (AC-4.1) | T-12 | TODO: assign | Not started |
+| T-14 | Calculate and reply with the daily running total | FR-4 (AC-4.1) | T-12 | Bazid (B2, #44) | Not started |
 | T-15 | Build `/today`: list entries plus total | FR-5 (AC-5.1) | T-12 | TODO: assign | Not started |
 | T-16 | Handle empty `/today` with a clear message | FR-5 (AC-5.2) | T-15 | TODO: assign | Not started |
-| T-17 | Cut the day at midnight Central | FR-5 (AC-5.3) | T-14, OQ-7 | TODO: assign | Not started |
+| T-17 | Cut the day at midnight Central | FR-5 (AC-5.3) | T-14, OQ-7 | Bazid (B2, #44) | Not started |
 | T-18 | Handle unknown foods: save nothing, ask to rephrase | FR-6 (AC-6.1, AC-6.2) | T-11 | TODO: assign | Not started |
 | T-19 | Scope every query to the requesting Telegram user ID | FR-7 (AC-7.1) | T-3, T-12 | TODO: assign | Not started |
+
+Owners for A4 work come from the GitHub Project board. Where this file and the board disagree, the board governs for A4.
 
 ## Should Requirements
 Only started if every Must task is done.
@@ -52,11 +54,11 @@ Only started if every Must task is done.
 ## Testing and Release
 | ID | Task | Traces to | Depends on | Owner | Status |
 |----|------|-----------|------------|-------|--------|
-| T-22 | Write acceptance tests for every Must acceptance criterion | All Must FRs | T-7 through T-19 | TODO: reassign | Not started |
+| T-22 | Write acceptance tests for every Must acceptance criterion | All Must FRs | T-7 through T-19 | Bazid | Partly in progress; parser and daily-total parts in #77 (Adiya) |
 | T-23 | Time responses to confirm the 5-second target | NFR-1 | T-14 | TODO: reassign | Not started |
 | T-24 | Test with 15 testers active in one week | NFR-2 | T-19, OQ-9 | TODO: assign | Not started |
 | T-25 | Write tester onboarding and data-handling notice | Tester onboarding | OQ-8 | Mazen | Not started |
-| T-26 | Confirm no secrets in the repo before release | NFR-3 | T-4 | TODO: reassign | Not started |
+| T-26 | Confirm no secrets in the repo before release | NFR-3 | T-4 | Bazid | Partly covered by the CI secrets check in #73 |
 
 ## Governance and Operations Tasks
 IDs reconciled 2026-10-30 per [Task ID Map](task-id-map.md). T-27 to T-29 come from [Traceability](traceability.md); T-30 to T-35 were renumbered from the A3 additions.
@@ -105,12 +107,8 @@ Proposal based on the roles in the [Team Charter](../team-charter.md), for the t
 | ID | Task |
 |----|------|
 | T-4 | Repo scaffolding, `.gitignore`, secrets handling |
-| T-9 | Parse message into food and amount |
-| T-10 | Default serving when no amount is given |
 | T-11 | Query FDC and scale calories |
 | T-12 | Save the entry |
-| T-14 | Daily running total |
-| T-17 | Chicago day cutoff |
 | T-31 | `food_cache` table and refresh rule |
 
 ### Khumoyun (Operations & Evidence Co-Lead, backup on Architecture)
@@ -140,7 +138,9 @@ Already proposed for V-2 to V-4 on the host, so the host-adjacent build work fit
 ### Bazid (Planning & Process Lead, acting Quality & Review Lead)
 | ID | Task |
 |----|------|
+| T-14 | Daily running total |
 | T-15 | `/today` listing |
+| T-17 | Chicago day cutoff |
 | T-19 | Per-user data separation |
 | T-22 | Acceptance tests for every Must acceptance criterion |
 | T-26 | Confirm no secrets in the repo before release |
@@ -149,8 +149,8 @@ Already proposed for V-2 to V-4 on the host, so the host-adjacent build work fit
 T-13, T-16, T-18, T-23 and T-24 need owners from the remaining four members. T-20 and T-21 are Should scope and stay unassigned until the Must work fits confirmed capacity.
 
 ## Dependency Notes
-- T-1 through T-3 gate almost everything. Until OQ-2, OQ-3 and OQ-4 close, no implementation task can start and no estimate is firm.
-- T-9 is the riskiest parsing task because the accepted input format (OQ-6) isn't decided.
+- T-1 through T-3 are decided in ADR-0002, ADR-0005 and ADR-0006, all Proposed until the M1 vote (#56). Construction is running ahead of accepted decisions.
+- The accepted input format is defined in ADR-0004 and Section 3 of the A1 design check (#64), so T-9 is no longer blocked on OQ-6.
 - T-19 is a privacy requirement, not a feature. It has to be built into storage from the start, not added later.
 - T-27 blocks the Entry Store merge. It is a review gate, not a build task.
 - T-29 has no estimate yet. [Re-estimation Notes](re-estimation.md) needs one before the schedule is trusted.
@@ -162,3 +162,4 @@ T-13, T-16, T-18, T-23 and T-24 need owners from the remaining four members. T-2
 | 09/29/2026 | Created Cycle 1 task plan | Bazid |
 | 10/15/2026 | Added architecture and verification tasks; updated T-13 per INV-01; proposed owners | Bazid |
 | 10/30/2026 | Reconciled task IDs per task-id-map.md (#74): adopted Mazen's T-27 to T-29, renumbered the A3 additions to T-30 to T-35, merged two duplicate entries into T-29, noted T-32 partly complete in #69. Recorded the team change and marked Sohail's tasks for reassignment | Bazid |
+| 11/02/2026 | Applied review feedback on #78: setup task statuses, owners matched to the A4 board, outdated T-9 risk note removed, T-22 and T-26 marked partly covered | Bazid |
