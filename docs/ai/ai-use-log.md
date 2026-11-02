@@ -36,6 +36,7 @@ Date | Tool | Feature/File | Type of Use | Team Member | Notes
 | 2026-10-29 | Claude (Opus 5) | docs/planning/task-id-map.md | Documentation | Bazid | Reconciled the conflicting T-27 to T-29 IDs between traceability.md and task-plan.md flagged in the A3 review; added done criteria for the privacy, security and verification tasks. Reviewed and edited by Bazid before commit; PR reviewers Mazen and Adiya |
 Add a new row for every AI-assisted file in Assignment 3, and name who checked it.
 | 2026-11-02 | Claude (Opus 5) | src/core/day.py, tests/test_day.py | Code Generation, Testing | Bazid | Daily-total function for B2 (#44): chicago_day_bounds and total_for_day, with tests for midnight, both DST transitions and the empty case. Reviewed and edited by Bazid; ran the full suite locally, 34 tests OK |
+| 2026-11-02 | Claude (Opus 5) | docs/reviews/assignment4-changed-files.md | Documentation | Bazid | Built the changed-file index from the a3-architecture-review to main comparison: 22 files, owners, PRs, unchanged areas and three workflow examples. Paths and PR numbers checked against the comparison by Bazid before commit |
 
 ## Summary Statistics
 
