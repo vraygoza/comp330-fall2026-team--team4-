@@ -1,15 +1,15 @@
-"""Contract tests for the B2 daily total (issue #44), written before it exists.
+"""Contract tests for the B2 daily total (issue #44).
 
 They check the interface agreed in docs/reviews/a1-design-check.md, Section 3, and
-ADR-0007. Until chicago_day_bounds and daily_total are merged in src/core/day.py,
-every test here is skipped, so CI stays green. When B2 merges, they run.
+ADR-0007, using the names in api-contracts C-6 (total_for_day, logged_at_utc).
+Until chicago_day_bounds and total_for_day are merged in src/core/day.py, every
+test here is skipped, so CI stays green. When B2 (#83) merges, they run.
 
 S2 (issue #53). Run: python -m unittest discover -s tests -t .
 """
 
 import importlib.util
 import unittest
-from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
@@ -21,16 +21,15 @@ def _day_ready():
     if importlib.util.find_spec("src.core.day") is None:
         return False
     import src.core.day as day
-    return hasattr(day, "chicago_day_bounds") and hasattr(day, "daily_total")
+    return hasattr(day, "chicago_day_bounds") and hasattr(day, "total_for_day")
 
 
 DAY_READY = _day_ready()
 
 
-@dataclass
-class Entry:
-    kcal: float
-    logged_at: datetime
+def Entry(kcal, logged_at_utc):
+    """One saved entry, shaped like a row of the entries table (C-6)."""
+    return {"kcal": kcal, "logged_at_utc": logged_at_utc}
 
 
 def chicago(y, m, d, hh, mm):
@@ -67,8 +66,8 @@ class ChicagoDayBoundsTests(unittest.TestCase):
 @unittest.skipUnless(DAY_READY, "src/core/day.py not merged yet (B2, #44)")
 class DailyTotalTests(unittest.TestCase):
     def total(self, entries, today):
-        from src.core.day import daily_total
-        return daily_total(entries, today)
+        from src.core.day import total_for_day
+        return total_for_day(entries, today)
 
     def test_sums_only_today(self):
         entries = [
@@ -89,7 +88,7 @@ class DailyTotalTests(unittest.TestCase):
     def test_utc_midnight_does_not_split_the_day(self):
         # 20:00 Chicago is 01:00 UTC the next day, but it is still Oct 26 in Chicago.
         evening = Entry(200, chicago(2026, 10, 26, 20, 0))
-        self.assertEqual(evening.logged_at.date(), date(2026, 10, 27))
+        self.assertEqual(evening["logged_at_utc"].date(), date(2026, 10, 27))
         self.assertEqual(self.total([evening], date(2026, 10, 26)), 200)
 
     def test_daylight_saving_night(self):
@@ -108,7 +107,7 @@ class DailyTotalTests(unittest.TestCase):
         self.assertEqual(self.total([], date(2026, 10, 26)), 0)
 
 
-# Tester separation (AC-7.1) is not tested here: daily_total receives one tester's
+# Tester separation (AC-7.1) is not tested here: total_for_day receives one tester's
 # entries already filtered by Telegram user ID. That filter lives in the Entry Store,
 # so its test (tester A cannot see tester B) belongs with the storage code in A4 (#50).
 
