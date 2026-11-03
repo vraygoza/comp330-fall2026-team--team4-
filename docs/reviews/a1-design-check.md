@@ -73,12 +73,13 @@ chicago_day_bounds(day: date) -> tuple[datetime, datetime]
 # chicago_day_bounds(date(2026, 10, 26)) -> (2026-10-26 05:00 UTC, 2026-10-27 05:00 UTC)   24 hours
 # chicago_day_bounds(date(2026, 11, 1))  -> (2026-11-01 05:00 UTC, 2026-11-02 06:00 UTC)   25 hours
 
-daily_total(entries, today: date) -> float
-# entries: one tester's entries only (AC-7.1). Each has kcal (float) and
-#   logged_at (timezone-aware UTC datetime). The caller (A4) passes entries already
-#   filtered by Telegram user ID; daily_total never mixes testers.
-# today: the Chicago calendar date. Sums entries with start <= logged_at < end,
-#   using chicago_day_bounds(today).
+total_for_day(entries, chicago_date: date) -> float
+# entries: one tester's entries only (AC-7.1). Each is a dict with "kcal" (number) and
+#   "logged_at_utc" (UTC datetime), the same names as the entries table in api-contracts C-6.
+#   The caller (A4) passes entries already filtered by Telegram user ID;
+#   total_for_day never mixes testers.
+# chicago_date: the Chicago calendar date. Sums entries with start <= logged_at_utc < end,
+#   using chicago_day_bounds(chicago_date). Returns 0 when nothing was logged (AC-5.2).
 # Example: 23:30 Chicago on Oct 26 counts for Oct 26; 00:10 counts for Oct 27.
 # Example: on Sunday, Nov 1 (daylight saving ends), 23:30 Chicago is 05:30 UTC Nov 2
 #   and still counts for Nov 1; 00:10 Nov 2 Chicago is 06:10 UTC and counts for Nov 2.
@@ -113,4 +114,5 @@ Core files import nothing from `src/bot/`, `src/adapters/`, Flask, `sqlite3` or 
 |------|--------|----|
 | 2026-10-26 | Created for issue #47 | Adiya |
 | 2026-10-29 | Task ID: duplicate update protection is now T-30 (task ID map, #74) | Adiya |
+| 2026-11-02 | Section 3: renamed `daily_total` to `total_for_day` and `logged_at` to `logged_at_utc` to match api-contracts C-6 and B2 (#83) | Adiya |
 | 2026-10-29 | Section 3: added `unit` and `amount_given` to the parser result, and `chicago_day_bounds` with one-tester and Nov 1 examples for the daily total (from Mazen review on #64) | Adiya |
