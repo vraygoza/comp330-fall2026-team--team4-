@@ -99,8 +99,8 @@ Each member accepts this policy by filling in their row through a commit or PR a
  
 | Member | Role | Accepted (Y/N) | Date |
 |---|---|---|---|
-| Victoria | Team Lead | | |
-| Bazid | Planning & Process Lead | | |
+| Victoria | Team Lead | Yes| 10/15/2026 |
+| Bazid | Planning & Process Lead | Yes | 10/15/2026 |
 | Adiya | Architecture & Development Lead | Yes | 9/29/2026 |
 | Sohail | Quality & Review Lead | | |
 | Mazen Malas | Operations & Evidence Lead | Yes | 9/18/2026 |
