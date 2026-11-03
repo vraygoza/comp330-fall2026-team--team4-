@@ -71,7 +71,7 @@ Totals: 22 files, 908 additions, 1 deletion.
 Three changes traced from issue to merge.
 
 **1. Bot skeleton**
-Issue #48 → branch `feature/a2-bot-skeleton` → PR #69 → review requested from Sohail and Khumoyun → 17 tests run locally, all passed; wrong webhook secret returned 403 → merged 2026-10-29.
+Issue #48 → branch `feature/a2-bot-skeleton` → PR #69 → review requested from Sohail and Khumoyun; Victoria submitted a review → 17 tests run locally, all passed; wrong webhook secret returned 403 → merged 2026-11-2.
 
 **2. Food lookup**
 Issue #49 → branch `feature/a3-food-lookup` → PR #70 → review by Sohail → 25 tests run locally (A2 plus A3), all passed → merged 2026-10-29.
@@ -83,7 +83,7 @@ Issue from the A3 feedback → branch `Kbazid330-patch-1` → PR #74 → review 
 
 ## Board Check
 
-TODO: confirm every issue on the Assignment 4 board has an assignee, a due date and a linked pull request, and record the gaps found here.
+Board check: not completed at the time of this snapshot; see the Assignment 4 board for current status.
 
 ## Open Pull Requests Not in This Comparison
 
@@ -95,9 +95,14 @@ These were open when the comparison was taken, so their files are not listed abo
 | #72 | Architecture review, A4 test matrix. Unowned since the team change | — |
 | #73 | CI workflow and secrets check | Mazen |
 | #77 | Contract tests for the parser and daily total | Adiya |
-| #78 | Task plan renumbered to the governing IDs | Bazid |
+| #85 | Task plan renumbered to the governing IDs | Bazid |
 | #79 | Schedule updated through A4 | Bazid |
-| B2 | `src/core/day.py` and its tests, issue #44 | Bazid |
+| #80 | README change in a stacked pull request, to be closed because #67 merged | Victoria |
+| #81 | Meeting notes for 10/26 and 10/30 | Victoria |
+| #82 | AI-use log, six-column format | Khumoyun |
+| #83 | `src/core/day.py` and its tests, issue #44 | Bazid |
+
+#67 and #68 were also open when the comparison was taken and have since merged.
 
 This index is regenerated against `main` before the Assignment 4 tag.
 
@@ -106,3 +111,4 @@ This index is regenerated against `main` before the Assignment 4 tag.
 | Date | Change | By |
 |------|--------|----|
 | 2026-11-02 | Created from the `a3-architecture-review`-to-`main` comparison | Bazid |
+| 2026-11-02 | Updated the open pull requests table, example 1 and the board-check note after review | Victoria |
