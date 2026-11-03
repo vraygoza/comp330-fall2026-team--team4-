@@ -34,12 +34,10 @@ Date | Tool | Feature/File | Type of Use | Team Member | Notes
 | 2026-10-26 | Claude (Opus 5.5) | src/bot/, src/adapters/telegram.py, requirements.txt, .env.example, src/README.md, tests/test_router.py, tests/test_web.py, tests/test_telegram_adapter.py | Code Generation, Testing | Adiya | Bot skeleton for #48. Rejected: python-telegram-bot (ADR-0005). Claude ran the 17 tests and a simulated /start webhook check on the uploaded branch (commit 32d7c7e, 10/28): all passed, wrong secret returned 403. Adiya ran the full suite on her Mac (Python 3.15.2) on 10/29 from the A3 branch, which includes A2: 25 tests, OK. Not yet run with a live Telegram bot. Adiya uploaded; review by Sohail in PR #69 (issue #48) |
 | 2026-10-26 | Claude (Opus 5.5) | src/core/food_lookup.py, src/core/sample_foods.json, tests/test_food_lookup.py | Code Generation, Testing | Adiya | Food lookup for #49. Calorie values are made up and labeled synthetic. Partial matches such as egg roll are refused, not guessed (AC-6.2). Claude ran 25 tests (A2 plus A3), all passed. Adiya ran the same 25 tests on her Mac (Python 3.15.2) on 10/29: OK. Adiya uploaded; review by Sohail in PR #70 (issue #49) |
 | 2026-10-29 | Claude (Opus 5) | docs/planning/task-id-map.md | Documentation | Bazid | Reconciled the conflicting T-27 to T-29 IDs between traceability.md and task-plan.md flagged in the A3 review; added done criteria for the privacy, security and verification tasks. Reviewed and edited by Bazid before commit; PR reviewers Mazen and Adiya |
-Add a new row for every AI-assisted file in Assignment 3, and name who checked it.
+| 2026-11-02 | Claude (Opus 5.5) | src/core/parser.py, tests/test_parser.py, tests/test_parser_contract.py, tests/test-interactive.py | Code Generation, Testing | Khumoyun | K2 message parser (#61). Implemented parse_message for count, gram, article and food-alone forms; implemented missing amount and unknown food replies; added unit and contract test suites. 26 tests pass. Reviewed, tested, and edited by Khumoyun before commit; review by Adiya or Victoria |
 
 ## Summary Statistics
 
-- Total AI-assisted sessions: 8
-- Most used tool: Claude (7 of 8, including via Google Antigravity)
-- Total AI-assisted sessions: 10
-- Most used tool: Claude (9 of 10, including via Google Antigravity)
-- Primary use cases: Documentation, Code Generation
+- Total AI-assisted sessions: 16
+- Most used tool: Claude (15 of 16, including via Google Antigravity and Opus models)
+- Primary use cases: Documentation, Code Generation, Testing
