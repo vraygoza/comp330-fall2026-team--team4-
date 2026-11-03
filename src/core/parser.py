@@ -4,17 +4,14 @@ Turns a user's food message into food words, quantity, unit, and whether an
 amount was explicitly given, or returns an outcome code (PARSED,
 UNSUPPORTED_FORMAT, OUT_OF_RANGE) per ADR-0004 and docs/reviews/a1-design-check.md.
 
-Also provides reply helpers when amount is missing or the food is unknown.
-
 Core rule: imports nothing from src/bot, src/adapters, Flask, sqlite3, or urllib.
+Parser does not import resolver/lookup; reply generation belongs to use cases (A4).
 """
 
 from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-
-from src.core.food_lookup import lookup
 
 # Limits from ADR-0004 and api-contracts.md C-1
 MAX_MESSAGE_CHARS = 100
@@ -148,35 +145,3 @@ def parse_message(text: str) -> ParseResult:
     if food is None:
         return ParseResult(UNSUPPORTED_FORMAT)
     return ParseResult(PARSED, food, 1.0, "count", False)
-
-
-def handle_food_message(text: str) -> str:
-    """Handle all three cases from Task K2:
-    - Step 1: turns '2 tacos' into the item tacos and quantity 2
-    - Step 2: if there is no quantity, reply asking how many
-    - Step 3: if the food is unknown (lookup says so), reply with a friendly
-      'I don't know that food' message
-    """
-    result = parse_message(text)
-    if result.outcome == OUT_OF_RANGE:
-        return "That amount is outside the allowed range (1-20 count or 1-2000g)."
-    if result.outcome == UNSUPPORTED_FORMAT:
-        return "Please send one food per message, like: 2 eggs, or: 150g rice"
-
-    # Step 3: If food is unknown (the lookup says so), reply with friendly message
-    lookup_res = lookup(result.food)
-    if not lookup_res.found:
-        return f"I don't know that food: {result.food}"
-
-    # Step 2: If there is no quantity, reply asking how many
-    if not result.amount_given:
-        return f"How many {result.food}?"
-
-    # Step 1: Valid item and quantity
-    return f"{result.quantity:g} {result.food}"
-
-
-# Convenient aliases for callers
-parse_and_reply = handle_food_message
-parse_food = handle_food_message
-

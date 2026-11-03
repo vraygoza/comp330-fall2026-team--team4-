@@ -1,10 +1,7 @@
-"""Unit and contract tests for the K2 parser (issue #61).
+"""Unit tests for the K2 message parser (issue #61).
 
-Tests the interface from docs/reviews/a1-design-check.md Section 3,
-ADR-0004 accepted message forms and limits, and reply handling for:
-- turns '2 tacos' into item and quantity
-- missing quantity asks how many
-- unknown food replies with friendly message
+Tests the interface from docs/reviews/a1-design-check.md Section 3
+and ADR-0004 accepted message forms and limits.
 """
 
 import unittest
@@ -13,13 +10,11 @@ from src.core.parser import (
     OUT_OF_RANGE,
     PARSED,
     UNSUPPORTED_FORMAT,
-    handle_food_message,
-    parse_and_reply,
     parse_message,
 )
 
 
-class TestParserContract(unittest.TestCase):
+class TestParser(unittest.TestCase):
     def parse(self, text):
         return parse_message(text)
 
@@ -32,7 +27,7 @@ class TestParserContract(unittest.TestCase):
         self.assertEqual(result.unit, unit, text)
         self.assertIs(result.amount_given, amount_given, text)
 
-    # 1. Accepted forms
+    # 1. Accepted forms (ADR-0004, Section 3)
 
     def test_count_and_food(self):
         self.assertParsed("2 tacos", "tacos", 2.0, "count", True)
@@ -45,8 +40,9 @@ class TestParserContract(unittest.TestCase):
         self.assertParsed("a banana", "banana", 1.0, "count", True)
 
     def test_food_alone_assumes_one_serving(self):
-        # amount_given=False allows caller to know amount was assumed (AC-2.2)
+        # amount_given=False allows caller (A4) to know amount was assumed (AC-2.2, Finding 1)
         self.assertParsed("banana", "banana", 1.0, "count", False)
+        self.assertParsed("taco", "taco", 1.0, "count", False)
 
     def test_grams(self):
         self.assertParsed("150g rice cooked", "rice cooked", 150.0, "g", True)
@@ -96,32 +92,5 @@ class TestParserContract(unittest.TestCase):
         self.assertIsNone(result.amount_given)
 
 
-class TestFoodMessageReplies(unittest.TestCase):
-    """Tests the three cases required by Task K2."""
-
-    def test_step_1_turns_2_tacos_into_item_and_quantity(self):
-        result = parse_message("2 tacos")
-        self.assertEqual(result.item, "tacos")
-        self.assertEqual(result.quantity, 2.0)
-        self.assertEqual(handle_food_message("2 tacos"), "2 tacos")
-
-    def test_step_2_missing_quantity_replies_how_many(self):
-        reply = handle_food_message("taco")
-        self.assertEqual(reply, "How many taco?")
-
-        reply_banana = handle_food_message("banana")
-        self.assertEqual(reply_banana, "How many banana?")
-
-    def test_step_3_unknown_food_replies_friendly_message(self):
-        # 'dragonfruit' is not in sample_foods.json
-        reply = handle_food_message("2 dragonfruit")
-        self.assertIn("I don't know that food", reply)
-        self.assertIn("dragonfruit", reply)
-
-    def test_parse_and_reply_alias(self):
-        self.assertEqual(parse_and_reply("2 tacos"), "2 tacos")
-
-
 if __name__ == "__main__":
     unittest.main()
-
