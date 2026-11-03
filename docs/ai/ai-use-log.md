@@ -36,7 +36,6 @@ Tool/Model | Task | Accepted output | Rejected output | Human edits | Verificati
 | Claude (Opus 5) | Reconcile task IDs and criteria (docs/planning/task-id-map.md) (2026-10-29, Documentation) | Reconciliation of conflicting T-27 to T-29 IDs between traceability.md and task-plan.md; added done criteria for privacy, security, and verification tasks | n/a | Bazid: reviewed and edited before commit | PR reviewed by Mazen and Adiya |
 | Claude (Opus 5.5) | Restructure AI use log table format and update statistics (docs/ai/ai-use-log.md) (2026-10-31, Documentation) | Reformatted log with six columns: Tool/Model, Task, Accepted output, Rejected output, Human edits, Verification; migrated all historical rows; updated summary statistics | n/a | Khumoyun: reviewed and verified all rows, columns, and statistics before commit | Khumoyun: verified column structure, preserved all historical entries, verified summary counts; review by Victoria pending |
 
-Add a new row for every AI-assisted file or task, and name who checked it.
 
 ## Summary Statistics
 
