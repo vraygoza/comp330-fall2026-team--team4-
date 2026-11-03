@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-03 |
 | Baseline revised | A2 checkpoint 4cf90ab (estimates.md) |
 | Trigger | INV-01 lookup and storage investigation; A2 feedback |
 
@@ -52,17 +52,19 @@ Revised estimates after the architecture work. The A2 estimates listed re-estima
 | T-19 | Per-user separation | 4 | 3 | Entry Store port enforces it |
 | | **Subtotal** | **46** | **46** | Same total, different distribution |
 
-### New Tasks (did not exist at A2)
+### New Tasks (renumbered per governing Task ID Map, #74)
 | ID | Task | Low | Likely | High | Source |
 |----|------|-----|--------|------|--------|
-| T-27 | Duplicate protection via `processed_updates` | 2 | 3 | 5 | Finding 7, C-1 |
-| T-28 | `food_cache` table and refresh rule | 2 | 4 | 7 | C-5, Finding 8 |
-| T-29 | Webhook secret check and 403 path | 1 | 2 | 4 | C-1, TB-1 |
-| T-30 | `/privacy` command and notice text | 2 | 3 | 5 | OQ-8, G-4 |
-| T-31 | Deletion script for G-5 | 2 | 3 | 5 | OQ-8, C-6 |
-| T-32 | Deploy smoke test | 1 | 2 | 4 | G-3 |
-| T-33 | Nightly backup of `bot.db` | 1 | 2 | 4 | Diagram, SQLite risk |
-| | **Subtotal** | **11** | **19** | **34** | |
+| T-27 | Review database tables against NFR-4 | 1 | 1 | 2 | NFR-4 |
+| T-28 | Weekly free-tier resource health check | 1 | 1 | 2 | NFR-5, Risk 5 |
+| T-29 | Tester invite check and `/privacy` reply | 2 | 3 | 5 | FR-10, OQ-8 (absorbs old T-30, T-34) |
+| T-30 | Duplicate protection via `processed_updates` | 2 | 3 | 5 | Finding 7, C-1 (was old T-27) |
+| T-31 | `food_cache` table and refresh rule | 2 | 4 | 7 | C-5, Finding 8 (was old T-28) |
+| T-32 | Webhook secret check and 403 path | 1 | 2 | 4 | C-1, TB-1 (was old T-29; unit tests merged in #69) |
+| T-33 | Deletion script for G-5 | 2 | 3 | 5 | OQ-8, C-6 (was old T-31) |
+| T-34 | Deploy smoke test | 1 | 2 | 4 | G-3 (was old T-32) |
+| T-35 | Nightly backup of `bot.db` | 1 | 2 | 4 | Diagram, SQLite risk (was old T-33) |
+| | **Subtotal** | **13** | **21** | **38** | |
 
 ### Testing and Release
 | ID | Task | A2 likely | Revised likely | Note |
@@ -125,7 +127,11 @@ Presented for the team to decide at the architecture review. No option is adopte
 ## Open Dependencies
 Estimates for T-2, T-6 and the hosting-dependent tasks hold only if V-2 through V-4 pass. If PythonAnywhere does not allow `api.telegram.org`, P-6 and P-7 both change and these estimates are revised again.
 
+## Capacity Adjustment Note (2026-10-30)
+Sohail left the team on 2026-10-30; the team is now five part-time members. With five members averaging 5 hours per week, total remaining team capacity is approximately 25 hours per week. Unassigned tasks (T-13, T-22, T-23, T-26) are marked for reassignment in `task-plan.md`.
+
 ## Change Log
 | Date | Change | By |
 |------|--------|----|
 | 10/15/2026 | Created; revised A2 estimates against INV-01 findings | Bazid |
+| 11/03/2026 | Reconciled new tasks T-27 to T-35 with governing task-id-map.md; recorded 5-member team capacity note | Bazid, Khumoyun |

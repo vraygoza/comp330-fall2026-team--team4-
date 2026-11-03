@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Adiya (Architecture & Development Lead) |
 | Backup | Khumoyun |
-| Last updated | 2026-09-29 |
+| Last updated | 2026-11-03 |
 
 ## Cycle 1 Vertical Slice
 A tester sends the bot one food item in a text message. The bot finds the calories, saves the entry under that tester's account, and replies with the tester's calorie total for the day.
@@ -60,7 +60,7 @@ Cycle 1 cannot start building until these open questions are closed. Full list i
 | OQ-5: Where does the bot run during testing? | Testers cannot use a bot that only runs on one laptop |
 
 ## Assumptions
-These are working assumptions, not commitments. If one proves wrong, the scope is revisited and the change is recorded in [Re-estimation Notes](reestimation.md).
+These are working assumptions, not commitments. If one proves wrong, the scope is revisited and the change is recorded in [Re-estimation Notes](re-estimation.md).
 
 - Testers already use Telegram.
 - Testers log foods in English.

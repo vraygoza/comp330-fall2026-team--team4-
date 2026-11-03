@@ -1,6 +1,20 @@
 # AI Use Log
 
+| Field | Value |
+|---|---|
+| Owner | Khumoyun (Operations & Evidence Co-Lead) |
+| Backup | Mazen (Operations & Evidence Lead) |
+| Last updated | 2026-11-03 |
+
 Track all AI tool usage for transparency and academic integrity purposes. Every AI-assisted change gets a row here, with what a human checked or changed before commit.
+
+## Individual Member Trackers
+To prevent Git merge conflicts on this central log, each member logs their AI usage in their dedicated tracking file. Khumoyun (Log Lead) consolidates entries into this master file before submissions:
+- [Victoria Raygoza's Log](ai-log-victoria.md)
+- [Adiya Ingram's Log](ai-log-adiya.md)
+- [Bazid Khan's Log](ai-log-bazid.md)
+- [Mazen Malas's Log](ai-log-mazen.md)
+- [Khumoyun Abdulpattoev's Log](ai-log-khumoyun.md)
 
 ## Log Format
 
@@ -35,10 +49,16 @@ Tool/Model | Task | Accepted output | Rejected output | Human edits | Verificati
 | Claude (Opus 5.5) | Food lookup implementation and tests for #49 (src/core/food_lookup.py, src/core/sample_foods.json, tests/test_food_lookup.py) (2026-10-26, Code Generation, Testing) | Food lookup implementation, synthetic food sample data, and unit tests | Guessing partial matches like egg roll (refused per AC-6.2) | Adiya: labeled calorie values as synthetic; uploaded branch | Claude ran 25 tests (all passed); Adiya ran 25 tests on Mac (Python 3.15.2, OK); review by Sohail in PR #70 |
 | Claude (Opus 5) | Reconcile task IDs and criteria (docs/planning/task-id-map.md) (2026-10-29, Documentation) | Reconciliation of conflicting T-27 to T-29 IDs between traceability.md and task-plan.md; added done criteria for privacy, security, and verification tasks | n/a | Bazid: reviewed and edited before commit | PR reviewed by Mazen and Adiya |
 | Claude (Opus 5.5) | Restructure AI use log table format and update statistics (docs/ai/ai-use-log.md) (2026-10-31, Documentation) | Reformatted log with six columns: Tool/Model, Task, Accepted output, Rejected output, Human edits, Verification; migrated all historical rows; updated summary statistics | n/a | Khumoyun: reviewed and verified all rows, columns, and statistics before commit | Khumoyun: verified column structure, preserved all historical entries, verified summary counts; review by Victoria pending |
-
+| Claude (Opus 5.5) | A5 architecture update and construction changes (docs/architecture/README.md, architecture.md, api-contracts.md) (2026-10-28, Documentation, Code Review) | Construction change records CC-1 to CC-5, index cleanup, and contract clarifications | Premature acceptance of ADRs (kept as Proposed per #56) | Adiya: reviewed against A3 feedback and prepared PR #71 | Review by Mazen; merged in PR #71 |
+| Claude (Opus 5.5) | CI workflow and secrets check (.github/workflows/ci.yml) (2026-10-29, Code Generation, Testing) | GitHub Actions workflow running unittest on Python 3.12 and regex secrets scan | Scanning values in public log output (modified to print filenames only) | Mazen: reviewed workflow and verified with test PR | Review by Adiya in PR #73; CI check passed |
+| Claude (Opus 5.5) | S2 contract tests for parser and daily total (tests/test_parser_contract.py, tests/test_day_contract.py) (2026-10-30, Testing) | Contract tests for contracts C-2 and C-6 based on Section 3 interface specs | Testing parser before implementation merged (used skip/throwaway harness) | Adiya: renamed day tests to total_for_day and logged_at_utc | Review by Mazen; merged in PR #77 |
+| Claude (Opus 5) | B2 daily total function and timezone tests (src/core/day.py, tests/test_day.py) (2026-11-02, Code Generation, Testing) | Implementation of chicago_day_bounds and total_for_day with DST tests | Fixed timezone offset logic (rejected fixed UTC-6 in favor of zoneinfo America/Chicago) | Bazid: reviewed edge cases for midnight and DST transitions | Ran 34 tests locally; review by Adiya; merged in PR #83 |
+| Claude (Opus 5) | Assignment 4 changed-file index (docs/reviews/assignment4-changed-files.md) (2026-11-02, Documentation) | Initial index of 22 changed files, commit comparison, and workflow traces | Unchecked commit hashes | Bazid: verified file owners, PR numbers, and comparison baseline | Review by Victoria; merged in PR #84 |
+| Google Antigravity / Claude | K2 message parser implementation and tests (src/core/parser.py, tests/test_parser.py) (2026-11-02, Code Generation, Testing) | parse_message implementation handling amounts, units, serving fallback, and unknown foods | Direct dependency on food_lookup and response text generation in parser (removed to preserve Section 3 separation) | Khumoyun: removed reply formatting and food_lookup import; verified against AC-2.2 and contract C-2 | Ran 51 tests locally; all 11 contract tests from #77 passed; review by Adiya; merged in PR #88 |
+| Google Antigravity (Gemini 3.8) | Repository consistency audit, link verification, planning and task alignment, decentralized log templates, and changed-file index regeneration (README.md, docs/planning/*, docs/reviews/*, docs/decisions/*, docs/ai/*) (2026-11-03, Documentation, Code Review) | Audit report identifying dropped AI entries, broken links, and task ID mismatches; restored 6 dropped AI rows; resolved 6 broken markdown links; regenerated assignment4-changed-files.md (41 files, 2,088 lines); updated review package and README statuses; reconciled T-27 to T-35 in re-estimation.md; created 5 individual member AI logs (ai-log-*.md) | Retaining duplicate working agreements file (deleted extensionless file); manual test scripts | Khumoyun: directed comprehensive audit, proposed per-member decentralized log architecture to eliminate merge conflicts, verified all link resolutions and file modifications | Automated link scanner verified 295 links (0 broken); 60 unit and contract tests passed; CI secrets check passed |
 
 ## Summary Statistics
 
-- Total AI-assisted sessions: 16
-- Most used tool: Claude (15 of 16, including via Google Antigravity and Opus models)
+- Total AI-assisted sessions: 23
+- Most used tool: Claude (21 of 23), Gemini / Antigravity (1 of 23), GitHub Copilot (1 of 23)
 - Primary use cases: Documentation, Code Generation, Testing, Code Review

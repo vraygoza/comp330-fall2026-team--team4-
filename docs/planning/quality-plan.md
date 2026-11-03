@@ -2,7 +2,7 @@
 
 Project: Calorie Counter Telegram Bot
 Team: Team 4 (COMP 330, Fall 2026)
-Owner: Sohail (Quality & Review Lead)
+Owner: Bazid (acting Quality & Review Lead; charter backup; previously Sohail)
 
 ## 1. What Quality Means for This Project
 For Cycle 1, our main goals are making sure the bot doesn't crash, gives accurate numbers, and feels smooth for our 10-15 trial users. Since the bot is pretty simple right now (log food -> get calories -> show running daily total), we are focusing on four core things:
