@@ -35,9 +35,10 @@ Date | Tool | Feature/File | Type of Use | Team Member | Notes
 | 2026-10-26 | Claude (Opus 5.5) | src/core/food_lookup.py, src/core/sample_foods.json, tests/test_food_lookup.py | Code Generation, Testing | Adiya | Food lookup for #49. Calorie values are made up and labeled synthetic. Partial matches such as egg roll are refused, not guessed (AC-6.2). Claude ran 25 tests (A2 plus A3), all passed. Adiya ran the same 25 tests on her Mac (Python 3.15.2) on 10/29: OK. Adiya uploaded; review by Sohail in PR #70 (issue #49) |
 | 2026-10-29 | Claude (Opus 5) | docs/planning/task-id-map.md | Documentation | Bazid | Reconciled the conflicting T-27 to T-29 IDs between traceability.md and task-plan.md flagged in the A3 review; added done criteria for the privacy, security and verification tasks. Reviewed and edited by Bazid before commit; PR reviewers Mazen and Adiya |
 | 2026-11-02 | Claude (Opus 5.5) | src/core/parser.py, tests/test_parser.py, tests/test_parser_contract.py, tests/test-interactive.py | Code Generation, Testing | Khumoyun | K2 message parser (#61). Implemented parse_message for count, gram, article and food-alone forms; implemented missing amount and unknown food replies; added unit and contract test suites. 26 tests pass. Reviewed, tested, and edited by Khumoyun before commit; review by Adiya or Victoria |
+| 2026-10-29 | Claude (Opus 5.5) | .github/workflows/ci.yml | Documentation/Code Help | Mazen | CI workflow for #57 (M2). Claude helped to finish draft of workflow and its secrets check and also searched the repo for secrets. Mazen read and reviewed all. #73 CI run: secrets check passed, tests failed as expected because main had no tests/ yet. Accepted as drafted; Review by Adiya in PR #73 |
 
 ## Summary Statistics
 
-- Total AI-assisted sessions: 16
-- Most used tool: Claude (15 of 16, including via Google Antigravity and Opus models)
+- Total AI-assisted sessions: 17
+- Most used tool: Claude (16 of 17, including via Google Antigravity and Opus models)
 - Primary use cases: Documentation, Code Generation, Testing
