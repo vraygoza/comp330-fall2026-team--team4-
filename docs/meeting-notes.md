@@ -81,4 +81,38 @@
 - The disconnected feeling from A2 feedback is tracked as Risk 8 in the risk register (docs contradict each other).
 - PR reviewer assignment is a working-agreement change.
 
+## 2026-10-26 — Team Meeting
+**Present:** Victoria, Bazid, Adiya, Mazen, Khumoyun **Absent:** Sohail **Format:** Zoom (6:30 PM)
 
+### Decisions
+- **Project board:** Victoria set up a GitHub Project board to track overall progress and each person's tasks.
+- **Instructor feedback reviewed:** The team reviewed feedback about contradictory information across the records and about making teamwork visible in the repository.
+- **Task ownership reviewed:** Individual tasks were reviewed ahead of the next checkpoint.
+
+### Action Items
+| Item | Owner | Due |
+|---|---|---|
+| Follow up with Sohail on his assigned tasks | Victoria | 2026-10-28 |
+
+### Notes
+- Notes drafted by Victoria and expanded with Gemini; logged in docs/ai/ai-use-log.md.
+
+## 2026-10-30 — Assignment 4 Update
+**Present:** {Victoria, Bazid, Adiya, Mazen, Khumoyun} **Format:** { group chat}
+
+### Decisions
+- **Team change:** Sohail is no longer on the team. His Assignment 4 tasks were reassigned; current owners are listed in docs/reviews/assignment4-review-package.md.
+- **Deadline:** The Assignment 4 deadline was extended; the exact time is in Sakai.
+- **Status:** Every task not shown as merged on the Assignment 4 board is in progress.
+- **Plan:** Reviews, then merges, then the tag a4-construction-integration, then the Sakai submission. Progress is tracked on the Assignment 4 board.
+
+### Action Items
+| Item | Owner | Due |
+|---|---|---|
+| Confirm owners for the reassigned tasks | Victoria | Before the tag |
+| Open or finish pull requests for all in-progress tasks | Everyone | Before the tag |
+| Review assigned pull requests | Reviewers | Before the tag |
+| Merge approved pull requests, tag, submit on Sakai | Victoria | Before the Sakai deadline |
+
+### Notes
+- Status is tracked on the Assignment 4 board.
