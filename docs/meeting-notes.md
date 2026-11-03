@@ -98,21 +98,21 @@
 - Notes drafted by Victoria and expanded with Gemini; logged in docs/ai/ai-use-log.md.
 
 ## 2026-10-30 — Assignment 4 Update
-**Present:** [names] **Format:** [Zoom / group chat]
+**Present:** {Victoria, Bazid, Adiya, Mazen, Khumoyun} **Format:** { group chat}
 
 ### Decisions
-- **Team change:** Sohail is no longer on the team. His Assignment 4 tasks are being reassigned: test strategy (TBD), remaining tests (TBD), review of the integration pull request (10/30/26), AI code review (TBD).
-- **Deadline:** The Assignment 4 deadline was extended to tonight, 2026-10-30, [time per Sakai].
-- **Status:** Every task that is not listed as merged on the board is in progress.
-- **Plan for tonight:** reviews by [12 AM]; merge by [9 AM]; tag by [9 AM]; Sakai submission by [time].
+- **Team change:** Sohail is no longer on the team. His Assignment 4 tasks were reassigned; current owners are listed in docs/reviews/assignment4-review-package.md.
+- **Deadline:** The Assignment 4 deadline was extended; the exact time is in Sakai.
+- **Status:** Every task not shown as merged on the Assignment 4 board is in progress.
+- **Plan:** Reviews, then merges, then the tag a4-construction-integration, then the Sakai submission. Progress is tracked on the Assignment 4 board.
 
 ### Action Items
 | Item | Owner | Due |
 |---|---|---|
-| Confirm new owners for the reassigned tasks | Victoria | [6PM] |
-| Open or finish pull requests for all in-progress tasks | Everyone | [12AM] |
-| Review assigned pull requests | Reviewers | [9AM] |
-| Merge approved pull requests, tag, submit on Sakai | Victoria | [11AM] |
+| Confirm owners for the reassigned tasks | Victoria | Before the tag |
+| Open or finish pull requests for all in-progress tasks | Everyone | Before the tag |
+| Review assigned pull requests | Reviewers | Before the tag |
+| Merge approved pull requests, tag, submit on Sakai | Victoria | Before the Sakai deadline |
 
 ### Notes
 - Status is tracked on the Assignment 4 board.
