@@ -5,8 +5,8 @@
 ### Documentation Files
 - [ ] `/docs/team-charter.md` - Team mission, goals, communication plan, role assignments
 - [ ] `/docs/roles.md` - Role definitions and team member assignments
-- [ ] `/docs/ai-policy.md` - AI usage policy and guidelines
-- [ ] `/docs/ai-use-log.md` - Log to track AI tool usage
+- [ ] `/docs/ai/ai-policy.md` - AI usage policy and guidelines
+- [ ] `/docs/ai/ai-use-log.md` - Log to track AI tool usage
 - [ ] `/docs/meeting-notes.md` - First meeting notes and decisions
 
 ### Planning Files

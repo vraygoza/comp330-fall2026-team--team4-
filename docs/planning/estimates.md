@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-09-29 |
+| Last updated | 2026-11-03 |
 
-Estimates for the tasks in [Task Plan](taskplan.md). Numbers are hours of focused work by one person.
+Estimates for the tasks in [Task Plan](task-plan.md). Numbers are hours of focused work by one person.
 
 ## How These Were Made
 - This is the team's first implementation cycle, so there is no past velocity to base estimates on. Everything here is judgment, not measurement.
@@ -85,7 +85,7 @@ That is close to the limit of what this team can sustain, and [Team Commitments]
 - The real Cycle 1 end date differing from 10/18/2026.
 - A member's confirmed capacity coming in below what is assumed here.
 
-Re-estimation is tracked by Sohail in [reestimation.md](reestimation.md).
+Re-estimation is tracked in [re-estimation.md](re-estimation.md).
 
 ## Change Log
 | Date | Change | By |
