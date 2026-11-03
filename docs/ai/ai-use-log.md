@@ -35,7 +35,6 @@ Date | Tool | Feature/File | Type of Use | Team Member | Notes
 | 2026-10-26 | Claude (Opus 5.5) | src/core/food_lookup.py, src/core/sample_foods.json, tests/test_food_lookup.py | Code Generation, Testing | Adiya | Food lookup for #49. Calorie values are made up and labeled synthetic. Partial matches such as egg roll are refused, not guessed (AC-6.2). Claude ran 25 tests (A2 plus A3), all passed. Adiya ran the same 25 tests on her Mac (Python 3.15.2) on 10/29: OK. Adiya uploaded; review by Sohail in PR #70 (issue #49) |
 | 2026-10-28 | Claude (Opus 5.5) | docs/architecture/README.md, architecture.md, api-contracts.md | Documentation, Code Review | Adiya | Claude compared the A2 and A3 code with architecture.md, recorded construction changes CC-1 to CC-5, moved the architecture index and fixed dead links (A3 feedback, Package navigation). ADRs left Proposed for the vote in #56. Adiya uploaded; review by Mazen in PR #71 (issue #51) |
 
-Add a new row for every AI-assisted file in Assignment 3, and name who checked it.
 
 ## Summary Statistics
 
