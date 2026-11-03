@@ -68,3 +68,12 @@ class TestTotalForDay(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class ChicagoDateOfTests(unittest.TestCase):
+    """chicago_date_of was added in A4 (#50)."""
+
+    def test_evening_after_utc_midnight_is_still_chicago_today(self):
+        from datetime import date, datetime, timezone
+        from src.core.day import chicago_date_of
+        self.assertEqual(chicago_date_of(datetime(2026, 10, 27, 1, 0, tzinfo=timezone.utc)), date(2026, 10, 26))
+        self.assertEqual(chicago_date_of(datetime(2026, 10, 27, 5, 0, tzinfo=timezone.utc)), date(2026, 10, 27))

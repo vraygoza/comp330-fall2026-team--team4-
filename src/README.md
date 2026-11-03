@@ -12,7 +12,7 @@ Python 3.10 or later. Layout follows [Architecture](../docs/architecture/archite
 |--------|-------|------|
 | `src/core/` | Core: parser, lookup, day total, use cases | Imports nothing from `src/bot/`, `src/adapters/`, Flask, `sqlite3` or `urllib` |
 | `src/bot/` | Interface: webhook, router, local runner | Turns Telegram updates into core calls |
-| `src/adapters/` | Adapters: Telegram (and later FDC, storage) | The only code that reads secrets or calls outside services |
+| `src/adapters/` | Adapters: Telegram, Entry Store (SQLite); later FDC | The only code that reads secrets, runs SQL or calls outside services |
 
 ## Run the Bot on Your Computer
 
@@ -28,7 +28,9 @@ Python 3.10 or later. Layout follows [Architecture](../docs/architecture/archite
 
 3. Open `.env` and paste the token after `TELEGRAM_BOT_TOKEN=`. Never commit `.env`.
 4. Start the bot: `python -m src.bot.poll`
-5. In Telegram, send `/start` to your test bot. It replies with the welcome message. Press Ctrl+C to stop.
+5. In Telegram, send `/start` to your test bot, then try `2 tacos`, `banana` and `an egg`. Each reply shows what was logged and today's total. Press Ctrl+C to stop.
+
+Entries are saved in `bot.db` in the repo folder (ignored by git). Set `BOT_DB_PATH` in `.env` to keep it somewhere else. Delete the file to start over.
 
 `poll.py` is for local development only. The production entry point is the webhook in `src/bot/web.py` (ADR-0005), which is deployed only after host checks V-2 to V-4 pass.
 
@@ -45,3 +47,4 @@ Tests use Python's built-in `unittest`, so they need nothing beyond `requirement
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-26 | Created with the bot skeleton (#48) | Adiya |
+| 2026-11-03 | A4 (#50): food logging wired end to end; run steps and BOT_DB_PATH added | Adiya |

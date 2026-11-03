@@ -21,10 +21,11 @@ from src.bot.router import route_update
 log = logging.getLogger(__name__)
 
 
-def create_app(messenger=None) -> Flask:
-    """Build the app. Tests pass a fake messenger; production uses Telegram."""
+def create_app(messenger=None, store=None) -> Flask:
+    """Build the app. Tests pass a fake messenger and a temporary store."""
     app = Flask(__name__)
     app.config["MESSENGER"] = messenger
+    app.config["STORE"] = store
 
     def _messenger():
         if app.config["MESSENGER"] is None:
@@ -48,7 +49,7 @@ def create_app(messenger=None) -> Flask:
         # TODO(T-30, Khumoyun; was T-27 before the task ID map, #74): skip an update_id that was already processed,
         # recorded in the same transaction as the entry (C-1).
 
-        result = route_update(update)
+        result = route_update(update, store=app.config["STORE"])
         if result.chat_id is not None and result.reply:
             _messenger().send_message(result.chat_id, result.reply)
 

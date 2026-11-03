@@ -19,6 +19,7 @@ import logging
 import os
 import sys
 
+from src.adapters.store import EntryStore
 from src.adapters.telegram import TelegramClient, TelegramConfigError
 from src.bot.router import route_update
 
@@ -47,6 +48,8 @@ def main() -> int:
         print(err, file=sys.stderr)
         return 1
 
+    db_path = os.environ.get("BOT_DB_PATH") or "bot.db"  # empty in .env means the default
+    store = EntryStore(db_path)
     log.info("Bot started. Message your test bot in Telegram. Press Ctrl+C to stop.")
     offset = None
     try:
@@ -62,12 +65,14 @@ def main() -> int:
                 continue
             for update in result.get("result", []):
                 offset = update["update_id"] + 1
-                routed = route_update(update)
+                routed = route_update(update, store=store)
                 if routed.chat_id is not None and routed.reply:
                     client.send_message(routed.chat_id, routed.reply)
                 log.info("outcome=%s", routed.outcome)
     except KeyboardInterrupt:
         log.info("Stopped.")
+    finally:
+        store.close()
     return 0
 
 
