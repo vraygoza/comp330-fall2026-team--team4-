@@ -37,7 +37,15 @@ Allowed statuses: Not started, In progress, PR open, Merged. Statuses are a snap
 To be added after the integration pull request merges: the issue number, branch, pull request, review comments, CI result and merge decision. Until then, see the three traced examples in `docs/reviews/assignment4-changed-files.md` (PR #84).
 
 ## Known gaps
-Anything not merged and reviewed is listed in `docs/release/known-limitations.md`.
-
+`docs/release/known-limitations.md` is not on main yet, so the gaps are listed here. As of 2026-11-02 these are Not started:
+- Integration pull request (#50); input parsing (#61) is not merged
+- Dependency review (adr-0009-dependencies.md)
+- Risk register update for construction
+- CI results evidence
+- Runtime and logging evidence
+- Known-limitations file
+- AI code review (ai-code-review-01.md)
+- ADR acceptance vote (#56); ADR-0001 to ADR-0008 remain Proposed
+Items shown as PR open are not on main.
 ## AI use
 Parts of this package were drafted with AI assistance, then reviewed and edited by team members. See `docs/ai/ai-use-log.md`.
