@@ -14,8 +14,8 @@ A Telegram bot that tracks calories. A user texts the bot what they ate, the bot
 The project was chosen at the 2026-09-16 team meeting. See [D1 in the Decision Log](docs/decisions/decision-log.md).
 
 ## Current Status
-   Cycle 1 construction (Assignment 4). The bot's core code and automated tests are merged; see the Assignment 4 section below for how to run and test them.
-
+   Cycle 1 construction (Assignment 4). The bot skeleton and food lookup are merged (PR #69, #70); input parsing, the daily total and the integration pull request (A4, #50) are in progress. See the Assignment 4 section below for how to run and test what is merged.
+   
    | Phase gate | Git tag | Status |
    |------------|---------|--------|
    | Assignment 1: Project Launch | `a1-project-launch` | Submitted |
@@ -30,7 +30,7 @@ The project was chosen at the 2026-09-16 team meeting. See [D1 in the Decision L
 | Requirements | [`/docs/requirements/`](docs/requirements/) | Requirements, acceptance criteria, assumptions, open questions |
 | Planning | [`/docs/planning/`](docs/planning/README.md) | Scope, task plan, estimates, schedule, risks, commitments |
    | Source code | [`/src/`](src/) | Bot logic and adapters (PR #69) |
-   | Tests | [`/tests/`](tests/) | Automated tests (PR #70) |
+| Tests | [`/tests/`](tests/) | Automated tests (PR #69 and #70; contract tests in PR #77, open) |
 
 
 Task tracking lives in GitHub Issues and the GitHub Projects board, not in repository folders.
@@ -47,7 +47,7 @@ Task tracking lives in GitHub Issues and the GitHub Projects board, not in repos
 | Victoria Raygoza | Team Lead |
 | Bazid | Planning & Process Lead |
 | Adiya | Architecture & Development Lead |
-| Sohail | Quality & Review Lead |
+| Sohail | Quality & Review Lead (no longer on the team as of 2026-10-30; tasks reassigned, see PR #79) |
 | Mazen Malas | Operations & Evidence Lead |
 | Khumoyun | Operations & Evidence Co-Lead |
 
@@ -57,7 +57,6 @@ Task tracking lives in GitHub Issues and the GitHub Projects board, not in repos
 The Cycle 1 architecture evidence is indexed in [docs/architecture/README.md](docs/architecture/README.md).
 Planning records are in [docs/planning/](docs/planning/), requirements in [docs/requirements/](docs/requirements/), decisions in [docs/decisions/](docs/decisions/), and AI use in [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md).
 
-The Cycle 1 architecture evidence is indexed in [docs/architecture/README.md](docs/architecture/README.md). Planning records are in [docs/planning/](docs/planning/), requirements in [docs/requirements/](docs/requirements/), decisions in [docs/decisions/](docs/decisions/), and AI use in [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md).
 
 
 
@@ -91,15 +90,15 @@ From the repository root:
 python -m unittest discover -s tests -t .
 ```
 
-Tests use Python's built-in `unittest`, so they need nothing beyond `requirements.txt`. The planned test cases will be in `docs/testing/test-strategy.md` (pending; it is not on `main` yet).
+Tests use Python's built-in `unittest`, so they need nothing beyond `requirements.txt`. The planned test cases are in docs/testing/test-cases.md (PR #72, not on main yet). The automated contract tests are in PR #77 (open).
 
 ### Evidence map
 | Evidence | Location | Status |
 |---|---|---|
-| Pull request template | `.github/pull_request_template.md` | PR open |
-| CI workflow | `.github/workflows/ci.yml` | In progress |
+| Pull request template | `.github/pull_request_template.md` | Merged |
+| CI workflow | `.github/workflows/ci.yml` | Merged |
 | Source code | [`/src/`](src/) | Merged (#69) |
-| Tests | [`/tests/`](tests/) | Merged (#70) |
+| Tests | [`/tests/`](tests/) | Merged (#69, #70); contract tests in PR #77 (open) |
 | Traceability | [docs/planning/traceability.md](docs/planning/traceability.md) | Updating |
 | Decisions and ADRs | [docs/decisions/](docs/decisions/) | Exists |
 | Architecture | [docs/architecture/](docs/architecture/) | Exists |
