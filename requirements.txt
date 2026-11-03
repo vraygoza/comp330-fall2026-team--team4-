@@ -1,0 +1,3 @@
+# Runtime dependencies. Everything else is the Python standard library (ADR-0005).
+# New packages need a dependency review (issue #58, ADR-0009).
+Flask==3.1.3
