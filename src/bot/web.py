@@ -21,10 +21,11 @@ from src.bot.router import route_update
 log = logging.getLogger(__name__)
 
 
-def create_app(messenger=None) -> Flask:
-    """Build the app. Tests pass a fake messenger; production uses Telegram."""
+def create_app(messenger=None, store=None) -> Flask:
+    """Build the app. Tests pass a fake messenger and a temporary store."""
     app = Flask(__name__)
     app.config["MESSENGER"] = messenger
+    app.config["STORE"] = store
 
     def _messenger():
         if app.config["MESSENGER"] is None:

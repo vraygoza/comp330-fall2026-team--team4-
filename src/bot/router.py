@@ -4,21 +4,25 @@ Turns one Telegram Update into one reply. It does not send anything and does
 not know about Flask or HTTP, so the webhook (web.py) and the local runner
 (poll.py) share the same behavior.
 
-Skeleton scope (issue #48): /start and the C-1 filtering rules. Food logging
-is wired in by the integration PR (issue #50).
+Skeleton (issue #48): /start and the C-1 filtering rules.
+Integration (issue #50, A4): /start registers the tester, and any other text runs
+the Log Food use case. The store is passed in, so tests use a temporary database.
 """
 
 from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
+from datetime import datetime, timezone
+
+from src.core import use_cases
 
 log = logging.getLogger(__name__)
 
 WELCOME = (
     "Welcome to the Team 4 calorie tracker test.\n"
     "Send one food per message, for example: 2 eggs\n"
-    "Send /today to see what you logged today."
+    "Calories come from a small sample list during this test."
 )
 DIRECT_ONLY = "Please message me directly."
 FORMAT_HINT = (

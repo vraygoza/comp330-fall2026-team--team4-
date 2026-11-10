@@ -47,8 +47,9 @@ class RouterTests(unittest.TestCase):
         self.assertEqual(result.outcome, "IGNORED")
         self.assertIsNone(result.chat_id)
 
-    def test_food_text_is_not_logged_yet(self):
-        # Food logging arrives with the integration PR (issue #50).
+    def test_food_text_without_a_store_is_not_logged(self):
+        # route_update needs an EntryStore to log food. Without one it refuses;
+        # the full logging path is tested in tests/test_log_food.py (#50).
         self.assertEqual(route_update(private_update("2 eggs")).outcome, "NOT_READY")
 
     def test_unexpected_exception_returns_safe_error_reply(self):
