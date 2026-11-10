@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-02 |
 
 Schedule for Cycle 1 of the Telegram calorie-counter bot. The Cycle 1 vertical slice is: a tester sends the bot one food item, the bot finds the calories, saves the entry, and replies with the daily total. See [Scope Statement](scope.md).
 
@@ -43,14 +43,14 @@ Work is tracked as GitHub Issues. Issue prefixes are by owner initial (A Adiya, 
 | #47 | A1 design check | Adiya | Merged (#64) |
 | #48 | Bot skeleton | Adiya | Merged (#69) |
 | #49 | Food lookup | Adiya | Merged (#70) |
-| #51 | A5 architecture index and construction changes | Adiya | Merged (#71) |
-| #44 | B2 daily-total function | Bazid | Merged (#83) |
-| #61 | K2 input parsing | Khumoyun | Merged (#88) |
-| #50 | A4 integration | Adiya | Ready / unblocked (PR not yet opened) |
+| #51 | A5 architecture index and construction changes | Adiya | PR #71 open, blocked on #50 |
+| #44 | B2 daily-total function | Bazid | PR open, approved by Adiya |
+| #61 | K2 input parsing | Khumoyun | Not started — blocks #50 |
+| #50 | A4 integration | Adiya | Blocked on #44 and #61 |
 | #56 | ADR acceptance vote | Team | Open |
 | #58 | Risk register update | Mazen | Open |
-| M2 | CI workflow and secrets check | Mazen | Merged (#73) |
-| S2 | Contract tests for parser and daily total | Adiya | Merged (#77) |
+| M2 | CI workflow and secrets check | Mazen | PR #73 open, check passing |
+| S2 | Contract tests for parser and daily total | Adiya | PR #77 open |
 
 ## Team Change, 2026-10-30
 
@@ -78,4 +78,3 @@ Consequences for this schedule:
 | 09/29/2026 | Created Cycle 1 schedule | Bazid |
 | 10/30/2026 | Updated through A3 and A4; fixed broken links to task-plan.md and meeting-notes.md; replaced the placeholder working schedule with current issues; recorded the team change; reworded the A2 internal-deadline row | Bazid |
 | 11/02/2026 | Applied review feedback on #79: S2 owner is Adiya, M2 check passing, B2 status updated | Bazid |
-| 11/03/2026 | Updated issue statuses to Merged for #44, #51, #61, M2, S2; noted #50 unblocked and awaiting PR creation | Bazid, Khumoyun |

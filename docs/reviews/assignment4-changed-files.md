@@ -81,7 +81,7 @@ Totals: 41 files, 2,088 additions, 154 deletions.
 | Area | Why |
 |---|---|
 | `docs/architecture/data-context.md`, `architecture-diagram.dot`, `.png` | The core data model and high-level component diagram established at A3 remain current. Section 11 of `architecture.md` records construction-level deviations. |
-| `docs/decisions/adr-0001` to `adr-0008` | Content stable; accepted at architecture review (`architecture-review.md`). Team vote issue #56 formalizes repository status change. |
+| `docs/decisions/adr-0001` to `adr-0008` | Content stable; reviewed at architecture review (`architecture-review.md`). Status remains Proposed pending formal team vote in issue #56 (M1). |
 | `docs/requirements/requirements.md`, `open-questions.md` | Requirements are locked for Cycle 1. Open questions OQ-2, OQ-4, and OQ-5 await live verification tasks V-1 through V-6. |
 | `docs/planning/scope.md` | Cycle 1 scope (S1–S8 committed, O1–O2 optional) remains unchanged. |
 

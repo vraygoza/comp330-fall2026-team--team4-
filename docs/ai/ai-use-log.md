@@ -4,12 +4,12 @@
 |---|---|
 | Owner | Khumoyun (Operations & Evidence Co-Lead) |
 | Backup | Mazen (Operations & Evidence Lead) |
-| Last updated | 2026-11-03 |
+| Last updated | 2026-11-09 |
 
-Track all AI tool usage for transparency and academic integrity purposes. Every AI-assisted change gets a row here, with what a human checked or changed before commit.
+Track all AI tool usage for transparency and academic integrity purposes. Every AI-assisted change gets a row here, with what a human checked or changed before commit. This file serves as the authoritative master evidence file for Assignment 5 and course reviews.
 
-## Individual Member Trackers
-To prevent Git merge conflicts on this central log, each member logs their AI usage in their dedicated tracking file. Khumoyun (Log Lead) consolidates entries into this master file before submissions:
+## Individual Member Trackers & Decentralized Logging
+To prevent Git merge conflicts on this central log, team members can either add rows directly here or log their usage in their dedicated tracking file. Khumoyun (Log Lead) continuously reconciles and consolidates entries into this master file before every deliverable submission (confirming zero lost rows):
 - [Victoria Raygoza's Log](ai-log-victoria.md)
 - [Adiya Ingram's Log](ai-log-adiya.md)
 - [Bazid Khan's Log](ai-log-bazid.md)
@@ -56,9 +56,11 @@ Tool/Model | Task | Accepted output | Rejected output | Human edits | Verificati
 | Claude (Opus 5) | Assignment 4 changed-file index (docs/reviews/assignment4-changed-files.md) (2026-11-02, Documentation) | Initial index of 22 changed files, commit comparison, and workflow traces | Unchecked commit hashes | Bazid: verified file owners, PR numbers, and comparison baseline | Review by Victoria; merged in PR #84 |
 | Google Antigravity / Claude | K2 message parser implementation and tests (src/core/parser.py, tests/test_parser.py) (2026-11-02, Code Generation, Testing) | parse_message implementation handling amounts, units, serving fallback, and unknown foods | Direct dependency on food_lookup and response text generation in parser (removed to preserve Section 3 separation) | Khumoyun: removed reply formatting and food_lookup import; verified against AC-2.2 and contract C-2 | Ran 51 tests locally; all 11 contract tests from #77 passed; review by Adiya; merged in PR #88 |
 | Google Antigravity (Gemini 3.8) | Repository consistency audit, link verification, planning and task alignment, decentralized log templates, and changed-file index regeneration (README.md, docs/planning/*, docs/reviews/*, docs/decisions/*, docs/ai/*) (2026-11-03, Documentation, Code Review) | Audit report identifying dropped AI entries, broken links, and task ID mismatches; restored 6 dropped AI rows; resolved 6 broken markdown links; regenerated assignment4-changed-files.md (41 files, 2,088 lines); updated review package and README statuses; reconciled T-27 to T-35 in re-estimation.md; created 5 individual member AI logs (ai-log-*.md) | Retaining duplicate working agreements file (deleted extensionless file); manual test scripts | Khumoyun: directed comprehensive audit, proposed per-member decentralized log architecture to eliminate merge conflicts, verified all link resolutions and file modifications | Automated link scanner verified 295 links (0 broken); 60 unit and contract tests passed; CI secrets check passed |
+| Claude (Opus 5.5) | A4 integration for #50 (src/core/use_cases.py, src/adapters/store.py, src/bot/router.py, src/bot/web.py, src/bot/poll.py, src/core/day.py chicago_date_of, tests/test_log_food.py, tests/test_store.py, tests/test_day.py, src/README.md, .env.example) (2026-11-03, Code Generation, Testing) | End-to-end Log Food use case: parse (K2), lookup (A3), save under the tester ID, daily total (B2), reply; SQLite Entry Store with C-6 names | /today and duplicate update protection (T-30) left out of A4 scope; gram entries save nothing until FDC data (CC-2) | No manual code edits by Adiya. Review fixes from Mazen (#90) applied: Python 3.12 in src/README.md, Mac certificate note, router test renamed | Claude ran 88 tests, all passed, including tester separation (AC-7.1), repeat /start (AC-1.2) and the Chicago midnight reset (AC-5.3). Live run by Mazen (independent reviewer) on commit 14e247b with his own test bot: /start, 2 eggs, Banana, 100g rice and 25 eggs all gave the expected replies (screenshots in his #90 review). Approved by Mazen |
+| Claude (Opus 5.5) | A5 final architecture check (docs/architecture/architecture.md) (2026-11-09, Documentation, Code Review) | Compared the integrated code in #90 (head a29959f) with Sections 3 and 4; added a status column, an as-built note, CC-6 to CC-9, the live check status, and closed the Section 11 TODO | Did not change ADR statuses (that follows the #56 vote, a separate PR) | No manual edits by Adiya yet | Dependency rules checked with git grep on the #90 branch (core imports, SQL only in store.py, secrets only in telegram.py); the 2 eggs reply wording matches Mazen's live run on #90. Review by a teammate other than Adiya |
 
 ## Summary Statistics
 
-- Total AI-assisted sessions: 23
-- Most used tool: Claude (21 of 23), Gemini / Antigravity (1 of 23), GitHub Copilot (1 of 23)
+- Total AI-assisted sessions: 25
+- Most used tool: Claude (23 of 25), Gemini / Antigravity (1 of 25), GitHub Copilot (1 of 25)
 - Primary use cases: Documentation, Code Generation, Testing, Code Review
