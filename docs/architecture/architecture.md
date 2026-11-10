@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Adiya (Architecture & Development Lead) |
 | Backup | Mazen Malas (Operations & Evidence Lead) |
-| Last updated | 2026-10-26 |
-| Status | Draft. Built on proposed decisions P-1 to P-10, which the team votes on in #56. Construction changes are recorded in Section 11 |
-| Baseline under review | Branch `docs/a3-architecture-adiya` (commit recorded in the review file when the PR opens) |
+| Last updated | 2026-11-09 |
+| Status | Matches the code merged in #90 (checked 2026-11-09; Section 11). Decision status for P-1 to P-10 follows the team vote recorded in the [Decision Log](../decisions/decision-log.md) (#56) |
+| Code checked | Integration PR #90, head `a29959f` (A3 baseline: tag `a3-architecture-review`) |
 
 Related files: [Diagram](architecture-diagram.png) ([source](architecture-diagram.dot)), [API and Tool Contracts](api-contracts.md), [Data and Context](data-context.md), [INV-01 Investigation](investigations/inv-01-lookup-storage.md), [Requirements](../requirements/requirements.md).
 
@@ -34,20 +34,20 @@ Each line becomes an ADR (owner Mazen, backup Adiya) once the team accepts it. E
 
 The design is layered with the core in the middle. The core (parser, resolver, day calculator, use cases) has no knowledge of Telegram, Flask, HTTP or SQL. Adapters on the outside translate between the core and each external system. That is what lets P-6 and P-7 change without touching business rules.
 
-| # | Component | Layer | Responsibility (one line) | Planned module |
-|---|-----------|-------|---------------------------|----------------|
-| 1 | Webhook Endpoint | Interface | Accepts Telegram POSTs, checks the secret header, drops repeats, hands the message to the router, always answers fast | `src/bot/web.py` |
-| 2 | Command Router | Interface | Maps `/start`, `/today`, `/privacy`, plain text (and `/undo` if built) to a use case | `src/bot/router.py` |
-| 3 | Use Cases | Core | Run each request end to end: register, log food, list today | `src/core/use_cases.py` |
-| 4 | Message Parser | Core | Turns text into food words, quantity and unit, or a refusal reason | `src/core/parser.py` |
-| 5 | Food Resolver | Core | Picks one reliable FDC record and gram amount, or refuses with a reason | `src/core/resolver.py` |
-| 6 | Day Calculator | Core | Gives the UTC start and end of a Chicago calendar day | `src/core/day.py` |
-| 7 | Telegram Adapter | Adapter | Calls Bot API `sendMessage` and `setWebhook`; holds the bot token | `src/adapters/telegram.py` |
-| 8 | FDC Adapter | Adapter | Calls FDC search and food details with a timeout; holds the API key; fills the food cache | `src/adapters/fdc.py` |
-| 9 | Entry Store | Adapter | The only code that runs SQL. Every read and write takes a Telegram user ID | `src/adapters/store.py` |
-| 10 | Curated Food Map | Data (repo) | Reviewed mapping from tester words to one FDC record and default portion | `data/food_map.json` |
-| 11 | SQLite Database | Data (host) | Tables `users`, `entries`, `food_cache`, `processed_updates` | `~/calorie-bot/bot.db` on the host |
-| 12 | Operations Log | Data (host) | Outcome codes and timings, no food text, no Telegram IDs | Host server and error logs |
+| # | Component | Layer | Responsibility (one line) | Module | Cycle 1 status (2026-11-09) |
+|---|-----------|-------|---------------------------|--------|-----------------------------|
+| 1 | Webhook Endpoint | Interface | Accepts Telegram POSTs, checks the secret header, drops repeats, hands the message to the router, always answers fast | `src/bot/web.py` | Built and unit tested; not deployed (CC-3). No duplicate check yet (CC-5); not yet created with a store (CC-9) |
+| 2 | Command Router | Interface | Maps `/start`, `/today`, `/privacy`, plain text (and `/undo` if built) to a use case | `src/bot/router.py` | Built: `/start` and plain text. `/today`, `/privacy`, `/undo` not built (CC-8) |
+| 3 | Use Cases | Core | Run each request end to end: register, log food, list today | `src/core/use_cases.py` | Built (#90): register and log food. List today not built |
+| 4 | Message Parser | Core | Turns text into food words, quantity and unit, or a refusal reason | `src/core/parser.py` | Built (#88) |
+| 5 | Food Resolver | Core | Picks one reliable FDC record and gram amount, or refuses with a reason | `src/core/resolver.py` | Not built. `src/core/food_lookup.py` with sample data stands in (CC-1) |
+| 6 | Day Calculator | Core | Gives the UTC start and end of a Chicago calendar day | `src/core/day.py` | Built (#83); `chicago_date_of` added in #90 |
+| 7 | Telegram Adapter | Adapter | Calls Bot API `sendMessage` and `setWebhook`; holds the bot token | `src/adapters/telegram.py` | Built: `sendMessage`, plus `getUpdates` for the dev runner. `setWebhook` not built (CC-3) |
+| 8 | FDC Adapter | Adapter | Calls FDC search and food details with a timeout; holds the API key; fills the food cache | `src/adapters/fdc.py` | Not built (CC-1) |
+| 9 | Entry Store | Adapter | The only code that runs SQL. Every read and write takes a Telegram user ID | `src/adapters/store.py` | Built (#90): `users` and `entries` only (CC-6) |
+| 10 | Curated Food Map | Data (repo) | Reviewed mapping from tester words to one FDC record and default portion | `data/food_map.json` | Not built; sample list instead (CC-4) |
+| 11 | SQLite Database | Data (host) | Tables `users`, `entries`, `food_cache`, `processed_updates` | `~/calorie-bot/bot.db` on the host | Local `bot.db` (path from `BOT_DB_PATH`); `users` and `entries` only (CC-6) |
+| 12 | Operations Log | Data (host) | Outcome codes and timings, no food text, no Telegram IDs | Host server and error logs | Outcome code per message to the console (plus handler ms in the webhook); no host yet (CC-3) |
 
 This table is the authoritative list of components and responsibilities (owner Khumoyun, backup Adiya). The separate component-responsibilities file planned in A3 was not created; Section 11 shows which modules exist in the A4 code.
 
@@ -84,6 +84,8 @@ A tester sends `2 eggs`:
 10. Webhook Endpoint returns 200 and writes one log line: outcome `LOGGED`, handler milliseconds, FDC status (P-9 measurement).
 
 Any refusal in steps 5 or 6 (`UNSUPPORTED_FORMAT`, `OUT_OF_RANGE`, `NOT_FOUND`, `AMBIGUOUS`, `NEEDS_GRAMS`, `NO_ENERGY_VALUE`, `LOOKUP_FAILED`) skips step 7 entirely and replies with the reason. Nothing is saved. The spike shows each path ([INV-01 results](../../spikes/inv-01-lookup-storage/results-2026-10-14.md)).
+
+**As built in Cycle 1 (#90).** The path runs local polling, Router, Log Food use case, Parser, sample lookup, Entry Store, Day Calculator, reply. Steps 1, 2, 6 and 7 differ from the design above: no webhook deployment or duplicate check (CC-3, CC-5), a sample list instead of FDC (CC-1, CC-2), and no FDC ID or grams saved (CC-6). The actual reply to `2 eggs` is: "Logged 2 x Egg (1 large egg each) = 140 kcal. Today's total: 140 kcal." Built refusals: `NOT_REGISTERED` (text before `/start`), `UNSUPPORTED_FORMAT`, `OUT_OF_RANGE`, `NOT_FOUND`, and `NEEDS_GRAMS` (any gram amount, CC-7). Not built until FDC is connected: `AMBIGUOUS`, `NO_ENERGY_VALUE`, `LOOKUP_FAILED`. Each built path has an end-to-end test in `tests/test_log_food.py`.
 
 ## 5. Trust Boundaries and Security
 
@@ -183,11 +185,11 @@ Health signals reviewed weekly (Risk 5 and NFR-5): count of each outcome code, 9
 
 These feed the risk register (owner Mazen) and the re-estimation notes (owner Sohail and Bazid).
 
-**Live check status (2026-10-26):** V-1 to V-6 have not been run. The A4 slice is built so it does not depend on them (Section 11). Whether they are completed in A4 or deferred to A5 is the Team Lead's call; the outcome is recorded here and in the [Risk Register](../planning/risk-register.md).
+**Live check status (2026-11-09):** V-1 to V-6 (live FDC and host checks) have not been run and are deferred to Cycle 2. The Cycle 1 release uses sample data and local polling, so it does not depend on them (Section 11). The only live run is local: Mazen ran the integrated bot on his own test bot at commit `14e247b` (review on #90). That is not evidence of deployment or FDC integration.
 
 ## 11. Construction Changes from Assignment 3
 
-Checked against the code on 2026-10-26 (A5, issue #51). Recommendations behind each change are in the [A1 design check](../reviews/a1-design-check.md). None of these changes the core design: the core still has no knowledge of Telegram, Flask, HTTP or SQL, and secrets are still read only in adapters.
+First checked 2026-10-26 (issue #51); final check against the integrated code on 2026-11-09 (CC-6 to CC-9). Recommendations behind each change are in the [A1 design check](../reviews/a1-design-check.md). None of these changes the core design: the core still has no knowledge of Telegram, Flask, HTTP or SQL, and secrets are still read only in adapters.
 
 | # | A3 design | A4 code | Why | Reverts when |
 |---|-----------|---------|-----|--------------|
@@ -196,14 +198,23 @@ Checked against the code on 2026-10-26 (A5, issue #51). Recommendations behind e
 | CC-3 | Webhook only (P-6, C-1, C-3) | Webhook built and unit tested (`src/bot/web.py`). Added `src/bot/poll.py`, a development-only runner using Telegram `getUpdates`, outside contract C-3. Both share `src/bot/router.py` | V-2 to V-4 have not run, so no public webhook URL exists | Never deployed; removed or kept as a dev tool once the host passes V-2 to V-4 |
 | CC-4 | Curated Food Map at `data/food_map.json` | Sample file at `src/core/sample_foods.json` | `.gitignore` ignores every `data/` folder | The real food map arrives; the ignore rule is narrowed then |
 | CC-5 | Duplicate `update_id` check on every webhook request (C-1, T-30) | Marked TODO in `src/bot/web.py` | Owned by Khumoyun (T-30, formerly T-27; task ID map, #74); not needed for the local slice. **The bot is not deployed until T-30 merges**: without it, a Telegram resend could log a meal twice (Risk Register, #58) | T-30 merges |
+| CC-6 | Entry Store per C-6: entries include `fdc_id` and `grams`; `add_entry` records the `update_id` in the same transaction; the store returns the day total; `food_cache` and `processed_updates` tables | `users` and `entries` only. Entry columns: `food_text`, `matched_description`, `quantity`, `unit` (`count` or `default`), `kcal` (> 0), `source` (`sample`), `logged_at_utc`. Methods: `register`, `is_registered`, `add_entry`, `entries_between(user_id, start, end)`. The total is computed in the core by `total_for_day` (B2) | Sample data has no FDC IDs or grams. Computing the total in the core reuses B2's tested function and keeps the store to SQL only. Mazen's T-27 check on #90: stores fewer fields than C-6 lists, so NFR-4 passes | FDC Adapter (CC-1), T-30 and T-31 |
+| CC-7 | Grams converted with FDC kcal per 100 g (P-4) | Parser accepts grams (unit `g`); Log Food refuses with `NEEDS_GRAMS` and saves nothing | The sample list is per serving | CC-1 reverts |
+| CC-8 | Router handles `/start`, `/today`, `/privacy`, plain text and `/undo` | `/start` and plain text only. The welcome message no longer mentions `/today` | `/today` (T-15), `/privacy` (T-29) and `/undo` (T-20) are separate tasks | Those tasks merge |
+| CC-9 | Webhook passes each update to the use cases with the Entry Store | `create_app(messenger, store=None)`: nothing in production creates the app with a store yet, so a deployed webhook would answer food with `NOT_READY`. `src/bot/poll.py` creates the store from `BOT_DB_PATH` | Not deployed (CC-3); raised by Mazen on #90 | The deploy task passes an `EntryStore` to `create_app`, together with T-30 |
 
-Modules in the A4 code, mapped to Section 3: Webhook Endpoint `src/bot/web.py`; Command Router `src/bot/router.py`; Telegram Adapter `src/adapters/telegram.py`; Food lookup (stand-in for the Food Resolver) `src/core/food_lookup.py`. Not yet built: Use Cases, Message Parser (K2, #61), Day Calculator (B2, #44), Entry Store, FDC Adapter.
+**Final check (2026-11-09).** Compared the integrated code (#90, head `a29959f`) with Sections 3 and 4. Built and not built per component is in the Section 3 status column; differences are CC-1 to CC-9. The dependency rules in Section 3 still hold:
 
-**Final check after the integration PR (A4, #50):** TODO before this PR merges: compare the merged parser, daily total, storage and wiring with Sections 3 and 4, and add any further row above.
+- `src/core/` imports nothing from `src/bot/`, `src/adapters/`, Flask, `sqlite3` or `urllib` (checked with `git grep`).
+- Only `src/adapters/store.py` runs SQL.
+- Only `src/adapters/telegram.py` reads secrets. `src/bot/poll.py` reads `BOT_DB_PATH`, which is a file path, not a secret.
+- Every Entry Store read and write takes a Telegram user ID; two-tester separation is tested in `tests/test_store.py` and `tests/test_log_food.py` (AC-7.1).
+
+The Python minimum moves from 3.10 (ADR-0005) to 3.12 in ADR-0009 (#91) to match CI. That is a dependency decision, not an architecture change.
 
 ## AI Disclosure
 
-Drafted with Claude from the team's A2 files, the A2 feedback and the INV-01 results; reviewed and edited by Adiya. See the [AI Use Log](../ai/ai-use-log.md).
+Drafted with Claude from the team's A2 files, the A2 feedback and the INV-01 results; reviewed and edited by Adiya. The 2026-11-09 final check was done with Claude against the code in #90. See the [AI Use Log](../ai/ai-use-log.md).
 
 ## Change Log
 
@@ -213,3 +224,4 @@ Drafted with Claude from the team's A2 files, the A2 feedback and the INV-01 res
 | 2026-10-26 | Added Section 11 (construction changes CC-1 to CC-5), live check status, removed link to the uncreated component-responsibilities file | Adiya |
 | 2026-10-29 | CC-5: no deploy until T-27 merges (from Mazen review on #71) | Adiya |
 | 2026-10-29 | CC-5: duplicate check renumbered T-27 to T-30 (task ID map, #74) | Adiya |
+| 2026-11-09 | Final check against the integrated code (#90): Section 3 status column, as-built note in Section 4, CC-6 to CC-9, live check status, TODO closed | Adiya |
