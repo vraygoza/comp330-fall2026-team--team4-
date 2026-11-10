@@ -48,12 +48,30 @@ def create_app(messenger=None) -> Flask:
         # TODO(T-30, Khumoyun; was T-27 before the task ID map, #74): skip an update_id that was already processed,
         # recorded in the same transaction as the entry (C-1).
 
-        result = route_update(update)
-        if result.chat_id is not None and result.reply:
-            _messenger().send_message(result.chat_id, result.reply)
+        try:
+            result = route_update(update)
+            if result.chat_id is not None and result.reply:
+                try:
+                    _messenger().send_message(result.chat_id, result.reply)
+                except Exception:
+                    log.warning("outcome=REPLY_FAILED")
 
-        # Outcome and timing only: no food text, no Telegram IDs (architecture.md 3, item 12).
-        log.info("outcome=%s handler_ms=%d", result.outcome, (time.monotonic() - started) * 1000)
-        return jsonify(ok=True), 200
+            # Outcome and timing only: no food text, no Telegram IDs (architecture.md 3, item 12).
+            log.info("outcome=%s handler_ms=%d", result.outcome, (time.monotonic() - started) * 1000)
+            return jsonify(ok=True), 200
+        except Exception:
+            log.exception("Unexpected error processing webhook update")
+            chat_id = None
+            try:
+                chat_id = ((update.get("message") or {}).get("chat") or {}).get("id")
+            except Exception:
+                pass
+            if chat_id is not None:
+                try:
+                    _messenger().send_message(chat_id, "Something went wrong. Please try again later.")
+                except Exception:
+                    log.warning("outcome=REPLY_FAILED")
+            log.info("outcome=INTERNAL_ERROR handler_ms=%d", (time.monotonic() - started) * 1000)
+            return jsonify(ok=False), 500
 
     return app

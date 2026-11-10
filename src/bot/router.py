@@ -10,7 +10,10 @@ is wired in by the integration PR (issue #50).
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
+
+log = logging.getLogger(__name__)
 
 WELCOME = (
     "Welcome to the Team 4 calorie tracker test.\n"
@@ -23,6 +26,7 @@ FORMAT_HINT = (
     "Send /start to see the instructions again."
 )
 NOT_READY = "Food logging is not switched on yet. Send /start to see the instructions."
+ERROR_REPLY = "Something went wrong. Please try again later."
 
 
 @dataclass(frozen=True)
@@ -32,26 +36,35 @@ class RouteResult:
     reply: str | None = None
 
 
-def route_update(update: dict) -> RouteResult:
+def route_update(update: dict, store=None, now_utc=None) -> RouteResult:
     """Decide the reply for one Update. Reads only the C-1 fields."""
-    message = update.get("message")
-    if not isinstance(message, dict):
-        return RouteResult("IGNORED")  # edited message, channel post, other
+    try:
+        message = update.get("message")
+        if not isinstance(message, dict):
+            return RouteResult("IGNORED")  # edited message, channel post, other
 
-    chat = message.get("chat") or {}
-    chat_id = chat.get("id")
-    if chat_id is None:
-        return RouteResult("BAD_UPDATE")
+        chat = message.get("chat") or {}
+        chat_id = chat.get("id")
+        if chat_id is None:
+            return RouteResult("BAD_UPDATE")
 
-    if chat.get("type") != "private":
-        return RouteResult("NOT_PRIVATE", chat_id, DIRECT_ONLY)
+        if chat.get("type") != "private":
+            return RouteResult("NOT_PRIVATE", chat_id, DIRECT_ONLY)
 
-    text = message.get("text")
-    if not isinstance(text, str) or not text.strip():
-        return RouteResult("UNSUPPORTED_FORMAT", chat_id, FORMAT_HINT)
+        text = message.get("text")
+        if not isinstance(text, str) or not text.strip():
+            return RouteResult("UNSUPPORTED_FORMAT", chat_id, FORMAT_HINT)
 
-    command = text.strip().split()[0].lower()
-    if command == "/start" or command.startswith("/start@"):
-        return RouteResult("STARTED", chat_id, WELCOME)
+        command = text.strip().split()[0].lower()
+        if command == "/start" or command.startswith("/start@"):
+            return RouteResult("STARTED", chat_id, WELCOME)
 
-    return RouteResult("NOT_READY", chat_id, NOT_READY)
+        return RouteResult("NOT_READY", chat_id, NOT_READY)
+    except Exception:
+        log.exception("Unexpected error routing update")
+        chat_id = None
+        try:
+            chat_id = ((update.get("message") or {}).get("chat") or {}).get("id")
+        except Exception:
+            pass
+        return RouteResult("INTERNAL_ERROR", chat_id, ERROR_REPLY)

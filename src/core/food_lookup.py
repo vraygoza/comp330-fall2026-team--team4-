@@ -14,9 +14,12 @@ Core rule: imports nothing from src/bot, src/adapters, Flask, sqlite3 or urllib.
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+
+log = logging.getLogger(__name__)
 
 SAMPLE_FILE = Path(__file__).with_name("sample_foods.json")
 MAX_FOOD_LENGTH = 100  # ADR-0004 message limit
@@ -67,9 +70,11 @@ def _candidates(key: str) -> list[str]:
 def lookup(food: str) -> LookupResult:
     """Return calories per serving for a known food, or a NOT_FOUND result."""
     if not isinstance(food, str):
+        log.warning("Lookup failure: invalid food query type")
         return LookupResult(NOT_FOUND)
     key = _normalize(food)
     if not key or len(key) > MAX_FOOD_LENGTH:
+        log.warning("Lookup failure: food query empty or exceeds length limit")
         return LookupResult(NOT_FOUND)
 
     foods = _load_foods()
@@ -77,4 +82,5 @@ def lookup(food: str) -> LookupResult:
         item = foods.get(candidate)
         if item:
             return LookupResult(FOUND, item["name"], item["serving"], float(item["kcal_per_serving"]))
+    log.warning("Lookup failure: food item not found in database")
     return LookupResult(NOT_FOUND)
