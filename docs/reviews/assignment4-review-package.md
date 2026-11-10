@@ -22,7 +22,7 @@ Index of the construction, integration, review, AI-use, CI/CD and test evidence 
 | Traceability | `docs/planning/traceability.md` | Mazen | Task IDs reconciled and merged (#74); further updates in progress |
 | Risk register | `docs/planning/risk-register.md` | Mazen | Not started |
 | Runtime and logging evidence | `docs/testing/runtime-evidence.md` | Khumoyun | Not started |
-| Known limitations | `docs/release/known-limitations.md` | Khumoyun | Not started |
+| Known limitations | `docs/release/known-limitations.md` | Khumoyun | In progress |
 | AI-use log | `docs/ai/ai-use-log.md` | Khumoyun | In progress: log exists with rows from every member; format update in PR #82 |
 | Changed-file index | `docs/reviews/assignment4-changed-files.md` | Bazid | PR open (#84) |
 | A1 design check | `docs/reviews/a1-design-check.md` | Adiya | Merged (#64) |
