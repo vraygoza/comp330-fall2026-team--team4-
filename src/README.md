@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Adiya (Architecture & Development Lead) |
 | Backup | Khumoyun |
-| Last updated | 2026-10-26 |
+| Last updated | 2026-11-09 |
 
-Python 3.10 or later. Layout follows [Architecture](../docs/architecture/architecture.md), Section 3.
+Python 3.12 or later (ADR-0009, matches CI). Layout follows [Architecture](../docs/architecture/architecture.md), Section 3.
 
 | Folder | Layer | Rule |
 |--------|-------|------|
@@ -28,6 +28,8 @@ Python 3.10 or later. Layout follows [Architecture](../docs/architecture/archite
 
 3. Open `.env` and paste the token after `TELEGRAM_BOT_TOKEN=`. Never commit `.env`.
 4. Start the bot: `python -m src.bot.poll`
+
+   On a Mac with Python from python.org, if you see `CERTIFICATE_VERIFY_FAILED`, run **Install Certificates.command** once (in your Applications > Python folder), then start the bot again.
 5. In Telegram, send `/start` to your test bot, then try `2 tacos`, `banana` and `an egg`. Each reply shows what was logged and today's total. Press Ctrl+C to stop.
 
 Entries are saved in `bot.db` in the repo folder (ignored by git). Set `BOT_DB_PATH` in `.env` to keep it somewhere else. Delete the file to start over.
@@ -48,3 +50,4 @@ Tests use Python's built-in `unittest`, so they need nothing beyond `requirement
 |------|--------|----|
 | 2026-10-26 | Created with the bot skeleton (#48) | Adiya |
 | 2026-11-03 | A4 (#50): food logging wired end to end; run steps and BOT_DB_PATH added | Adiya |
+| 2026-11-09 | Python 3.12 minimum (ADR-0009); Mac certificate note (Mazen review on #90) | Adiya |
