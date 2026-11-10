@@ -52,4 +52,3 @@ Tool/Model | Task | Accepted output | Rejected output | Human edits | Verificati
 - Total AI-assisted sessions: 27
 - Most used tool: Claude (22 of 27, including via Google Antigravity and Opus models), Gemini / Antigravity (4 of 27), GitHub Copilot (1 of 27)
 - Primary use cases: Documentation, Code Generation, Testing, Code Review, Release Documentation
-- Primary use cases: Documentation, Code Generation, Testing, Code Review
