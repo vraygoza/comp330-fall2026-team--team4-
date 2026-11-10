@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Bazid (Planning & Process Lead) |
 | Backup | Victoria (Team Lead) |
-| Last updated | 2026-11-02 |
+| Last updated | 2026-11-09 |
 
 Cycle 1 work broken into tasks. Each task traces to a requirement in [Requirements](../requirements/requirements.md). Estimates are in [Effort Estimates](estimates.md) and [Re-estimation Notes](re-estimation.md).
 
@@ -29,19 +29,19 @@ These come before any requirement work and are blocked by open questions.
 |----|------|-----------|------------|-------|--------|
 | T-7 | Handle `/start`: create account, send usage example | FR-1 (AC-1.1) | T-3, T-5 | TODO: assign | Not started |
 | T-8 | Make repeat `/start` safe: no duplicate account, keep entries | FR-1 (AC-1.2) | T-7 | TODO: assign | Not started |
-| T-9 | Parse a message into food and amount | FR-2 (AC-2.1) | T-2, OQ-6 | Khumoyun (K2, #61) | Not started |
-| T-10 | Default to one standard serving when no amount is given, and say so | FR-2 (AC-2.2) | T-9 | Khumoyun (K2, #61) | Not started |
+| T-9 | Parse a message into food and amount | FR-2 (AC-2.1) | T-2, OQ-6 | Khumoyun (K2, #61) | PR #88 |
+| T-10 | Default to one standard serving when no amount is given, and say so | FR-2 (AC-2.2) | T-9 | Khumoyun (K2, #61) | PR #88 |
 | T-11 | Query the data source and scale calories to the amount | FR-3 (AC-3.1) | T-1, T-9 | Adiya | Partly done; sample data in #70 |
-| T-12 | Save the entry with food, amount, calories, and timestamp | FR-2 (AC-2.1) | T-3, T-11 | TODO: assign | Not started |
-| T-13 | Build and verify the curated food map (reviewed word to FDC record and portion) | FR-3 (AC-3.2), P-2 | T-11, V-1 | TODO: reassign | Not started |
-| T-14 | Calculate and reply with the daily running total | FR-4 (AC-4.1) | T-12 | Bazid (B2, #44) | Not started |
+| T-12 | Save the entry with food, amount, calories, and timestamp | FR-2 (AC-2.1) | T-3, T-11 | Adiya (A4, #50) | In the integration PR #90 |
+| T-13 | Build and verify the curated food map (reviewed word to FDC record and portion) | FR-3 (AC-3.2), P-2 | T-11, V-1 | Sohail | Not started |
+| T-14 | Calculate and reply with the daily running total | FR-4 (AC-4.1) | T-12 | Bazid (B2, #44) | Merged (#83) |
 | T-15 | Build `/today`: list entries plus total | FR-5 (AC-5.1) | T-12 | TODO: assign | Not started |
 | T-16 | Handle empty `/today` with a clear message | FR-5 (AC-5.2) | T-15 | TODO: assign | Not started |
-| T-17 | Cut the day at midnight Central | FR-5 (AC-5.3) | T-14, OQ-7 | Bazid (B2, #44) | Not started |
+| T-17 | Cut the day at midnight Central | FR-5 (AC-5.3) | T-14, OQ-7 | Bazid (B2, #44) | Merged (#83) |
 | T-18 | Handle unknown foods: save nothing, ask to rephrase | FR-6 (AC-6.1, AC-6.2) | T-11 | TODO: assign | Not started |
-| T-19 | Scope every query to the requesting Telegram user ID | FR-7 (AC-7.1) | T-3, T-12 | TODO: assign | Not started |
+| T-19 | Scope every query to the requesting Telegram user ID | FR-7 (AC-7.1) | T-3, T-12 | TODO: assign | In the integration PR #90 |
 
-Owners for A4 work come from the GitHub Project board. Where this file and the board disagree, the board governs for A4.
+Owners for A4 and A5 work come from the GitHub Project board. Where this file and the board disagree, the board governs.
 
 ## Should Requirements
 Only started if every Must task is done.
@@ -54,11 +54,11 @@ Only started if every Must task is done.
 ## Testing and Release
 | ID | Task | Traces to | Depends on | Owner | Status |
 |----|------|-----------|------------|-------|--------|
-| T-22 | Write acceptance tests for every Must acceptance criterion | All Must FRs | T-7 through T-19 | Bazid | Partly in progress; parser and daily-total parts in #77 (Adiya) |
-| T-23 | Time responses to confirm the 5-second target | NFR-1 | T-14 | TODO: reassign | Not started |
+| T-22 | Write acceptance tests for every Must acceptance criterion | All Must FRs | T-7 through T-19 | Sohail | Partly in progress; parser and daily-total parts in #77 (Adiya) |
+| T-23 | Time responses to confirm the 5-second target | NFR-1 | T-14 | Sohail | Not started |
 | T-24 | Test with 15 testers active in one week | NFR-2 | T-19, OQ-9 | TODO: assign | Not started |
 | T-25 | Write tester onboarding and data-handling notice | Tester onboarding | OQ-8 | Mazen | Not started |
-| T-26 | Confirm no secrets in the repo before release | NFR-3 | T-4 | Bazid | Partly covered by the CI secrets check in #73 |
+| T-26 | Confirm no secrets in the repo before release | NFR-3 | T-4 | Sohail | Partly covered by the CI secrets check in #73 |
 
 ## Governance and Operations Tasks
 IDs reconciled 2026-10-30 per [Task ID Map](task-id-map.md). T-27 to T-29 come from [Traceability](traceability.md); T-30 to T-35 were renumbered from the A3 additions.
@@ -91,14 +91,12 @@ These close the blocking decisions.
 
 **V-2 is the highest-priority verification item.** If PythonAnywhere blocks `api.telegram.org`, P-6 and P-7 both change and estimates for T-2, T-6 and every hosting-dependent task are revised again.
 
-## Team Change, 2026-10-30
-Sohail is no longer on the team. The team is now five members. His tasks are marked `TODO: reassign` above: T-13, T-22, T-23 and T-26.
+## Team Change, 2026-10-30 (reversed 2026-11-09)
+On 2026-10-30 the team recorded that Sohail was no longer a member and reassigned his tasks. The instructor has since confirmed he remains on the team, so that change is reversed.
 
-Quality & Review Lead is vacant. Bazid is the charter backup and is acting in that role for Cycle 1.
+The team is six members. Sohail continues as Quality & Review Lead, and T-13, T-22, T-23 and T-26 return to him. PR #72 (architecture review, PR template, A4 test matrix) is his again.
 
-Capacity drops from six part-time members to five. [Team Commitments](team-commitments.md) and [Re-estimation Notes](re-estimation.md) need updating before the schedule is used for planning.
-
-PR #72 (architecture review, PR template, A4 test matrix) was opened by Sohail and is still open. The team needs to decide whether to merge, continue it, or close it. The architecture review document in it is a required A3 deliverable the repo still lacks.
+This entry is kept rather than deleted so the record shows what was decided and why it changed.
 
 ## Proposed Owners for Unassigned Tasks
 Proposal based on the roles in the [Team Charter](../team-charter.md), for the team to confirm or change. Victoria assigns.
@@ -129,24 +127,29 @@ Already proposed for V-2 to V-4 on the host, so the host-adjacent build work fit
 | T-29 | Tester invite check and `/privacy` reply |
 | T-33 | Per-tester deletion script |
 
+### Sohail (Quality & Review Lead)
+T-16 and T-18 are refusal paths, the error cases a quality lead should own.
+
+| ID | Task |
+|----|------|
+| T-16 | Empty `/today` message |
+| T-18 | Unknown food handling |
+| T-24 | 15-tester capacity check |
+
 ### Victoria (Team Lead)
 | ID | Task |
 |----|------|
 | T-7 | `/start` account creation |
 | T-8 | Repeat `/start` safe |
 
-### Bazid (Planning & Process Lead, acting Quality & Review Lead)
+### Bazid (Planning & Process Lead)
 | ID | Task |
 |----|------|
-| T-14 | Daily running total |
 | T-15 | `/today` listing |
-| T-17 | Chicago day cutoff |
 | T-19 | Per-user data separation |
-| T-22 | Acceptance tests for every Must acceptance criterion |
-| T-26 | Confirm no secrets in the repo before release |
 
-### Still unowned after the team change
-T-13, T-16, T-18, T-23 and T-24 need owners from the remaining four members. T-20 and T-21 are Should scope and stay unassigned until the Must work fits confirmed capacity.
+### Not proposed yet
+T-20 and T-21 are Should scope and stay unassigned until the Must work fits confirmed capacity.
 
 ## Dependency Notes
 - T-1 through T-3 are decided in ADR-0002, ADR-0005 and ADR-0006, all Proposed until the M1 vote (#56). Construction is running ahead of accepted decisions.
@@ -154,7 +157,7 @@ T-13, T-16, T-18, T-23 and T-24 need owners from the remaining four members. T-2
 - T-19 is a privacy requirement, not a feature. It has to be built into storage from the start, not added later.
 - T-27 blocks the Entry Store merge. It is a review gate, not a build task.
 - T-29 has no estimate yet. [Re-estimation Notes](re-estimation.md) needs one before the schedule is trusted.
-- T-13 blocks T-11 acceptance and has no owner since the team change. It is on the critical path for FR-3.
+- T-13 blocks T-11 acceptance and is on the critical path for FR-3.
 
 ## Change Log
 | Date | Change | By |
@@ -163,3 +166,4 @@ T-13, T-16, T-18, T-23 and T-24 need owners from the remaining four members. T-2
 | 10/15/2026 | Added architecture and verification tasks; updated T-13 per INV-01; proposed owners | Bazid |
 | 10/30/2026 | Reconciled task IDs per task-id-map.md (#74): adopted Mazen's T-27 to T-29, renumbered the A3 additions to T-30 to T-35, merged two duplicate entries into T-29, noted T-32 partly complete in #69. Recorded the team change and marked Sohail's tasks for reassignment | Bazid |
 | 11/02/2026 | Applied review feedback on #78: setup task statuses, owners matched to the A4 board, outdated T-9 risk note removed, T-22 and T-26 marked partly covered | Bazid |
+| 11/09/2026 | Reversed the 10/30 team change; Sohail remains on the team and T-13, T-22, T-23 and T-26 return to him. Updated statuses for T-9, T-10, T-12, T-14, T-17 and T-19 against the current PRs | Bazid |
