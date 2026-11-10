@@ -16,6 +16,16 @@ CHICAGO = ZoneInfo("America/Chicago")
 UTC = ZoneInfo("UTC")
 
 
+def chicago_date_of(moment_utc):
+    """Return the Chicago calendar date for a UTC moment (added in A4, #50).
+
+    Example:
+        chicago_date_of(datetime(2026, 10, 27, 1, 0, tzinfo=UTC)) -> date(2026, 10, 26)
+        (01:00 UTC is 8:00 pm the evening before in Chicago)
+    """
+    return moment_utc.astimezone(CHICAGO).date()
+
+
 def chicago_day_bounds(chicago_date):
     """Return the UTC start and end of one Chicago calendar day.
 
