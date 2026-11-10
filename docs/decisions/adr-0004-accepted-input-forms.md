@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-5 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). Built in the parser (#88) and covered by its unit and contract tests. From P-5 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya
 - **Closes:** OQ-6, input-form part (the quantity part is [ADR-0003](adr-0003-quantity-to-grams.md))
 - **Related:** FR-2 (AC-2.3, AC-2.4), FR-6; T-9, T-10; Risk 13
@@ -49,3 +49,4 @@ Anything else (cups, ounces, fractions such as `1/2 banana`, an amount after the
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-5 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |

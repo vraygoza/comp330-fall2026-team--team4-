@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-9 and P-10 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted as the target** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). Not run yet: the 5-second and 15-tester checks need a deployed bot, so they move to Cycle 2. From P-9 and P-10 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya, with Sohail
 - **Closes:** OQ-10 and OQ-11
 - **Related:** NFR-1, NFR-2, the Cycle 1 Definition of Done in [Scope](../planning/scope.md); T-23, T-24; Risks 14, 15 and 18
@@ -43,3 +43,4 @@ The matching NFR-1 and NFR-2 checks are in [Requirements](../requirements/requir
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-9 and P-10 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |
