@@ -52,6 +52,46 @@ class LookupTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             food_lookup._load_foods.__wrapped__(handle.name)
 
+    def test_lookup_failure_logs_safely_without_food_text(self):
+        # K3 (issue #62): Lookup failure logs a warning without leaking the food text or user data.
+        with self.assertLogs(food_lookup.log, level="WARNING") as cm:
+            result = lookup("dragonfruit")
+        self.assertEqual(result.outcome, NOT_FOUND)
+        self.assertTrue(any("Lookup failure: food item not found in database" in msg for msg in cm.output))
+        # Ensure raw food query text is never leaked in the log message
+        for msg in cm.output:
+            self.assertNotIn("dragonfruit", msg)
+
+    def test_lookup_invalid_query_logs_safely(self):
+        with self.assertLogs(food_lookup.log, level="WARNING") as cm:
+            lookup("")
+        self.assertTrue(any("Lookup failure: food query empty or exceeds length limit" in msg for msg in cm.output))
+
+        with self.assertLogs(food_lookup.log, level="WARNING") as cm:
+            lookup(12345)
+        self.assertTrue(any("Lookup failure: invalid food query type" in msg for msg in cm.output))
+
+    def test_known_food_does_not_log_warning(self):
+        # A successful lookup should not log any warning.
+        import logging
+
+        class Handler(logging.Handler):
+            def __init__(self):
+                super().__init__()
+                self.records = []
+
+            def emit(self, record):
+                self.records.append(record)
+
+        handler = Handler()
+        food_lookup.log.addHandler(handler)
+        try:
+            result = lookup("banana")
+            self.assertEqual(result.outcome, FOUND)
+            self.assertEqual(len(handler.records), 0)
+        finally:
+            food_lookup.log.removeHandler(handler)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -65,10 +65,27 @@ def main() -> int:
                 continue
             for update in result.get("result", []):
                 offset = update["update_id"] + 1
-                routed = route_update(update, store=store)
-                if routed.chat_id is not None and routed.reply:
-                    client.send_message(routed.chat_id, routed.reply)
-                log.info("outcome=%s", routed.outcome)
+                try:
+                    routed = route_update(update, store=store)
+                    if routed.chat_id is not None and routed.reply:
+                        try:
+                            client.send_message(routed.chat_id, routed.reply)
+                        except Exception:
+                            log.warning("outcome=REPLY_FAILED")
+                    log.info("outcome=%s", routed.outcome)
+                except Exception:
+                    log.exception("Unexpected error processing update")
+                    chat_id = None
+                    try:
+                        chat_id = ((update.get("message") or {}).get("chat") or {}).get("id")
+                    except Exception:
+                        pass
+                    if chat_id is not None:
+                        try:
+                            client.send_message(chat_id, "Something went wrong. Please try again later.")
+                        except Exception:
+                            log.warning("outcome=REPLY_FAILED")
+                    log.info("outcome=INTERNAL_ERROR")
     except KeyboardInterrupt:
         log.info("Stopped.")
     finally:

@@ -20,6 +20,8 @@ Index of the construction, integration, review, AI-use, CI/CD and test evidence 
 | Reviewed pull request (integration) | Issue #50 (branch/PR not yet opened) | Adiya (author), Mazen (reviewer) | Not started: unblocked by merges of #83 and #88 |
 | Dependency review | `docs/decisions/adr-0009-dependencies.md` | Mazen | Not started |
 | Traceability | `docs/planning/traceability.md` | Mazen | Task IDs reconciled and merged (#74); further updates in progress |
+| Risk register | `docs/planning/risk-register.md` | Mazen | Not started |
+| Runtime and logging evidence | `docs/testing/runtime-evidence.md` | Khumoyun | In progress |
 | Risk register | `docs/planning/risk-register.md` | Mazen | Not started (#58) |
 | Runtime and logging evidence | `docs/testing/runtime-evidence.md` | Khumoyun | Not started |
 | Known limitations | `docs/release/known-limitations.md` | Khumoyun | Not started |

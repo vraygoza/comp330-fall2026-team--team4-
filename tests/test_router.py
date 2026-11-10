@@ -52,6 +52,33 @@ class RouterTests(unittest.TestCase):
         # the full logging path is tested in tests/test_log_food.py (#50).
         self.assertEqual(route_update(private_update("2 eggs")).outcome, "NOT_READY")
 
+    def test_unexpected_exception_returns_safe_error_reply(self):
+        # K3 (issue #62): Bot replies "Something went wrong" instead of crashing.
+        class BrokenDict(dict):
+            def get(self, key, default=None):
+                if key == "message":
+                    raise RuntimeError("Simulated unexpected crash during routing")
+                return super().get(key, default)
+
+        update = BrokenDict(private_update("broken"))
+        result = route_update(update)
+        self.assertEqual(result.outcome, "INTERNAL_ERROR")
+        self.assertIn("Something went wrong", result.reply)
+
+    def test_unexpected_exception_with_chat_id_preserved(self):
+        class BrokenMessage(dict):
+            def get(self, key, default=None):
+                if key == "text":
+                    raise ValueError("Unexpected corruption in text parsing")
+                return super().get(key, default)
+
+        update = private_update("test")
+        update["message"] = BrokenMessage(update["message"])
+        result = route_update(update)
+        self.assertEqual(result.outcome, "INTERNAL_ERROR")
+        self.assertEqual(result.chat_id, 111)
+        self.assertEqual(result.reply, "Something went wrong. Please try again later.")
+
 
 if __name__ == "__main__":
     unittest.main()

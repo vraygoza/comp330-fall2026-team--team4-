@@ -6,6 +6,7 @@
 | **Role** | Architecture & Development Lead |
 | **GitHub Handle** | `@aingram444` |
 | **Central Log Lead** | Khumoyun (Operations & Evidence Co-Lead) |
+| **Last updated** | 2026-11-03 |
 | **Last updated** | 2026-11-09 |
 
 ---
@@ -46,6 +47,7 @@
 
 ## Member Summary Statistics
 
+- **Total AI-assisted sessions:** 7
 - **Total AI-assisted sessions:** 9
 - **Primary tools:** Claude (Opus 5.5, Sonnet)
 - **Primary use cases:** Code Generation, Testing, Architecture Documentation, Code Review
