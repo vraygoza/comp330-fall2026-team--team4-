@@ -40,8 +40,12 @@ class RouteResult:
     reply: str | None = None
 
 
-def route_update(update: dict, store=None, now_utc=None) -> RouteResult:
-    """Decide the reply for one Update. Reads only the C-1 fields."""
+def route_update(update: dict, store=None, now_utc: datetime | None = None) -> RouteResult:
+    """Decide the reply for one Update. Reads only the C-1 fields.
+
+    store: an EntryStore. Without one (as in the skeleton tests), /start still
+    replies but food messages are not logged.
+    """
     try:
         message = update.get("message")
         if not isinstance(message, dict):
@@ -59,11 +63,20 @@ def route_update(update: dict, store=None, now_utc=None) -> RouteResult:
         if not isinstance(text, str) or not text.strip():
             return RouteResult("UNSUPPORTED_FORMAT", chat_id, FORMAT_HINT)
 
+        user_id = (message.get("from") or {}).get("id")  # the tester's identity (C-1)
+        now_utc = now_utc or datetime.now(timezone.utc)
+
         command = text.strip().split()[0].lower()
         if command == "/start" or command.startswith("/start@"):
+            if store is not None and user_id is not None:
+                use_cases.register(store, user_id, now_utc)
             return RouteResult("STARTED", chat_id, WELCOME)
 
-        return RouteResult("NOT_READY", chat_id, NOT_READY)
+        if store is None or user_id is None:
+            return RouteResult("NOT_READY", chat_id, NOT_READY)
+
+        result = use_cases.log_food(store, user_id, text, now_utc)
+        return RouteResult(result.code, chat_id, result.reply)
     except Exception:
         log.exception("Unexpected error routing update")
         chat_id = None

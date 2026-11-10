@@ -50,7 +50,7 @@ def create_app(messenger=None, store=None) -> Flask:
         # recorded in the same transaction as the entry (C-1).
 
         try:
-            result = route_update(update)
+            result = route_update(update, store=app.config["STORE"])
             if result.chat_id is not None and result.reply:
                 try:
                     _messenger().send_message(result.chat_id, result.reply)

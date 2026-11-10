@@ -66,7 +66,7 @@ def main() -> int:
             for update in result.get("result", []):
                 offset = update["update_id"] + 1
                 try:
-                    routed = route_update(update)
+                    routed = route_update(update, store=store)
                     if routed.chat_id is not None and routed.reply:
                         try:
                             client.send_message(routed.chat_id, routed.reply)
