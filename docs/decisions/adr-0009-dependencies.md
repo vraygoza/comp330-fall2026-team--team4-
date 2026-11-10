@@ -41,8 +41,7 @@ There is no Telegram library. ADR-0005 rejected `python-telegram-bot`, and the T
 - **Good:** few moving parts: one package family and two pinned Actions.
 - **Cost:** we maintain our own small Telegram adapter (ADR-0005).
 - **Gaps:** Flask's dependencies can install at newer versions than the ones checked here. On Windows, `zoneinfo` needs `pip install tzdata`, because Windows has no built-in time zone database; CI and the Linux host are not affected.
-- **Follow-up:** `src/README.md` still says "Python 3.10 or later." Its owner, Adiya, is asked to change it to 3.12 (comment on PR #90).
-
+- **Follow-up:** `src/README.md` now says Python 3.12 or later (changed in PR #90).
 ## Change Log
 | Date | Change | By |
 |------|--------|----|
