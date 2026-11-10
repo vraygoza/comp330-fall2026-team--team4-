@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed and **conditional** (P-7 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). Adopted only if checks V-2, V-3 and V-4 pass. TODO: record the check results and change to Accepted, with the date.
+- **Status:** **Accepted, conditional on V-2 to V-4** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). SQLite storage is built (#90). The PythonAnywhere host is adopted only if checks V-2, V-3 and V-4 pass; they have not run, and the bot is not deployed ([Architecture](../architecture/architecture.md), CC-3). From P-7 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya (proposed owner of OQ-5), with Khumoyun running V-2 to V-4 (proposed)
 - **Closes:** OQ-4 and OQ-5
 - **Related:** FR-1 (AC-1.2), FR-2, FR-5, FR-7, NFR-1, NFR-2, NFR-4, NFR-5; T-3, T-6; Risks 5, 14, 18, 21 and 22
@@ -21,7 +21,7 @@ Storage and hosting have to be decided together. SQLite is safe only on a host w
 4. **Deploys:** only a tagged commit from `main`, by the deployer (Adiya, backup Khumoyun, proposed), followed by a smoke test of `/start`, `2 eggs` and `/today` (checkpoint G-3). The host login is held by named developers with two-factor authentication.
 5. **Backups:** a nightly `sqlite3 .backup` copy kept on the host. Losing the host account itself is an accepted Cycle 1 risk (Risk 22).
 6. **Secrets** (bot token, webhook secret, FDC key) live only in the host environment and developers' `.env` (NFR-3).
-7. **Renewal:** the free web app expires unless renewed. INV-01 lists renewal every 3 months, but PythonAnywhere's [Free Accounts page](https://help.pythonanywhere.com/pages/FreeAccountsFeatures/) (published 2026-01-15) lists a 1-month expiry. TODO: confirm the interval during V-2 to V-4. Until then, the deployer sets a monthly reminder.
+7. **Renewal:** the free web app expires unless renewed. INV-01 lists renewal every 3 months, but PythonAnywhere's [Free Accounts page](https://help.pythonanywhere.com/pages/FreeAccountsFeatures/) (published 2026-01-15) lists a 1-month expiry. Open item: confirm the interval during V-2 to V-4 (deferred to Cycle 2 with those checks). Until then, the deployer sets a monthly reminder.
 
 ## Options Considered
 | Option | Entries survive a restart? | Meets the 5-second reply? | Main problem |
@@ -46,3 +46,4 @@ Storage and hosting have to be decided together. SQLite is safe only on a host w
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-7 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |
