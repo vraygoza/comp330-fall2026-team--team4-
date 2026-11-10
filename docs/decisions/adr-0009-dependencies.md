@@ -6,7 +6,7 @@
 | Backup | Adiya (Architecture & Development Lead) |
 | Last updated | 2026-11-09 |
 
-- **Status:** Proposed (2026-11-09). Changes to Accepted, with the date, when the reviewer approves the pull request that adds it.
+- **Status:** Accepted (2026-11-09, team vote in #56).
 - **Decision owner:** Mazen (dependency review, issue #58), with Adiya
 - **Related:** [ADR-0005](adr-0005-python-flask-webhook.md); NFR-3, NFR-5; Risk 6; [`requirements.txt`](../../requirements.txt); [`ci.yml`](../../.github/workflows/ci.yml) (issue #57, PR #73)
 
@@ -46,3 +46,4 @@ There is no Telegram library. ADR-0005 rejected `python-telegram-bot`, and the T
 | Date | Change | By |
 |------|--------|----|
 | 2026-11-09 | Created: dependency review for issue #58; Python 3.12 minimum, from Adiya's review of PR #73 | Mazen |
+| 2026-11-09 | Accepted by team vote (#56) | Mazen |
