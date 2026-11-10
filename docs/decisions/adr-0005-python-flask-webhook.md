@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-6 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes), with one change: item 1 (Python 3.10 or later) is replaced by Python 3.12 or later in [ADR-0009](adr-0009-dependencies.md). The webhook is built and unit tested but not deployed; local development uses polling ([Architecture](../architecture/architecture.md), CC-3). From P-6 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya
 - **Closes:** OQ-3
 - **Related:** T-2, T-4, T-5; NFR-1, NFR-3; Risks 12, 14 and 18
@@ -43,3 +43,4 @@ The A2 [Technical Recommendations](../architecture/technical-recommendations.md)
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-6 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |

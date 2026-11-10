@@ -26,6 +26,7 @@ This log records important team decisions and why we made them.  Architecture de
 ## D3: Cycle 1 Scope
 
 - **Status:** Proposed (pending team vote on #56 [M1]).
+- **Status:** Accepted (2026-11-09). Proposed in the team group chat at 9:05 PM; no objections by 9:20 PM. Recorded on issue #56. This closes OQ-1. What did not ship in Cycle 1 is listed in the Assignment 5 release notes and known limitations.
 - **Decision:** Cycle 1 commits to S1–S8 in the [Scope Statement](../planning/scope.md), with O1 (`/undo`) and O2 (manual calories) optional. No new features are added, except FR-10 (tester access), which is privacy work the slice needs before real testers ([Requirements](../requirements/requirements.md)). The expansion ideas from the 2026-09-16 meeting go to the backlog (DF-1 to DF-7 in [Deferred Scope](deferred-scope.md)). This closes OQ-1.
 - **Why:** The Must-only forecast (48 / 85 / 163 person-hours in [Estimates](../planning/estimates.md)) is well above the weekly hours confirmed so far in [Team Commitments](../planning/team-commitments.md), so there is no room for more features ([TR-1](tradeoff-records.md), Risk 7).
 - **Tradeoffs:** Testers get only the core log-and-total path in Cycle 1; macros, history and the other expansion ideas wait.
@@ -46,6 +47,21 @@ Each ADR records one proposed decision from [INV-01](../architecture/investigati
 | [ADR-0008](adr-0008-performance-and-capacity-checks.md) | How we check the 5-second reply and 15-tester capacity | P-9, P-10 | OQ-10, OQ-11 | Proposed |
 
 Note: Team vote issue #56 (M1) formalizes repository status change to Accepted.
+Each ADR records one decision from [INV-01](../architecture/investigations/inv-01-lookup-storage.md) (P-1 to P-10), with its alternatives, consequences and risks; ADR-0009 came from the Assignment 4 dependency review. All nine were accepted by team vote on 2026-11-09, 6 of 6 (issue #56).
+
+| ADR | Decision | From | Closes | Status |
+|-----|----------|------|--------|--------|
+| [ADR-0001](adr-0001-no-ai-in-bot.md) | No AI behavior in the running bot | P-1 | A3 AI boundary questions | Accepted 2026-11-09 |
+| [ADR-0002](adr-0002-food-data-source-and-matching.md) | USDA FoodData Central with a curated food map and strict matching | P-2, P-3 | OQ-2 | Accepted 2026-11-09; conditional on V-1. Cycle 1 uses sample data (CC-1) |
+| [ADR-0003](adr-0003-quantity-to-grams.md) | Converting amounts to grams | P-4 | OQ-6 (quantity) | Accepted 2026-11-09 as the target; not built yet (CC-2) |
+| [ADR-0004](adr-0004-accepted-input-forms.md) | Accepted message forms | P-5 | OQ-6 (forms) | Accepted 2026-11-09 |
+| [ADR-0005](adr-0005-python-flask-webhook.md) | Python with a Flask webhook | P-6 | OQ-3 | Accepted 2026-11-09; Python 3.10 replaced by 3.12 in ADR-0009 |
+| [ADR-0006](adr-0006-hosting-and-storage.md) | PythonAnywhere free web app with SQLite | P-7 | OQ-4, OQ-5 | Accepted 2026-11-09; conditional on V-2 to V-4 |
+| [ADR-0007](adr-0007-chicago-day.md) | "Today" is the Chicago calendar day | P-8 | OQ-7 | Accepted 2026-11-09 |
+| [ADR-0008](adr-0008-performance-and-capacity-checks.md) | How we check the 5-second reply and 15-tester capacity | P-9, P-10 | OQ-10, OQ-11 | Accepted 2026-11-09 as the target; the checks need a deployed bot |
+| [ADR-0009](adr-0009-dependencies.md) | Dependencies and Python 3.12 minimum | A4 dependency review (#58) | — | Accepted 2026-11-09 |
+
+TODO (Adiya): update the Status line in ADR-0001 to ADR-0008 to match this table (A5 item 3), and move the questions these close to Closed Questions in [Open Questions](../requirements/open-questions.md).
 
 ## Change Log
 | Date | Change | By |
@@ -54,3 +70,4 @@ Note: Team vote issue #56 (M1) formalizes repository status change to Accepted.
 | 2026-10-14 | D1 marked Accepted; added note separating D1 from Cycle 1 scope | Khumoyun |
 | 2026-10-15 | Added D3 (Cycle 1 scope, proposed) and D4 (index of ADR-0001 to ADR-0008); fixed header table | Mazen |
 | 2026-11-09 | Reverted D3 and ADR-0001 to ADR-0008 status to Proposed pending formal team vote in #56 (per PR #89 review feedback) | Khumoyun |
+| 2026-11-09 | D3 and ADR-0001 to ADR-0009 accepted (team vote, issue #56); added ADR-0009 to D4 | Mazen |
