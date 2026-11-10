@@ -6,7 +6,7 @@
 | **Role** | Operations & Evidence Co-Lead |
 | **GitHub Handle** | `@kabdulpattoev` / `khumoyun` |
 | **Central Log Lead** | Khumoyun (Log Owner & Consolidator) |
-| **Last updated** | 2026-11-03 |
+| **Last updated** | 2026-11-09 |
 
 ---
 
