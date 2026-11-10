@@ -104,4 +104,4 @@ Each member accepts this policy by filling in their row through a commit or PR a
 | Adiya | Architecture & Development Lead | Yes | 9/29/2026 |
 | Sohail | Quality & Review Lead | | |
 | Mazen Malas | Operations & Evidence Lead | Yes | 9/18/2026 |
-| Khumoyun | Operations & Evidence Lead | | |
+| Khumoyun | Operations & Evidence Co-Lead | Yes | 10/15/2026 |

@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Adiya (Architecture & Development Lead) |
 | Backup | Khumoyun |
-| Last updated | 2026-09-29 |
+| Last updated | 2026-11-03 |
 
 This is the index for Assignment 2. Each artifact below is the authoritative version; the Word document submitted to Sakai links here.
 
@@ -21,14 +21,14 @@ Owners marked TODO are proposed based on team roles and must be confirmed by Vic
 | Cycle 1 Scope Statement | [scope.md](scope.md) | Adiya | Khumoyun | Draft |
 | Updated Requirements Package | [requirements.md](../requirements/requirements.md), [open-questions.md](../requirements/open-questions.md) | Adiya | Khumoyun | Draft |
 | Requirement-to-Task Traceability | [traceability.md](traceability.md) | TODO: assign | TODO | Not started |
-| Task Plan | [taskplan.md](taskplan.md) | TODO: assign | TODO | Not started |
+| Task Plan | [task-plan.md](task-plan.md) | Bazid | Victoria | Merged (#85) |
 | GitHub Issues | [Issues](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues) | TODO: assign | TODO | Not started |
 | GitHub Projects board | TODO: add link | TODO: assign | TODO | Not started |
 | Effort Estimates | [estimates.md](estimates.md) | TODO: assign | TODO | Not started |
 | Risk Register | [risk-register.md](risk-register.md) | Bazid | Victoria | Needs Cycle 1 update |
 | Project Schedule and Milestones | [schedule.md](schedule.md), [milestones.md](milestones.md) | Bazid | Victoria | Needs Cycle 1 update |
 | Team Commitments | [team-commitments.md](team-commitments.md) | TODO: assign | TODO | Not started |
-| Re-estimation Notes | [reestimation.md](reestimation.md) | TODO: assign | TODO | Not started |
+| Re-estimation Notes | [re-estimation.md](re-estimation.md) | Bazid | Victoria | Updated |
 | Tradeoff and Deferred Scope Decisions | [Decision Log](../decisions/decision-log.md) | Mazen | Khumoyun | Needs Cycle 1 entries |
 | AI Use Log | [ai-use-log.md](../ai/ai-use-log.md) | Khumoyun | Mazen | Needs Assignment 2 entries |
 

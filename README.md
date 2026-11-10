@@ -4,7 +4,7 @@
 |-------|-------|
 | Owner | Adiya (Architecture & Development Lead) |
 | Backup | Khumoyun |
-| Last updated | 2026-10-30 |
+| Last updated | 2026-11-03 |
 
 COMP 330 Software Engineering, Fall 2026, Loyola University Chicago.
 
@@ -14,7 +14,7 @@ A Telegram bot that tracks calories. A user texts the bot what they ate, the bot
 The project was chosen at the 2026-09-16 team meeting. See [D1 in the Decision Log](docs/decisions/decision-log.md).
 
 ## Current Status
-   Cycle 1 construction (Assignment 4). The bot skeleton and food lookup are merged (PR #69, #70); input parsing, the daily total and the integration pull request (A4, #50) are in progress. See the Assignment 4 section below for how to run and test what is merged.
+   Cycle 1 construction (Assignment 4). The bot skeleton, food lookup, daily total, and message parser are merged (PRs #69, #70, #83, #88); integration work (A4, Issue #50) is up next (PR not yet opened; now unblocked by #83 and #88). See the Assignment 4 section below for how to run and test what is merged.
    
    | Phase gate | Git tag | Status |
    |------------|---------|--------|
@@ -29,8 +29,8 @@ The project was chosen at the 2026-09-16 team meeting. See [D1 in the Decision L
 | Team | [`/docs/team/`](docs/team/), [`team-charter.md`](docs/team-charter.md), [`roles.md`](docs/roles.md) | Charter, roles, documentation standards |
 | Requirements | [`/docs/requirements/`](docs/requirements/) | Requirements, acceptance criteria, assumptions, open questions |
 | Planning | [`/docs/planning/`](docs/planning/README.md) | Scope, task plan, estimates, schedule, risks, commitments |
-   | Source code | [`/src/`](src/) | Bot logic and adapters (PR #69) |
-| Tests | [`/tests/`](tests/) | Automated tests (PR #69 and #70; contract tests in PR #77, open) |
+   | Source code | [`/src/`](src/) | Bot logic, core modules, and adapters (PRs #69, #70, #83, #88) |
+| Tests | [`/tests/`](tests/) | Automated unit and contract tests (PRs #69, #70, #77, #83, #88) |
 
 
 Task tracking lives in GitHub Issues and the GitHub Projects board, not in repository folders.
@@ -90,19 +90,19 @@ From the repository root:
 python -m unittest discover -s tests -t .
 ```
 
-Tests use Python's built-in `unittest`, so they need nothing beyond `requirements.txt`. The planned test cases are in docs/testing/test-cases.md (PR #72, not on main yet). The automated contract tests are in PR #77 (open).
+Tests use Python's built-in `unittest`, so they need nothing beyond `requirements.txt`. The planned test cases are in [`docs/testing/test-cases.md`](docs/testing/test-cases.md) (merged in PR #72). Automated contract tests for the parser and daily total are in `tests/test_parser_contract.py` and `tests/test_day_contract.py` (merged in PR #77).
 
 ### Evidence map
 | Evidence | Location | Status |
 |---|---|---|
-| Pull request template | `.github/pull_request_template.md` | Merged |
-| CI workflow | `.github/workflows/ci.yml` | Merged |
-| Source code | [`/src/`](src/) | Merged (#69) |
-| Tests | [`/tests/`](tests/) | Merged (#69, #70); contract tests in PR #77 (open) |
+| Pull request template | `.github/pull_request_template.md` | Merged (#65) |
+| CI workflow | `.github/workflows/ci.yml` | Merged (#73) |
+| Source code | [`/src/`](src/) | Merged (#69, #70, #83, #88) |
+| Tests | [`/tests/`](tests/) | Merged (#69, #70, #77, #83, #88) |
 | Traceability | [docs/planning/traceability.md](docs/planning/traceability.md) | Updating |
 | Decisions and ADRs | [docs/decisions/](docs/decisions/) | Exists |
 | Architecture | [docs/architecture/](docs/architecture/) | Exists |
-| AI-use log | [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md) | Updating |
-| Review package (index of all evidence) | `docs/reviews/assignment4-review-package.md` | PR open |
+| AI-use log | [docs/ai/ai-use-log.md](docs/ai/ai-use-log.md) | Merged (#82, updated with 22 entries) |
+| Review package (index of all evidence) | `docs/reviews/assignment4-review-package.md` | Merged (#68) |
 
 

@@ -34,7 +34,7 @@ TD-2 says "today" runs midnight to midnight Central time, and AC-5.3 says entrie
 
 ## Evidence and Checks
 - **Ran (synthetic data, 2026-10-14), all passed:** 11:59:59 PM and 12:00:00 AM Chicago landed on different days; an 8:30 PM Chicago entry on October 14 (October 15 in UTC) still counted for October 14; November 1, 2026 was 25 hours, with both 1:30 AM entries counting for that day; March 14, 2027 was 23 hours ([spike results](../../spikes/inv-01-lookup-storage/results-2026-10-14.md)).
-- **Planned:** keep these four checks as unit tests in the [Test Strategy](../testing/test-strategy.md) (Sohail).
+- **Planned:** keep these four checks as unit tests in the [Test Cases](../testing/test-cases.md) (implemented in `tests/test_day.py` and `tests/test_day_contract.py`).
 
 ## Change Log
 | Date | Change | By |

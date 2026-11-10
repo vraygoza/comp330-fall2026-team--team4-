@@ -37,7 +37,7 @@ The matching NFR-1 and NFR-2 checks are in [Requirements](../requirements/requir
 
 ## Evidence and Checks
 - **Ran (synthetic data, 2026-10-14):** 15 synthetic testers sent 150 messages through the handler with 0 errors, 10 entries each and no data leaking between testers ([spike results](../../spikes/inv-01-lookup-storage/results-2026-10-14.md)).
-- **Still needed:** V-6 (time 20 FDC searches from the host) and T-23 (reply timing during the test week), in Sohail's [Test Strategy](../testing/test-strategy.md).
+- **Still needed:** V-6 (time 20 FDC searches from the host) and T-23 (reply timing during the test week), documented in [Test Cases](../testing/test-cases.md).
 
 ## Change Log
 | Date | Change | By |
