@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-8 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). Built in the Day Calculator (#83, #90) with midnight and daylight-saving tests. From P-8 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya, with test cases from Sohail
 - **Closes:** OQ-7 (confirms TD-2 in [Deferred Scope](deferred-scope.md))
 - **Related:** FR-4, FR-5 (AC-5.3); T-14, T-17; Risk 20
@@ -34,9 +34,10 @@ TD-2 says "today" runs midnight to midnight Central time, and AC-5.3 says entrie
 
 ## Evidence and Checks
 - **Ran (synthetic data, 2026-10-14), all passed:** 11:59:59 PM and 12:00:00 AM Chicago landed on different days; an 8:30 PM Chicago entry on October 14 (October 15 in UTC) still counted for October 14; November 1, 2026 was 25 hours, with both 1:30 AM entries counting for that day; March 14, 2027 was 23 hours ([spike results](../../spikes/inv-01-lookup-storage/results-2026-10-14.md)).
-- **Planned:** keep these four checks as unit tests in the [Test Strategy](../testing/test-strategy.md) (Sohail).
+- **Planned:** keep these four checks as unit tests in the [Test Cases](../testing/test-cases.md) (implemented in `tests/test_day.py` and `tests/test_day_contract.py`).
 
 ## Change Log
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-8 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |

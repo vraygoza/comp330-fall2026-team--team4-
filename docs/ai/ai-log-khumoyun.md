@@ -47,4 +47,7 @@
 - **Total AI-assisted sessions:** 7
 - **Primary tools:** Google Antigravity / Claude (5), Google Antigravity / Gemini (2)
 - **Primary use cases:** Code Generation, Testing, Documentation, Code Review, Safe Logging
+- **Total AI-assisted sessions:** 6
+- **Primary tools:** Google Antigravity / Claude (5), Google Antigravity / Gemini (1)
+- **Primary use cases:** Code Generation, Testing, Documentation, Code Review, Table Formatting
 

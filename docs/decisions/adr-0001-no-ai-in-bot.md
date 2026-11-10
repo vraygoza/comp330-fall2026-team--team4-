@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-1 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). Built as decided: the running bot makes no AI calls. From P-1 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Whole team
 - **Closes:** Assignment 3 Section 6 (AI boundary questions)
 - **Related:** FR-2, FR-3, FR-6; Risks 6 and 13
@@ -36,3 +36,4 @@ The Cycle 1 bot uses no AI model. Messages are parsed and matched by fixed rules
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-1 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |

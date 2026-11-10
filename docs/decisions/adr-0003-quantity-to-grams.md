@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-4 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted as the target** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). Not built yet: Cycle 1 calories are per serving from the sample list, and gram amounts are refused ([Architecture](../architecture/architecture.md), CC-2 and CC-7). From P-4 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya
 - **Closes:** OQ-6, quantity part (the input-form part is [ADR-0004](adr-0004-accepted-input-forms.md))
 - **Related:** FR-2 (AC-2.2, AC-2.5, AC-2.6), FR-3 (AC-3.1), FR-6 (AC-6.2); T-10, T-11, T-13; Risks 4 and 19
@@ -44,3 +44,4 @@ FDC lists energy per 100 grams ([ADR-0002](adr-0002-food-data-source-and-matchin
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-4 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |

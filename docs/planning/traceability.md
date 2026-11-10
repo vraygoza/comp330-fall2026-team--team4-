@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Khumoyun (Operations & Evidence Co-Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-03 |
 
-This maps each Cycle 1 requirement to the tasks that deliver it, the estimated hours, the owner, related risks, and how it will be tested. Requirements come from [Requirements](../requirements/requirements.md), tasks and owners from the [Task Plan](taskplan.md), hours from [Effort Estimates](estimates.md), and risk numbers from the [Risk Register](risk-register.md).
+This maps each Cycle 1 requirement to the tasks that deliver it, the estimated hours, the owner, related risks, and how it will be tested. Requirements come from [Requirements](../requirements/requirements.md), tasks and owners from the [Task Plan](task-plan.md), hours from [Effort Estimates](estimates.md), and risk numbers from the [Risk Register](risk-register.md).
 
 Issue numbers will be added once the GitHub Issues are created. Each Issue title should start with its task ID (for example, `T-9: Parse food and amount`).
 
@@ -34,8 +34,8 @@ Tasks shared by several requirements are counted once: T-2 (2 hours) and T-3 (5 
 
 Every acceptance criterion (AC-1.1 through AC-9.1) is covered by at least one task. The proposed criteria added on 2026-10-14 are covered too: AC-2.3 and AC-2.4 by T-9, AC-2.5 and AC-2.6 by T-10 and T-11, AC-6.3 and AC-6.4 by T-11 and T-18, and AC-10.1 to AC-10.3 by T-25 and T-29.
 
-## Proposed New Tasks
-For Bazid to add to the [Task Plan](taskplan.md) with estimates.
+## Adopted Architecture Tasks
+Adopted into the [Task Plan](task-plan.md) with governing IDs from the [Task ID Map](task-id-map.md).
 
 | ID | Task | Traces to | Proposed owner |
 |----|------|-----------|----------------|
