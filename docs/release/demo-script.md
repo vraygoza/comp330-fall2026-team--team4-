@@ -19,4 +19,4 @@
 /today, duplicate-update protection, gram amounts, live food database (USDA), deployed webhook, live Telegram verification.
 
 ## Owner / status
-Owner: Victoria. Status: replies copied from a run on main by [teammate name] on 2026-11-09 and matched to the test names above.
+Owner: Victoria. Status: replies copied from a run on main by Mazen on 2026-11-09 and matched to the test names above.
