@@ -4,9 +4,9 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-10-15 |
+| Last updated | 2026-11-09 |
 
-- **Status:** Proposed (P-2 and P-3 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md)). TODO: change to Accepted, with the date, once the team accepts it at the architecture review.
+- **Status:** **Accepted, conditional on V-1** on 2026-11-09, [team vote #56](https://github.com/vraygoza/comp330-fall2026-team--team4-/issues/56) (6 of 6 yes). Not built yet: the Cycle 1 code uses a made-up sample list instead of FDC ([Architecture](../architecture/architecture.md), CC-1). FDC is connected only after the live check V-1 passes. From P-2 and P-3 in [INV-01](../architecture/investigations/inv-01-lookup-storage.md).
 - **Decision owner:** Adiya
 - **Closes:** OQ-2
 - **Related:** FR-3, FR-6, NFR-1, NFR-3, NFR-5; T-1, T-11, T-13; Risks 4, 5 and 19
@@ -46,3 +46,4 @@ Full call details are in [API Contracts](../architecture/api-contracts.md), C-4,
 | Date | Change | By |
 |------|--------|----|
 | 2026-10-15 | Created from P-2 and P-3 in INV-01 | Mazen |
+| 2026-11-09 | Status set from the team vote (#56) | Adiya |
