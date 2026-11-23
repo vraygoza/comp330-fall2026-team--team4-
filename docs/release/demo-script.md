@@ -17,7 +17,7 @@
 ## Demo steps
 | # | Tester sends | Expected reply | Proof |
 |---|---|---|---|
-| 1 | /start | Welcome to the Team 4 calorie tracker test. Send one food per message, for example: 2 eggs | tests/test_log_food.py: test_start_registers_and_welcomes |
+| 1 | /start | Welcome to the Team 4 calorie tracker test. Send one food per message, for example: 2 eggs. Calories come from a small sample list during this test. | tests/test_log_food.py: test_start_registers_and_welcomes |
 | 2 | 2 eggs | Logged 2 x Egg (1 large egg each) = 140 kcal. Today's total: 140 kcal. | tests/test_log_food.py: test_logs_food_and_replies_with_total |
 | 3 | banana | Logged 1 x Banana (1 medium banana, assumed because no amount was given) = 105 kcal. Today's total: 245 kcal. | tests/test_log_food.py: test_no_amount_assumes_one_serving_and_says_so |
 | 4 | unknownfood | I don't know "unknownfood" yet, so nothing was saved. Try another food, like: banana | tests/test_log_food.py: test_unknown_food_saves_nothing |
