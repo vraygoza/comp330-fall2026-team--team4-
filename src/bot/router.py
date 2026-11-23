@@ -7,6 +7,10 @@ not know about Flask or HTTP, so the webhook (web.py) and the local runner
 Skeleton (issue #48): /start and the C-1 filtering rules.
 Integration (issue #50, A4): /start registers the tester, and any other text runs
 the Log Food use case. The store is passed in, so tests use a temporary database.
+Duplicate protection (T-30, A6): Telegram can send the same update more than once
+(a webhook retry, or polling after a crash). With a store, an update_id that was
+already processed returns DUPLICATE with no reply, so nothing is saved or sent
+twice. The check lives here so the webhook (web.py) and poll.py both get it.
 """
 
 from __future__ import annotations
@@ -47,36 +51,20 @@ def route_update(update: dict, store=None, now_utc: datetime | None = None) -> R
     replies but food messages are not logged.
     """
     try:
-        message = update.get("message")
-        if not isinstance(message, dict):
-            return RouteResult("IGNORED")  # edited message, channel post, other
-
-        chat = message.get("chat") or {}
-        chat_id = chat.get("id")
-        if chat_id is None:
-            return RouteResult("BAD_UPDATE")
-
-        if chat.get("type") != "private":
-            return RouteResult("NOT_PRIVATE", chat_id, DIRECT_ONLY)
-
-        text = message.get("text")
-        if not isinstance(text, str) or not text.strip():
-            return RouteResult("UNSUPPORTED_FORMAT", chat_id, FORMAT_HINT)
-
-        user_id = (message.get("from") or {}).get("id")  # the tester's identity (C-1)
         now_utc = now_utc or datetime.now(timezone.utc)
+        update_id = update.get("update_id")
+        tracked = store is not None and isinstance(update_id, int) and not isinstance(update_id, bool)
+        if tracked and store.is_processed(update_id):
+            return RouteResult(use_cases.DUPLICATE)  # answered the first time; say nothing
 
-        command = text.strip().split()[0].lower()
-        if command == "/start" or command.startswith("/start@"):
-            if store is not None and user_id is not None:
-                use_cases.register(store, user_id, now_utc)
-            return RouteResult("STARTED", chat_id, WELCOME)
+        result = _route_new_update(update, store, now_utc, update_id if tracked else None)
 
-        if store is None or user_id is None:
-            return RouteResult("NOT_READY", chat_id, NOT_READY)
-
-        result = use_cases.log_food(store, user_id, text, now_utc)
-        return RouteResult(result.code, chat_id, result.reply)
+        # Record the ID for every handled outcome so a resend is skipped. A LOGGED
+        # entry already recorded it in its own transaction; INTERNAL_ERROR is not
+        # recorded, so a resend can still succeed.
+        if tracked and result.outcome != use_cases.DUPLICATE:
+            store.mark_processed(update_id, now_utc)
+        return result
     except Exception:
         log.exception("Unexpected error routing update")
         chat_id = None
@@ -85,3 +73,38 @@ def route_update(update: dict, store=None, now_utc: datetime | None = None) -> R
         except Exception:
             pass
         return RouteResult("INTERNAL_ERROR", chat_id, ERROR_REPLY)
+
+
+def _route_new_update(update: dict, store, now_utc: datetime, update_id: int | None) -> RouteResult:
+    """The C-1 and C-2 rules for an update that has not been seen before."""
+    message = update.get("message")
+    if not isinstance(message, dict):
+        return RouteResult("IGNORED")  # edited message, channel post, other
+
+    chat = message.get("chat") or {}
+    chat_id = chat.get("id")
+    if chat_id is None:
+        return RouteResult("BAD_UPDATE")
+
+    if chat.get("type") != "private":
+        return RouteResult("NOT_PRIVATE", chat_id, DIRECT_ONLY)
+
+    text = message.get("text")
+    if not isinstance(text, str) or not text.strip():
+        return RouteResult("UNSUPPORTED_FORMAT", chat_id, FORMAT_HINT)
+
+    user_id = (message.get("from") or {}).get("id")  # the tester's identity (C-1)
+
+    command = text.strip().split()[0].lower()
+    if command == "/start" or command.startswith("/start@"):
+        if store is not None and user_id is not None:
+            use_cases.register(store, user_id, now_utc)
+        return RouteResult("STARTED", chat_id, WELCOME)
+
+    if store is None or user_id is None:
+        return RouteResult("NOT_READY", chat_id, NOT_READY)
+
+    result = use_cases.log_food(store, user_id, text, now_utc, update_id=update_id)
+    if result.code == use_cases.DUPLICATE:
+        return RouteResult(result.code)  # a copy arriving at the same moment already saved
+    return RouteResult(result.code, chat_id, result.reply)

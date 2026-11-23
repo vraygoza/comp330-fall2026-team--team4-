@@ -46,8 +46,9 @@ def create_app(messenger=None, store=None) -> Flask:
             log.warning("outcome=BAD_UPDATE")
             return jsonify(ok=False), 400
 
-        # TODO(T-30, Khumoyun; was T-27 before the task ID map, #74): skip an update_id that was already processed,
-        # recorded in the same transaction as the entry (C-1).
+        # Duplicate protection (T-30, C-1): route_update skips an update_id that was
+        # already processed and returns DUPLICATE with no reply, so this answers 200
+        # and Telegram stops resending. Needs a store (create_app(store=...)).
 
         try:
             result = route_update(update, store=app.config["STORE"])
