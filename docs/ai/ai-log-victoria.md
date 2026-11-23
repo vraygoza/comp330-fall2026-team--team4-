@@ -38,9 +38,6 @@
 | Claude | Five peer evaluation drafts, submitted privately on Sakai and not stored in the repository (2026-11-09, Review) | Structure and the dated PR evidence | n/a | Victoria: set the ratings and checked each statement | Checked against merged PRs |
 | Claude | Draft docs/release/presentation-index.md and update docs/release/demo-script.md (2026-11-23, Documentation) | File structure; test count from a re-run on main | n/a | Victoria: checked presenter names and file paths | Test suite re-run on main (93 pass); test names and reply text checked against tests/ and src/ |
 
-<!-- Add new rows below this line -->
-| [Tool/Model] | [Task description, file path, (YYYY-MM-DD, Type)] | [Accepted output] | [Rejected output] | [Victoria: edits made] | [Verification performed] |
-
 ---
 
 ## Member Summary Statistics
