@@ -51,7 +51,7 @@ Risk 23 was added for the Cycle 1 release (Assignment 5). Statuses were re-check
 | 20 | "Today" is cut at the wrong time | Low | Medium | FR-5 (AC-5.3), T-17, ADR-0007 | One Day Calculator used everywhere; midnight and daylight-saving tests | Adiya | Mitigated: Day Calculator merged (#83); midnight and daylight-saving tests pass in CI |
 | 21 | Only one person can deploy | Medium | Medium | ADR-0006, checkpoint G-3 | Khumoyun is the backup deployer and does one practice deploy before testing starts | Adiya | Open: no practice deploy yet, because nothing is deployed |
 | 22 | Losing the host account loses tester data | Low | High | ADR-0006, [Data and Context](../architecture/data-context.md) | Nightly backup on the host; two-factor login; accepted for Cycle 1 because backups are on the same host | Adiya | Accepted risk for Cycle 1. No tester data exists yet, because the bot is not deployed |
-| 23 | A Telegram resend logs the same meal twice | Medium | Medium | C-1, T-30, ADR-0005, CC-5 in [Architecture](../architecture/architecture.md), Section 11 | Do not deploy until T-30 (duplicate `update_id` check) merges | Adiya |Open: T-30 is not built and has no owner yet (Architecture Section 11 names Khumoyun; the Task Plan does not, Risk 17). The bot runs only on a developer's computer |
+| 23 | A Telegram resend logs the same meal twice | Medium | Medium | C-1, T-30, ADR-0005, CC-5 in [Architecture](../architecture/architecture.md), Section 11 | Do not deploy until T-30 (duplicate `update_id` check) merges | Adiya | Mitigated in A6: T-30 built by Adiya (taken over from Khumoyun per A5 feedback) with 18 repeat-message tests in `tests/test_duplicate_updates.py`. Residual: untested against live Telegram retries until the bot is deployed (V-2 to V-4) |
 
 ## Risk Triggers and Responsibilities
 
@@ -106,7 +106,7 @@ Checked 2026-11-09. "Before the A5 tag" means before the `a5-cycle1-release` tag
 | 20 | None beyond keeping the day tests in CI | Adiya | Ongoing |
 | 21 | Khumoyun does one practice deploy before testers start | Khumoyun | Before testers |
 | 22 | Revisit when the bot is deployed and holds tester data | Adiya | After deployment |
-| 23 | Build T-30 with a unit test that sends the same `update_id` twice | T-30 owner (Risk 17) | Before deployment |
+| 23 | Build T-30 with a unit test that sends the same `update_id` twice. Done in A6; next, confirm with one live resend after deployment | Adiya | Done (A6); live check after V-2 to V-4 |
 
 ## Change Log
 | Date | Change | By |
