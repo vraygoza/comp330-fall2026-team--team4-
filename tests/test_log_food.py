@@ -5,6 +5,7 @@ Runs through the router with a real EntryStore on a temporary file, so every
 piece is exercised together. Calorie values come from the made-up sample list.
 """
 
+import itertools
 import os
 import tempfile
 import unittest
@@ -34,9 +35,15 @@ def chicago(y, m, d, hh, mm):
     return datetime(y, m, d, hh, mm, tzinfo=CHICAGO).astimezone(UTC)
 
 
-def update(text, user=TESTER_A):
+_ids = itertools.count(1)
+
+
+def update(text, user=TESTER_A, update_id=None):
+    # Each message gets its own update_id, as Telegram does. Before T-30 every test
+    # message reused update_id 1; with duplicate protection those would now be
+    # skipped as resends, which is the behavior tests/test_duplicate_updates.py checks.
     return {
-        "update_id": 1,
+        "update_id": next(_ids) if update_id is None else update_id,
         "message": {"chat": {"id": user, "type": "private"}, "from": {"id": user}, "text": text},
     }
 
