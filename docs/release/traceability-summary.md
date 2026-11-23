@@ -54,7 +54,7 @@ This summary records what is demonstrated, not what is planned. A requirement wi
 
 - **Live services.** No live Telegram deployment and no live USDA FoodData Central calls. Food values come from `src/core/sample_foods.json` and are synthetic. The bot runs by local polling (`src/bot/poll.py`); the webhook is built and unit tested but not deployed (CC-3), and nothing creates it with a store yet (CC-9).
 - **Gram amounts** are parsed but refused with `NEEDS_GRAMS` and save nothing, because the sample list is per serving (CC-7).
-- **Duplicate update protection (T-30)** is not built. Per architecture.md CC-5 the bot is not deployed until it merges.
+- **Duplicate update protection (T-30)** was not built in Cycle 1. It is built in A6 (Cycle 2) with tests in `tests/test_duplicate_updates.py`; see architecture.md CC-5.
 - **Verification tasks V-1 to V-6** have not run and are deferred to Cycle 2, so hosting, rate limits and real FDC field behavior remain assumptions.
 - **ADR-0001 to ADR-0008** are Proposed. The M1 vote (#56) has not happened, so no requirement traces to a formally accepted decision.
 
