@@ -60,8 +60,12 @@ def route_update(update: dict, store=None, now_utc: datetime | None = None) -> R
         result = _route_new_update(update, store, now_utc, update_id if tracked else None)
 
         # Record the ID for every handled outcome so a resend is skipped. A LOGGED
-        # entry already recorded it in its own transaction; INTERNAL_ERROR is not
-        # recorded, so a resend can still succeed.
+        # entry already recorded it in its own transaction. INTERNAL_ERROR does not
+        # record it here, so an error before the entry is saved can be retried. An
+        # error after the entry is saved (for example while computing the total) is
+        # different: the ID was committed with the entry, so the resend returns
+        # DUPLICATE with no reply. That keeps the meal from being saved twice; the
+        # tester has already seen the error reply (review on #104).
         if tracked and result.outcome != use_cases.DUPLICATE:
             store.mark_processed(update_id, now_utc)
         return result
