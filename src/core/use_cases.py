@@ -6,6 +6,10 @@ message -> parse (K2) -> lookup (A3) -> save under the tester ID -> daily total 
 Core rule: no Telegram, Flask, HTTP or SQL here. The store is passed in and only
 needs register, is_registered, add_entry and entries_between (src/adapters/store.py).
 Any refusal saves nothing (AC-6.1, AC-6.2).
+
+T-30 (A6): log_food takes the Telegram update_id and hands it to add_entry, which
+records it in the same transaction as the entry. A resent update gets DUPLICATE
+and saves nothing, even if two copies arrive at the same moment.
 """
 
 from __future__ import annotations
@@ -15,7 +19,10 @@ from datetime import datetime
 
 from src.core.day import chicago_date_of, chicago_day_bounds, total_for_day
 from src.core.food_lookup import lookup
+from src.core.ports import DuplicateUpdate
 from src.core.parser import OUT_OF_RANGE, PARSED, UNSUPPORTED_FORMAT, parse_message
+
+DUPLICATE = "DUPLICATE"
 
 NOT_REGISTERED_REPLY = "Send /start first."
 FORMAT_REPLY = (
@@ -46,7 +53,8 @@ def register(store, user_id: int, now_utc: datetime) -> Outcome:
     return Outcome("REGISTERED" if created else "ALREADY_REGISTERED", "")
 
 
-def log_food(store, user_id: int, text: str, now_utc: datetime) -> Outcome:
+def log_food(store, user_id: int, text: str, now_utc: datetime,
+             update_id: int | None = None) -> Outcome:
     if not store.is_registered(user_id):
         return Outcome("NOT_REGISTERED", NOT_REGISTERED_REPLY)
 
@@ -67,16 +75,20 @@ def log_food(store, user_id: int, text: str, now_utc: datetime) -> Outcome:
         return Outcome("NOT_FOUND", NOT_FOUND_REPLY.format(food=parsed.food))
 
     kcal = parsed.quantity * found.kcal_per_serving
-    store.add_entry(
-        user_id,
-        food_text=parsed.food,
-        matched_description=found.name,
-        quantity=parsed.quantity,
-        unit="count" if parsed.amount_given else "default",
-        kcal=kcal,
-        source="sample",
-        now_utc=now_utc,
-    )
+    try:
+        store.add_entry(
+            user_id,
+            food_text=parsed.food,
+            matched_description=found.name,
+            quantity=parsed.quantity,
+            unit="count" if parsed.amount_given else "default",
+            kcal=kcal,
+            source="sample",
+            now_utc=now_utc,
+            update_id=update_id,
+        )
+    except DuplicateUpdate:
+        return Outcome(DUPLICATE, "")  # the first copy already saved and replied
 
     today = chicago_date_of(now_utc)
     start, end = chicago_day_bounds(today)

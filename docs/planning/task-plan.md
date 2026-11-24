@@ -68,7 +68,7 @@ IDs reconciled 2026-10-30 per [Task ID Map](task-id-map.md). T-27 to T-29 come f
 | T-27 | Review the database tables against NFR-4 before the Entry Store merges | NFR-4 | T-3 | Mazen | Not started |
 | T-28 | Weekly health check: outcome counts, reply times and FDC calls per hour against free-tier limits | NFR-5, Risk 5 | T-11 | Adiya | Not started |
 | T-29 | Build the tester invite check and the `/privacy` reply | FR-10 (AC-10.1 to AC-10.3), OQ-8, G-4 | T-7, OQ-1 | Mazen | Not started |
-| T-30 | Record processed `update_id` values in the same transaction as the entry | C-1, INV-01 Finding 7 | T-3, T-12 | TODO: assign | Not started |
+| T-30 | Record processed `update_id` values in the same transaction as the entry | C-1, INV-01 Finding 7 | T-3, T-12 | Adiya (A6; taken over from Khumoyun) | Done in A6, in review |
 | T-31 | Build `food_cache` table, loader, and 30-day refresh rule | C-5, INV-01 Finding 8 | T-1, T-3 | TODO: assign | Not started |
 | T-32 | Check `X-Telegram-Bot-Api-Secret-Token`; return 403 and log AUTH_REJECTED | C-1, TB-1 | T-5 | TODO: assign | Unit tests merged in #69; live check remains (V-3) |
 | T-33 | Write and test the per-tester deletion script | OQ-8, C-6, G-5 | T-3 | TODO: assign | Not started |
