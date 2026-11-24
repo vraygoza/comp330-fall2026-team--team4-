@@ -194,6 +194,32 @@ class RepeatMessageTests(TempStoreMixin, unittest.TestCase):
         self.assertEqual(self.send("2 tacos", 16, store=flaky).outcome, "LOGGED")
         self.assertEqual(len(self.saved(self.store)), 1)
 
+    def test_error_after_the_entry_is_saved_is_not_saved_twice(self):
+        # Review on #104 (Bazid): if something fails after add_entry commits, the
+        # update_id is already recorded. The resend must not save the meal again.
+        class FailAfterSaveStore:
+            def __init__(self, real):
+                self.real = real
+                self.failed = False
+
+            def entries_between(self, *args, **kwargs):
+                if not self.failed:
+                    self.failed = True
+                    raise RuntimeError("simulated failure after the entry was saved")
+                return self.real.entries_between(*args, **kwargs)
+
+            def __getattr__(self, name):
+                return getattr(self.real, name)
+
+        flaky = FailAfterSaveStore(self.store)
+        with self.assertLogs("src.bot.router", level=logging.ERROR):
+            self.assertEqual(self.send("2 tacos", 19, store=flaky).outcome, "INTERNAL_ERROR")
+        self.assertTrue(self.store.is_processed(19))
+        retry = self.send("2 tacos", 19, store=flaky)
+        self.assertEqual(retry.outcome, "DUPLICATE")
+        self.assertIsNone(retry.reply)
+        self.assertEqual(len(self.saved(self.store)), 1)
+
     def test_reused_id_after_48_hours_is_processed(self):
         # Telegram may restart update_id numbering after a week without updates.
         self.send("2 tacos", 17)
