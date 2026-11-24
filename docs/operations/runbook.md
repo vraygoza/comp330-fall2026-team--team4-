@@ -7,7 +7,7 @@
 | **Backup** | Mazen (Operations & Evidence Lead) |
 | **Reviewer** | Mazen (Operations & Evidence Lead) |
 | **Last updated** | 2026-11-23 |
-| **Target Release** | `a6-final-release` |
+| **Target Release** | `a6-final-release` (to be created at the freeze) |
 | **Operating Mode** | Local Polling Daemon (`src.bot.poll`) |
 
 ---
@@ -17,7 +17,7 @@
 The Team 4 Telegram Calorie Tracker bot is designed as a modular, layered system:
 - **Presentation / Adapter Layer:** In the final release, interaction with the Telegram Bot API runs via the **local polling runner** (`src/bot/poll.py`), which calls `getUpdates`.
 - **Why Polling in Release:** The production design is a webhook (`src/bot/web.py`, ADR-0005). However, deploying a public HTTPS webhook requires cloud hosting verification checks (`V-2` to `V-4` on PythonAnywhere), which are deferred. The polling runner executes the exact same application router (`src/bot/router.py`) and core use cases as the webhook, providing identical behavior without exposing a public endpoint (CC-3).
-- **Core Domain:** Message parsing (`src/core/parser.py`), calorie calculation (`src/core/day_calc.py`), and food resolution (`src/core/food_lookup.py`).
+- **Core Domain:** Message parsing (`src/core/parser.py`), calorie calculation (`src/core/day.py`), and food resolution (`src/core/food_lookup.py`).
 - **Persistence Layer:** Standard library `sqlite3` (`src/adapters/store.py`). Data is stored in a local SQLite file (`bot.db`).
 
 ```mermaid
@@ -45,8 +45,8 @@ flowchart LR
 The bot loads environment variables via `load_dotenv()` in `src/bot/poll.py`. Create a `.env` file in the project root directory:
 
 ```bash
-# Telegram Bot Configuration
-TELEGRAM_BOT_TOKEN="123456789:ABCdefGHIjklMNOpqrsTUVwxyz"
+# Telegram Bot Configuration (replace with your test token from BotFather)
+TELEGRAM_BOT_TOKEN="123456:REPLACE_ME"
 
 # Optional: Custom SQLite Database Path (defaults to "bot.db" if omitted)
 BOT_DB_PATH="bot.db"
@@ -67,19 +67,21 @@ python3 -m src.bot.poll
 ```
 
 ### 3.2 Expected Startup Logs
-Upon launch, the runner initializes logging, loads `.env`, instantiates `TelegramClient`, and begins the long-polling loop:
+Upon launch, `poll.py` initializes the Telegram client, opens SQLite, and prints the exact console message:
 
 ```text
-INFO poll TelegramClient initialized for bot ID: 123456789
-INFO poll Database connected at bot.db (foreign keys enabled)
-INFO poll Polling for updates (timeout=30s)...
+INFO poll Bot started. Message your test bot in Telegram. Press Ctrl+C to stop.
 ```
 
 ### 3.3 Verifying Bot Operation
 1. Open Telegram and search for your bot's handle (registered via `@BotFather`).
 2. Send `/start`.  
-   **Expected Reply:**  
-   `"Welcome to the Team 4 calorie tracker test. Send one food per message, for example: 2 eggs"`
+   **Expected Reply (3 lines):**  
+   ```text
+   Welcome to the Team 4 calorie tracker test.
+   Send one food per message, for example: 2 eggs
+   Calories come from a small sample list during this test.
+   ```
 3. Send a test food: `2 eggs`.  
    **Expected Reply:**  
    `"Logged 2 x Egg (1 large egg each) = 140 kcal. Today's total: 140 kcal."`
@@ -87,7 +89,7 @@ INFO poll Polling for updates (timeout=30s)...
 ### 3.4 Stopping the Daemon
 To terminate the bot cleanly, issue an interrupt signal:
 - In terminal: Press `Ctrl + C` (SIGINT).
-- The process terminates gracefully after completing any active polling request.
+- The process outputs `INFO poll Stopped.` and terminates cleanly.
 
 ---
 
@@ -142,11 +144,11 @@ If the database file is corrupted or entries are damaged:
 
 | Symptom / Failure | Root Cause | Operator Action |
 |---|---|---|
-| `TelegramConfigError: TELEGRAM_BOT_TOKEN environment variable is not set` | Missing or unreadable `.env` file. | Verify `.env` exists in the repository root and contains `TELEGRAM_BOT_TOKEN="<token>"`. |
-| `Conflict: can't use getUpdates method while webhook is active` | A previous webhook URL was set on the bot token via Telegram API. | Run the following command to delete the registered webhook: <br>`curl -s "https://api.telegram.org/bot<TOKEN>/deleteWebhook"` |
-| Console logs `Lookup failure: food item not found in database` | Tester entered a food item not present in `sample_foods.json`. | Expected behavior. No operator action required. Note: failure logging is sanitized and omits user ID and food text (NFR-3, NFR-4). |
+| `TelegramConfigError: TELEGRAM_BOT_TOKEN environment variable is not set` | Missing or unreadable `.env` file. | Verify `.env` exists in the repository root and contains `TELEGRAM_BOT_TOKEN="123456:REPLACE_ME"`. |
+| `Conflict: can't use getUpdates method while webhook is active` | A previous webhook URL was set on the bot token via Telegram API. | Run the following command to delete the registered webhook: <br>`curl -s "https://api.telegram.org/bot123456:REPLACE_ME/deleteWebhook"` |
+| Console logs `Lookup failure: food item not found in database` | Tester entered a food item not present in `src/core/sample_foods.json`. | Expected behavior. No operator action required. Note: failure logging is sanitized and omits user ID and food text (NFR-3, NFR-4). |
 | Tester receives `"Something went wrong. Please try again later."` | An unexpected exception occurred during update routing. | The bot's crash-protection handler caught the error without terminating the daemon (PR #96). Check the console traceback for details. |
-| `sqlite3.OperationalError: database is locked` | Concurrent process access or hanging file lock. | Ensure only one instance of `src.bot.poll` is running (`ps aux | grep poll.py`). SQLite uses WAL/busy timeout defaults. |
+| `sqlite3.OperationalError: database is locked` | Concurrent process access or hanging file lock. | Ensure only one instance of `src.bot.poll` is running (`ps aux \| grep poll.py`). Close any external SQLite CLI sessions or locks. |
 
 ---
 
@@ -156,4 +158,4 @@ In compliance with **NFR-3** (Credential Security) and **NFR-4** (Minimum Data R
 1. **Zero Secret Leakage:** Bot tokens are never printed in console logs, error traces, or test outputs.
 2. **Zero PII in Logs:** When a user enters an unparseable or unrecognized food, `src/core/food_lookup.py` logs a generic category string (`Lookup failure: food item not found in database`), intentionally omitting the user's Telegram ID and the raw food query text.
 3. **Tester Data Separation (AC-7.1):** All database queries are scoped by `telegram_user_id`. One user can never read, modify, or sum another user's calorie entries.
-4. **Security & Quality Audits:** For credential scanning and security checklists, see `docs/security/security-checklist.md` and `tests/test_secrets.py`. For known defects, see `docs/quality/defect-summary.md`.
+4. **Security & Quality Audits:** For credential scanning and security checklists, see `docs/security/security-checklist.md` and the CI secrets scanner in `.github/workflows/ci.yml`. For known defects, see `docs/quality/defect-summary.md`.
