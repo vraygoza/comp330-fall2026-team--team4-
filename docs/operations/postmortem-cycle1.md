@@ -54,6 +54,7 @@ Dates are merge dates on `origin/main`, confirmed with `git log`.
 | 2026-11-09 to 2026-11-23 | No pull request merges to `main` |
 | 2026-11-23 | `b789a22` is committed directly to `main` with no pull request and no review (see F-7) |
 | 2026-11-23 | #104 opens with the T-30 implementation, 39 days after T-30 was first written down |
+| 2026-11-23 evening | #106, #107 and #108 merge, landing the final release notes, known limitations, Cycle 2 maturity summary, presentation index and the runbook |
 
 ## What Went Well
 
@@ -99,7 +100,7 @@ These are worth naming because they are the practices that should carry into sus
 
 **What we changed.** `task-id-map.md` is now the governing list (#74, merged 2026-10-30).
 
-**Still outstanding.** `docs/planning/` contains both `re-estimation.md` and `reestimation.md` — the same defect class, two files for one subject.
+**Still outstanding.** `docs/planning/` contains both `re-estimation.md` and `reestimation.md`. These are two different documents — revised estimates and the re-estimation protocol — whose names differ by one hyphen. The defect is that the names do not distinguish them, not that one is a duplicate.
 
 ### F-4 — Eight architecture decisions sat in Proposed for 25 days
 
@@ -125,35 +126,39 @@ These are worth naming because they are the practices that should carry into sus
 
 ### F-6 — The release was tagged while its own release documents were unmerged
 
-**What happened.** The Assignment 5 release package listed nine deliverables. At the tagged commit, `docs/release/` contains three files. `release-notes.md`, `defect-summary.md` and `cycle2-handoff.md` are not on `main`. `known-limitations.md` merged (#97) and was reverted the same day (`265a906`). The defect summary, Cycle 2 handoff and presentation index were opened as #94 on 2026-11-09 and are still unmerged.
+**What happened.** The Assignment 5 release package listed nine deliverables. At the tagged commit, `docs/release/` contains three files. `release-notes.md`, `defect-summary.md` and `cycle2-handoff.md` were not on `main`. `known-limitations.md` merged (#97) and was reverted the same day (`265a906`). The defect summary and Cycle 2 handoff were opened as #94 on 2026-11-09 and are still unmerged 14 days later. The final release notes, known limitations and presentation index only reached `main` on 2026-11-23, two weeks after the release they describe was tagged.
 
-**Evidence.** `git ls-tree` at tag `A5Cycle1Release`. PR #94, open.
+**Evidence.** `git ls-tree` at tag `A5Cycle1Release`. PR #94, open. PRs #106, #107 and #108, merged 2026-11-23.
 
 **Root cause.** The tag was cut against a calendar date rather than against a checklist of merged artifacts. The release package table had a status column, but nothing enforced it before tagging.
 
 **What we would do differently.** The tag is not cut until every row of the release package table reads Merged, confirmed by looking at `main` rather than at a pull request.
 
-### F-7 — Cycle 2 produced no reviewed change for two weeks, and the one commit that landed bypassed review
+### F-7 — Cycle 2 produced no reviewed change for two weeks, and `main` accepts unreviewed commits by default
 
 **What happened.** Between the tag on 2026-11-09 and 2026-11-23, no pull request merged to `main`. The instruction on 2026-11-09 was explicitly to run Cycle 2 planning in parallel with finishing Assignment 5, and not to serialize them.
 
-The single commit that did land, `b789a22` on 2026-11-23, was pushed straight to `main` with no pull request and no reviewer. It was mine. It edited `docs/ai/ai-log-bazid.md` — a low-risk change, but the rule it broke (checkpoint G-1, no self-merge, a non-author reviews before `main`) does not have a low-risk exemption, and the person who broke it is the author of this postmortem.
+The single commit that did land in that window, `b789a22` on 2026-11-23, was pushed straight to `main` with no pull request and no reviewer. It was mine. It edited `docs/ai/ai-log-bazid.md` — a low-risk change, but checkpoint G-1 (no self-merge; a non-author reviews before `main`) has no low-risk exemption, and the person who broke it is the author of this postmortem.
 
-**Evidence.** `git rev-list --parents -n 1 b789a22` shows a single parent, `8eca1b5`. No pull request references it.
+That commit is not an isolated lapse. It is the most recent of many.
+
+**Evidence.** `git log --first-parent origin/main --no-merges` lists **41 commits pushed straight to `main`** across the life of the project. Five of them are since CI began on 2026-11-02: `df121c3`, `2583378`, `7fc718a` and `0e397f8` on 11-09, and `b789a22` on 11-23. All five are mine.
 
 **Root cause (the two-week gap).** Cycle 2 scope was discussed but never written into the repository, so it had no issues, no owners and no dates. Work that exists only in a conversation does not get done.
 
-**Root cause (the bypassed review).** The GitHub web editor defaults its commit target to whatever branch the file was opened from. Opening a file from `main` and then choosing "commit directly to this branch" commits to `main`. Nothing in the workflow stops it: `main` has no branch protection, so the rule exists only in `working-agreements.md` and in people remembering it.
+**Root cause (the unreviewed commits).** The GitHub web editor defaults its commit target to whatever branch the file was opened from. Opening a file from `main` and then choosing "commit directly to this branch" commits to `main`. Nothing in the workflow stops it: `main` has no branch protection, so G-1 exists only in `working-agreements.md` and in people remembering it. A control that depends on nobody ever mis-clicking is not a control.
 
-**What we would do differently.** Cycle 2 scope goes into the task plan as numbered, owned, dated tasks before Cycle 1 is tagged. And the no-self-merge rule gets enforced by branch protection on `main` rather than by memory, because a written rule with no mechanism behind it is the same category of failure as an unowned task.
+**What we would do differently.** Cycle 2 scope goes into the task plan as numbered, owned, dated tasks before Cycle 1 is tagged. And G-1 gets enforced by branch protection on `main` — require a pull request, require one non-author approval — rather than by memory.
 
-### F-8 — The risk register contains duplicated rows with conflicting statuses
+### F-8 — The risk register contained duplicated rows with conflicting statuses
 
-**What happened.** Risks 10 through 23 each appear twice in `docs/planning/risk-register.md`, with different statuses, and the header table has two "Last updated" rows.
+**What happened.** Risks 10 through 23 each appeared twice in `docs/planning/risk-register.md`, with different statuses, and the header table had two "Last updated" rows.
 
-**Evidence.** `docs/planning/risk-register.md` on `main`.
+**Evidence.** `docs/planning/risk-register.md` at commit `8eca1b5`.
 
 **Root cause.** A merge conflict resolved by keeping both sides instead of reconciling them — the mirror image of F-5, where keeping one side lost data. Neither resolution was checked against the rendered file.
+
+**Resolved.** Fixed by #107 on 2026-11-23 (action A-3): one row per risk, the duplicate header row removed, and the team-departure risk renumbered from 23 to 24 and closed.
 
 **What we would do differently.** Any pull request touching a table-heavy evidence file gets its rendered preview checked, not just its diff.
 
@@ -161,36 +166,40 @@ The single commit that did land, `b789a22` on 2026-11-23, was pushed straight to
 
 Six of the eight findings are the same failure in different clothes: **work with no single owner and no date does not happen, however important it is, and however clearly it is written down.** T-30 was written down 39 days before anyone built it. The ADR vote was written down, flagged by the instructor, and still took 25 days. The deployment condition was written into an accepted decision and never scheduled.
 
-F-7 adds the second half of the pattern: **a rule with no mechanism behind it is not a control.** The no-self-merge rule is written down, agreed, and was broken by the person writing this document, on the day he wrote it, without noticing. Branch protection would have refused the push. Nothing else was going to.
+F-7 adds the second half of the pattern: **a rule with no mechanism behind it is not a control.** The no-self-merge rule is written down, agreed, and was broken by the person writing this document, on the day he wrote it, without noticing. The scale matters, and it is worse than one slip: the rule has been bypassed 41 times across the project, and every instance since CI began belongs to the author of this postmortem. Branch protection would have refused all five. Nothing else was going to.
 
 Documentation was not the weak point. This team documented more than it executed. The weak point was that documents recorded intentions without recording who and when, and that nothing in the workflow refused to proceed when those fields were blank.
 
 ## Residual Risks Carried Into Cycle 2
 
-| Risk | Status entering Cycle 2 | Owner |
-|------|------------------------|-------|
+Checked against `main` on 2026-11-23 at 9:30 PM.
+
+| Risk | Status | Owner |
+|------|--------|-------|
 | Not deployed; V-1 to V-6 never run | Open | TODO: assign |
-| T-30 duplicate protection | Implemented in #104, approved, not yet merged | Adiya |
+| T-30 duplicate protection | Implemented and approved in #104; not yet on `main` | Adiya |
 | `/today` not built | Open | TODO: assign |
 | Food data synthetic; gram amounts unsupported | Open | Adiya |
 | Tester invite check and `/privacy` (T-29, FR-10) | Not started | TODO: assign |
 | Per-tester deletion script (T-33) | Not started | TODO: assign |
 | Central vs per-member AI log, no stated authority; no file for Sohail | Open | Khumoyun |
-| `main` has no branch protection | Open | Victoria |
-| Duplicate files: `re-estimation.md` / `reestimation.md` | Open | Bazid |
-| Risk register duplicate rows | Open | Mazen |
+| `main` has no branch protection; 41 commits pushed without review | Open | Victoria |
+| `docs/observability/` and `docs/security/` do not exist | Open, unclaimed | TODO: assign |
+| Defect summary and Cycle 2 handoff not on `main` (#94, open 14 days) | Open | Sohail |
+| Confusable filenames: `re-estimation.md` / `reestimation.md` | Open | Bazid |
 
 ## Action Items
 
-| # | Action | Owner | Due |
-|---|--------|-------|-----|
-| A-1 | Merge #104 (T-30). Approved by a non-author on 2026-11-23 | Adiya | 2026-11-24 |
-| A-2 | State in `ai-policy.md` which AI log is authoritative and when consolidation happens; create Sohail's per-member file | Khumoyun | 2026-11-24 |
-| A-3 | De-duplicate the risk register rows and the header table | Mazen | 2026-11-24 |
-| A-4 | Delete `reestimation.md`, keep `re-estimation.md` | Bazid | 2026-11-24 |
-| A-5 | Merge or close #94, and land the remaining release documents on `main` before tagging | Victoria | Victoria to confirm in the PR thread |
-| A-6 | Task plan becomes the only file naming task owners; other docs link to it | Bazid | 2026-11-24 |
-| A-7 | Turn on branch protection for `main`: require a pull request and one non-author approval | Victoria | 2026-11-24 |
+| # | Action | Owner | Due | Status |
+|---|--------|-------|-----|--------|
+| A-1 | Merge #104 (T-30). Approved by a non-author on 2026-11-23 | Adiya | Before the A6 tag | Open |
+| A-2 | State in `ai-policy.md` which AI log is authoritative and when consolidation happens; create Sohail's per-member file | Khumoyun | 2026-11-24 | Open |
+| A-3 | De-duplicate the risk register rows and the header table | Mazen | 2026-11-23 | Done (#107) |
+| A-4 | Rename `reestimation.md` to `re-estimation-protocol.md`. It is the re-estimation process, not a duplicate of the revised estimates in `re-estimation.md` | Bazid | 2026-11-24 | Open |
+| A-5 | Merge or close #94 and land the defect summary and Cycle 2 handoff on `main` before tagging | Victoria | Victoria to confirm in the PR thread | Open |
+| A-6 | Task plan becomes the only file naming task owners; other docs link to it | Bazid | 2026-11-24 | Open |
+| A-7 | Turn on branch protection for `main`: require a pull request and one non-author approval | Victoria | 2026-11-24 | Open |
+| A-8 | Create `docs/observability/` and `docs/security/`, or record in the release package that they were not produced | TODO: assign | Before the A6 tag | Open |
 
 ## Change Log
 
@@ -198,3 +207,4 @@ Documentation was not the weak point. This team documented more than it executed
 |------|--------|----|
 | 2026-11-23 | Created for Assignment 6 from repository evidence at commit `8eca1b5` | Bazid |
 | 2026-11-23 | Corrected merge dates against `git log`; rewrote F-5 after re-checking `main`; reworded the 10/30 entry; added the direct-to-`main` commit to F-7; attributed the 180-commit figure to Risk 6 | Bazid, after review by Victoria |
+| 2026-11-23 | F-7 evidence corrected from one commit to 41, with the five since CI named; F-8 marked resolved by #107; F-3 and A-4 corrected — `reestimation.md` is a distinct protocol document, not a duplicate; residual risks and actions re-checked against `main` after #106, #107 and #108 merged; added A-8 | Bazid |
