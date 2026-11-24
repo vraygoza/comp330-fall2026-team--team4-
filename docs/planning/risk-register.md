@@ -4,14 +4,13 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Bazid (Planning & Process Lead) |
-| Last updated | 2026-11-03 |
-| Last updated | 2026-11-09 |
+| Last updated | 2026-11-23 |
 
 This is a list of things that could go wrong with the project and how we plan to handle each one. We check it at every formal meeting. Anyone can add a risk through a pull request. When a risk is closed, we change its status instead of deleting it.
 
 Risks 1 to 11 are from Assignment 1. Risks 12 to 17 were added for Cycle 1. Risks 18 to 22 come from the Assignment 3 architecture ([Architecture](../architecture/architecture.md), Section 10). "Linked to" shows which requirements (FR/NFR), tasks (T), open questions (OQ) and ADRs each risk affects; ADRs are listed under D4 in the [Decision Log](../decisions/decision-log.md). See [Traceability](traceability.md) for the full mapping. Triggers, and who watches each high-impact risk, are in the second table.
 
-Risk 23 was added for the Cycle 1 release (Assignment 5). Statuses were re-checked against `main` (tag `a4-construction-integration`) on 2026-11-09, and the third table gives each risk's next action and who does it.
+Risk 23 was added for the Cycle 1 release (Assignment 5). Risk 24 was first added on 2026-11-03 as a second Risk 23 and was renumbered on 2026-11-23. Statuses were re-checked against `main` (tag `a4-construction-integration`) on 2026-11-09, and the third table gives each risk's next action and who does it.
 
 | # | Risk | Chance | Impact | Linked to | Plan | Owner | Status |
 |---|------|--------|--------|-----------|------|-------|--------|
@@ -20,26 +19,12 @@ Risk 23 was added for the Cycle 1 release (Assignment 5). Statuses were re-check
 | 3 | We try to build too much and finish nothing | High | High | OQ-1, FR-8, FR-9 | Lock scope each cycle; new ideas go to the backlog; Should items are dropped first ([TR-1](../decisions/tradeoff-records.md)) | Bazid | Open: nothing outside Cycle 1 scope has been built; the optional `/undo` and manual calories were not started |
 | 4 | No nutrition data source picked yet, or calorie numbers are wrong | High | High | FR-3, OQ-2, T-1, T-13 | Choose a source early (T-1); hand-check 20 common foods (T-13) | Adiya | Open: FDC is not connected yet; the bot uses eight made-up sample foods (CC-1 in [Architecture](../architecture/architecture.md), Section 11). V-1 and T-13 have not run |
 | 5 | Telegram or API limits or costs | Medium | Medium | NFR-5, OQ-5 | Stay on free tiers; watch usage | Adiya | Open: not exercised, because the bot is not deployed (Risk 14) |
-| 6 | Test users' food logs or bot tokens get exposed | Low | High | FR-7, NFR-3, NFR-4 | Keep secrets out of the repo and AI tools; store as little user data as possible; if a token leaks, revoke it in BotFather right away | Mazen | Open: the CI secrets check runs on every pull request since #73. It checks current files only, so on 2026-11-09 the full history of every branch (180 commits) was scanned with the same patterns: no tokens or secret files found |
+| 6 | Test users' food logs or bot tokens get exposed | Low | High | FR-7, NFR-3, NFR-4 | Keep secrets out of the repo and AI tools; store as little user data as possible; if a token leaks, revoke it in BotFather right away | Mazen | Open: the CI secrets check runs on every pull request since #73. It checks current files only, so on 2026-11-09 the full history of every branch (180 commits) was scanned with the same patterns: no tokens or secret files found. Scanned again on 2026-11-23 (264 commits on every branch and pull request): no tokens or secret files found; `pip-audit` on `requirements.txt` found no known vulnerabilities |
 | 7 | Busy schedules (work, other classes) | High | High | [Team Commitments](team-commitments.md) | Commit to Must requirements only; clear task owners; weekly WhatsApp updates | Bazid | Open: weekly hours confirmed for only 2 of 6 members |
 | 8 | Docs contradict each other or don't follow the format | High | Medium | All docs | Follow the documentation standards; check links and names before tagging | Mazen | Occurred again: the A3 feedback (reviewed 10/26) found contradictory records; `ci.yml` and `requirements.txt` pointed to ADR-0009 before it existed |
 | 9 | Some people do more work than others | Medium | High | All tasks | Track who did what through repo evidence | Khumoyun | Open |
-| 10 | AI-written work submitted without being checked | Medium | High | All docs and code | Follow the AI policy and log all AI use | Mazen | Open |
-| 11 | Bugs or mistakes get through review | Medium | Medium | All code | Use the quality checklist before merging | Bazid (acting) | Open |
-| 12 | Tech decisions are still open, so estimates aren't firm | High | High | OQ-2, OQ-3, OQ-4, T-1 to T-3 | Close these at the next meeting and record them in the Decision Log | Adiya | Open: eight ADRs proposed 2026-10-15 (ADR-0001 to ADR-0008) |
-| 13 | Understanding food messages is harder than expected | Medium | High | FR-2, OQ-6, T-9 | One food per message ([TD-1](../decisions/deferred-scope.md)); ask the tester to rephrase instead of guessing | Adiya | Open |
-| 14 | Testers can't reach the bot | Medium | High | OQ-5, T-6, NFR-2 | PythonAnywhere free + SQLite, adopted only if V-2 to V-4 pass; otherwise Render + Neon (ADR-0006) | Adiya | Open |
-| 15 | Not enough testers, or they start too late | Medium | High | OQ-8, OQ-9, T-24, T-25 | Confirm testers early; finish the onboarding notice before testing starts | Mazen | Open |
-| 16 | Estimates are wrong because this is our first cycle | High | Medium | [Effort Estimates](estimates.md) | Compare actual hours to estimates after week one; drop Should items first; record changes in re-estimation notes | Bazid | Open |
-| 17 | Most tasks have no owner, and the first three tasks all depend on one person | High | High | Task Plan (18 of 26 unassigned; T-1 to T-3 all Adiya) | Assign owners when Issues are created; Adiya's backup helps with T-1 to T-3 | Victoria | Open |
-| 18 | The chosen host doesn't fit the bot | Medium | High | ADR-0005, ADR-0006, T-6, NFR-1, AC-1.2 | Run V-2 to V-4 before building on the host; if any fails, switch to Option B and record the NFR-1 exception | Adiya | Open |
-| 19 | Food matching is wrong or refuses too many messages | Medium | High | FR-3, FR-6, ADR-0002, ADR-0003, T-11, T-13 | Curated map for common foods; 25% ambiguity rule; count `AMBIGUOUS` outcomes in the test week and revisit P-3 if more than about 1 in 5 messages are refused | Adiya | Open |
-| 20 | "Today" is cut at the wrong time | Low | Medium | FR-5 (AC-5.3), T-17, ADR-0007 | One Day Calculator used everywhere; midnight and daylight-saving tests | Adiya | Open: tests passed in INV-01 |
-| 21 | Only one person can deploy | Medium | Medium | ADR-0006, checkpoint G-3 | Khumoyun is the backup deployer and does one practice deploy before testing starts | Adiya | Open |
-| 22 | Losing the host account loses tester data | Low | High | ADR-0006, [Data and Context](../architecture/data-context.md) | Nightly backup on the host; two-factor login; accepted for Cycle 1 because backups are on the same host | Adiya | Accepted risk for Cycle 1 |
-| 23 | Team member departure mid-cycle | High | High | T-13, T-22, T-23, T-26 | Sohail departed 10/30; Bazid acting Quality Lead; reassign tasks to remaining 5 members | Victoria | Occurred (10/30): tasks marked for reassignment |
-| 10 | AI-written work submitted without being checked | Medium | High | All docs and code | Follow the AI policy and log all AI use | Mazen | Occurred: the AI-use rows for five merged Assignment 4 PRs (#73, #77, #83, #84, #88) are missing from the log on `main`, lost in merge conflicts (Risk 2). Open PR #89 restores them |
-| 11 | Bugs or mistakes get through review | Medium | Medium | All code | Use the quality checklist before merging | Sohail | Open: CI runs the tests on every pull request since #73 (66 tests on `main`). PRs merged before #73 had no CI check |
+| 10 | AI-written work submitted without being checked | Medium | High | All docs and code | Follow the AI policy and log all AI use | Mazen | Occurred: the AI-use rows for five merged Assignment 4 PRs (#73, #77, #83, #84, #88) were lost in merge conflicts (Risk 2). #89 restored them on 2026-11-09 |
+| 11 | Bugs or mistakes get through review | Medium | Medium | All code | Use the quality checklist before merging | Sohail | Open: CI runs the tests on every pull request since #73 (93 tests on `main`). PRs merged before #73 had no CI check |
 | 12 | Tech decisions are still open, so estimates aren't firm | High | High | OQ-2, OQ-3, OQ-4, T-1 to T-3 | Close these at the next meeting and record them in the Decision Log | Adiya | Closed: ADR-0001 to ADR-0009 accepted by team vote on 2026-11-09 (#56); ADR-0002 and ADR-0006 stay conditional on V-1 and V-2 to V-4 |
 | 13 | Understanding food messages is harder than expected | Medium | High | FR-2, OQ-6, T-9 | One food per message ([TD-1](../decisions/deferred-scope.md)); ask the tester to rephrase instead of guessing | Adiya | Open: parser merged (#88); its 22 unit and contract tests pass in CI |
 | 14 | Testers can't reach the bot | Medium | High | OQ-5, T-6, NFR-2 | PythonAnywhere free + SQLite, adopted only if V-2 to V-4 pass; otherwise Render + Neon (ADR-0006) | Adiya | Occurred for Cycle 1: the bot is not deployed. V-2 to V-4 have not run, and deployment waits for T-30 (Risk 23) |
@@ -51,7 +36,8 @@ Risk 23 was added for the Cycle 1 release (Assignment 5). Statuses were re-check
 | 20 | "Today" is cut at the wrong time | Low | Medium | FR-5 (AC-5.3), T-17, ADR-0007 | One Day Calculator used everywhere; midnight and daylight-saving tests | Adiya | Mitigated: Day Calculator merged (#83); midnight and daylight-saving tests pass in CI |
 | 21 | Only one person can deploy | Medium | Medium | ADR-0006, checkpoint G-3 | Khumoyun is the backup deployer and does one practice deploy before testing starts | Adiya | Open: no practice deploy yet, because nothing is deployed |
 | 22 | Losing the host account loses tester data | Low | High | ADR-0006, [Data and Context](../architecture/data-context.md) | Nightly backup on the host; two-factor login; accepted for Cycle 1 because backups are on the same host | Adiya | Accepted risk for Cycle 1. No tester data exists yet, because the bot is not deployed |
-| 23 | A Telegram resend logs the same meal twice | Medium | Medium | C-1, T-30, ADR-0005, CC-5 in [Architecture](../architecture/architecture.md), Section 11 | Do not deploy until T-30 (duplicate `update_id` check) merges | Adiya | Mitigated in A6: T-30 built by Adiya (taken over from Khumoyun per A5 feedback) with 18 repeat-message tests in `tests/test_duplicate_updates.py`. Residual: untested against live Telegram retries until the bot is deployed (V-2 to V-4) |
+| 23 | A Telegram resend logs the same meal twice | Medium | Medium | C-1, T-30, ADR-0005, CC-5 in [Architecture](../architecture/architecture.md), Section 11 | Do not deploy until T-30 (duplicate `update_id` check) merges | Adiya |Open: T-30 is not built and has no owner yet (Architecture Section 11 names Khumoyun; the Task Plan does not, Risk 17). The bot runs only on a developer's computer |
+| 24 | Team member departure mid-cycle | High | High | T-13, T-22, T-23, T-26 | Sohail departed 10/30; Bazid acting Quality Lead; reassign tasks to remaining 5 members | Victoria | Closed: the 10/30 departure was reversed before 2026-11-09, after the instructor confirmed Sohail was still on the course roster |
 
 ## Risk Triggers and Responsibilities
 
@@ -74,7 +60,7 @@ For each high-impact risk: what we would see if it starts happening, who decides
 | 18 | A host check (V-2 to V-4) fails, or entries disappear after a restart | Adiya | Khumoyun | Bazid (acting) | Host checks pass and entries survive restarts |
 | 19 | More than 1 in 5 test messages get refused, or a food is matched wrong | Adiya | Adiya | Bazid (acting) | Refusals stay under 1 in 5 for the test week |
 | 22 | We can't log in to the host | Adiya | Khumoyun | Mazen | Accepted for Cycle 1 |
-| 23 | Team member departure leaves tasks or role vacant | Victoria | Victoria | Victoria | All unassigned tasks reassigned to the 5 members |
+| 24 | Team member departure leaves tasks or role vacant | Victoria | Victoria | Victoria | All unassigned tasks reassigned to the 5 members |
 
 
 
@@ -116,3 +102,4 @@ Checked 2026-11-09. "Before the A5 tag" means before the `a5-cycle1-release` tag
 | 2026-10-15 | A2 review fixes: owner for Risk 14, removed proposed owners, added warning signs and who decides, watches and confirms each high impact risk. A3: linked Risks 12 and 14 to the ADRs; added Risks 18 to 22 from the architecture | Mazen |
 | 2026-11-03 | Added Risk 23 for team member departure (Sohail); reassigned former Quality Lead risk responsibilities to Bazid (acting); updated Risk 7 to 5 members | Mazen, Khumoyun |
 | 2026-11-09 | Cycle 1 release review: re-checked statuses against `main`, added Risk 23 and the Next Actions table, added the full-history secrets scan result (Risk 6) | Mazen |
+| 2026-11-23 | Assignment 6 (postmortem A-3): removed the duplicate Risks 10 to 22 and the second "Last updated" row; renumbered the team-departure risk from 23 to 24 and closed it; updated Risks 6, 10 and 11 | Mazen |

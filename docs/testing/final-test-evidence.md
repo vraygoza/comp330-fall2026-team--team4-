@@ -4,9 +4,25 @@
 |-------|-------|
 | Owner | Mazen Malas (Operations & Evidence Lead) |
 | Backup | Adiya (Architecture & Development Lead) |
-| Last updated | 2026-11-09 |
+| Last updated | 2026-11-23 |
 
 The tests added after Assignment 4, the requirements they cover, and the live run that follows the demo path. Baseline: tag `a4-construction-integration` (66 tests). Code under test: integration PR #90, merged into `main` on 2026-11-09 (merge commit `957e410`). The live run used the PR at commit `14e247b`; the only later changes were a renamed test and docs, so the bot code is the same. CI details are in [CI Evidence](ci-evidence.md).
+
+## Cycle 2 (Assignment 6)
+
+Checked on 2026-11-23 with Python 3.12.3, the version CI uses, running `python -m unittest discover -s tests -t .`.
+
+| Code | Tests | Result |
+|------|-------|--------|
+| Tag `A5Cycle1Release` (commit `8eca1b5`), the Cycle 1 release | 93 | All pass |
+| `main` at commit `b789a22` | 93 | All pass. The only change since the tag is a docs file |
+| PR #104 (T-30, duplicate-update protection) at commit `55de21f` | 111 | All pass |
+
+**Correction:** the Summary below says 88 tests, the count for PR #90. K3 (#96) merged just before the Cycle 1 tag and added 5 more: 3 in `tests/test_food_lookup.py` and 2 in `tests/test_router.py`. So the Cycle 1 release has 93 tests.
+
+**New in Cycle 2:** `tests/test_duplicate_updates.py` (#104) adds 18 tests: a Telegram resend with the same `update_id` saves one entry and sends one reply, the same text with a new `update_id` is a real second meal, two copies at the same moment save once, refusals and errors are not recorded so a resend can still succeed, and processed IDs survive a restart and are removed after 48 hours (C-1, T-30, Risk 23). #104 also gives each message in `tests/test_log_food.py` its own `update_id`. All 93 Cycle 1 tests still pass with #104.
+
+**No new live run in Cycle 2.** The live run below (2026-11-09) is the latest; the bot code it ran is unchanged on `main`.
 
 ## Summary
 - **Automated:** 88 tests, all passing. CI #31 ran them on PR #90; 66 of them were already on `main` at the A4 tag (CI #29).
@@ -64,7 +80,7 @@ Run by Mazen on 2026-11-09 on macOS with Python 3.12.0, PR #90 at commit `14e247
 
 ## Not Tested Yet
 - `/today` (AC-5.1, AC-5.2), real FDC data (AC-3.1, AC-3.2, AC-6.3, AC-6.4), gram entries (AC-2.5, AC-2.6), tester access (FR-10).
-- Duplicate updates (T-30), the live webhook (V-3), reply time (NFR-1) and 15-tester capacity (NFR-2): all need a deployed bot.
+- Duplicate updates (T-30), the live webhook (V-3), reply time (NFR-1) and 15-tester capacity (NFR-2): all need a deployed bot. Update 2026-11-23: duplicate updates are now tested in #104; a real Telegram retry still needs a deployed bot.
 - Two testers and restart persistence were tested automatically, not in the live run.
 
 Owners and next actions for these are in the [Risk Register](../planning/risk-register.md).
@@ -76,3 +92,4 @@ From the repository root: `python -m unittest discover -s tests -t .`
 | Date | Change | By |
 |------|--------|----|
 | 2026-11-09 | Created for Assignment 5: tests since A4, requirement coverage, planned test cases, live run | Mazen |
+| 2026-11-23 | Assignment 6: added the Cycle 2 section (93 tests at the Cycle 1 tag and on `main`, 111 with #104), the 88-to-93 correction, and the T-30 note under Not Tested Yet | Mazen |
